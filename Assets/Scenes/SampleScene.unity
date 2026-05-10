@@ -567,9 +567,9 @@ GameObject:
   - component: {fileID: 803040939}
   - component: {fileID: 803040938}
   - component: {fileID: 803040937}
-  - component: {fileID: 803040936}
+  - component: {fileID: 803040940}
   m_Layer: 5
-  m_Name: Create
+  m_Name: CreateCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,21 +595,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -76.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &803040936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803040934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 586537fc909740de9c677ce105580f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.ButtonClass
-  canvas: {fileID: 994094170}
-  spawn: {fileID: 1384758520}
-  card: {fileID: 5492515303826301947, guid: 12bfc2964d4929c4784cf8b8a9ab9907, type: 3}
 --- !u!114 &803040937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,8 +639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 803040936}
-        m_TargetAssemblyTypeName: Game.ButtonClass, Assembly-CSharp
+      - m_Target: {fileID: 803040940}
+        m_TargetAssemblyTypeName: UI.TempButton, Assembly-CSharp
         m_MethodName: CreateCard
         m_Mode: 1
         m_Arguments:
@@ -704,6 +689,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803040934}
   m_CullTransparentMesh: 1
+--- !u!114 &803040940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803040934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc34c5a88a2846909c6ccb608dd26f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.TempButton
+  spawn: {fileID: 1384758520}
+  card: {fileID: 5492515303826301947, guid: 12bfc2964d4929c4784cf8b8a9ab9907, type: 3}
 --- !u!1 &877512975
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +955,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1266755554}
-  - component: {fileID: 1266755553}
   - component: {fileID: 1266755552}
   m_Layer: 0
   m_Name: GameObject
@@ -978,23 +976,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerCards
   _cards: []
---- !u!114 &1266755553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266755551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae79d6ed16a18b84d99178bd91926f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Player
-  laser:
-    fireRate: 0
-  gun:
-    bulletSpeed: 0
-  canvas: {fileID: 994094170}
 --- !u!4 &1266755554
 Transform:
   m_ObjectHideFlags: 0
@@ -1020,7 +1001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384758521}
   m_Layer: 5
-  m_Name: Spawn
+  m_Name: SpawnCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
