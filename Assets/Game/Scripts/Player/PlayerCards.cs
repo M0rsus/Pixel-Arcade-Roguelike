@@ -16,6 +16,10 @@ namespace Game
             GameManager.Register(this);
         }
 
+        void OnDestroy()
+        {
+            GameManager.Unregister(this);
+        }
         
         public void OnUpdate(float deltaTime)
         {

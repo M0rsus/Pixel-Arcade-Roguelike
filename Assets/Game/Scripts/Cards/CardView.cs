@@ -29,6 +29,7 @@ namespace Game
         {
             card.OnPick();
             _playerCards.AddCard(card.CloneCard());
+            GameManager.Unregister(this);
         }
     }
 }

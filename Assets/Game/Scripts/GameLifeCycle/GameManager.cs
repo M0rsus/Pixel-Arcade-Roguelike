@@ -6,23 +6,22 @@ namespace Game
 {
     public class GameManager : MonoBehaviour
     {
-        private List<IOnUpdateListener> _onUpdateListeners = new();
-        private List<IOnFixedUpdateListener> _onFixedUpdateListeners = new();
-        private List<IOnLateUpdateListener> _onLateUpdateListeners = new();
+        private static readonly List<IOnUpdateListener> _onUpdateListeners = new();
+        private static readonly List<IOnFixedUpdateListener> _onFixedUpdateListeners = new();
+        private static readonly List<IOnLateUpdateListener> _onLateUpdateListeners = new();
         
-        public static event Action<IOnUpdateListener> OnRegister;
         public static void Register(IOnUpdateListener onUpdateListener) =>
-            OnRegister?.Invoke(onUpdateListener);
-
-        void Awake()
-        {
-            OnRegister += RegisterOnUpdateListener;
-        }
-
-        void OnDestroy()
-        {
-            OnRegister -= RegisterOnUpdateListener;
-        }
+            _onUpdateListeners.Add(onUpdateListener);
+        public static void Register(IOnFixedUpdateListener onFixedUpdateListener) =>
+            _onFixedUpdateListeners.Add(onFixedUpdateListener);
+        public static void Register(IOnLateUpdateListener onLateUpdateListener) =>
+            _onLateUpdateListeners.Add(onLateUpdateListener);
+        public static void Unregister(IOnUpdateListener onUpdateListener) =>
+            _onUpdateListeners.Remove(onUpdateListener);
+        public static void Unregister(IOnFixedUpdateListener onFixedUpdateListener) =>
+            _onFixedUpdateListeners.Remove(onFixedUpdateListener);
+        public static void Unregister(IOnLateUpdateListener onLateUpdateListener) =>
+            _onLateUpdateListeners.Remove(onLateUpdateListener);
 
         void Update()
         {
@@ -44,23 +43,5 @@ namespace Game
             foreach (var onLateUpdateListener in _onLateUpdateListeners)
                 onLateUpdateListener.OnLateUpdate(deltaTime);
         }
-
-        private void RegisterOnUpdateListener(IOnUpdateListener onUpdateListener) =>
-            _onUpdateListeners.Add(onUpdateListener);
-
-        private void RegisterOnFixedUpdateListener(IOnFixedUpdateListener onFixedUpdateListener) =>
-            _onFixedUpdateListeners.Add(onFixedUpdateListener);
-
-        private void RegisterOnLateUpdateListener(IOnLateUpdateListener onLateUpdateListener) =>
-            _onLateUpdateListeners.Add(onLateUpdateListener);
-
-        private void UnregisterOnUpdateListener(IOnUpdateListener onUpdateListener) =>
-            _onUpdateListeners.Remove(onUpdateListener);
-
-        private void UnregisterOnFixedUpdateListener(IOnFixedUpdateListener onFixedUpdateListener) =>
-            _onFixedUpdateListeners.Remove(onFixedUpdateListener);
-
-        private void UnregisterOnLateUpdateListener(IOnLateUpdateListener onLateUpdateListener) =>
-            _onLateUpdateListeners.Remove(onLateUpdateListener);
     }
 }
