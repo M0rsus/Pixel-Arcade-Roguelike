@@ -5,14 +5,14 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public sealed class MoveRbComponent
+    public sealed class MoveComponent
     {
         [SerializeField]
         private float movementSpeed;
         [SerializeField]
         private float rotationSpeed;
         [SerializeField] 
-        private Rigidbody2D rb;
+        private Rigidbody2D rigidbody;
 
         private IControllable _controllable;
         
@@ -21,13 +21,13 @@ namespace Game
             _controllable = controllable;
         }
         
-        public void OnFixedUpdate(float fixedDeltaTime)
+        public void OnFixedUpdate(float deltaTime)
         {
-            var rotation = _controllable.RotationInput * rotationSpeed * fixedDeltaTime;
-            rb.MoveRotation(rb.rotation + rotation);
+            var rotation = _controllable.RotationInput * rotationSpeed * deltaTime;
+            rigidbody.MoveRotation(rigidbody.rotation + rotation);
 
-            Vector2 move = rb.transform.up * _controllable.ForwardInput * movementSpeed * fixedDeltaTime;
-            rb.AddForce(move);
+            Vector2 move = rigidbody.transform.up * _controllable.ForwardInput * movementSpeed * deltaTime;
+            rigidbody.AddForce(move);
         }
     }
 }

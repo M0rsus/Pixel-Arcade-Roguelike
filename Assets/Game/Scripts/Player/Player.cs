@@ -2,31 +2,42 @@
 
 namespace Game
 {
-    public class Player : MonoBehaviour, IOnFixedUpdateListener
+    public class Player : MonoBehaviour, IOnUpdateListener, IOnFixedUpdateListener
     {
         [SerializeField] 
-        private MoveRbComponent moveComponent;
-        
+        private MoveComponent moveComponent;
+        [SerializeField] 
+        private ShootComponent shootComponent; 
         [SerializeField]
         private PlayerInput input;
+        [SerializeField]
+        private SpawnBulletComponent spawnBulletComponent;
 
         void Awake()
         {
-            GameManager.Register(this);
+            GameUpdate.Register(onUpdateListener: this);
+            GameUpdate.Register(onFixedUpdateListener: this);
         }
 
         void OnDestroy()
         {
-            GameManager.Unregister(this);
+            GameUpdate.Unregister(onUpdateListener: this);
+            GameUpdate.Unregister(onFixedUpdateListener: this);
         }
         void Start()
         {
             moveComponent.Initialize(input);
+            shootComponent.Initialize(input, spawnBulletComponent);
         }
 
-        public void OnFixedUpdate(float fixedDeltaTime)
+        public void OnUpdate(float deltaTime)
         {
-            moveComponent.OnFixedUpdate(fixedDeltaTime);
+            shootComponent.OnUpdate(deltaTime);
+        }
+
+        public void OnFixedUpdate(float deltaTime)
+        {
+            moveComponent.OnFixedUpdate(deltaTime);
         }
     }
 }

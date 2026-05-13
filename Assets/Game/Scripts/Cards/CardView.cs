@@ -12,7 +12,7 @@ namespace Game
         void Awake()
         {
             _playerCards = PlayerCards.Instance;
-            GameManager.Register(this);
+            GameUpdate.Register(this);
             card.OnCreate();
         }
 
@@ -29,7 +29,7 @@ namespace Game
         {
             card.OnPick();
             _playerCards.AddCard(card.CloneCard());
-            GameManager.Unregister(this);
+            GameUpdate.Unregister(this);
         }
     }
 }

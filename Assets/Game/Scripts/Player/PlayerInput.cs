@@ -10,24 +10,19 @@ namespace Game
         public float RotationInput {get; private set;}
         public bool ShootInput { get; private set; }
         
-        private void OnForward(InputValue value)
+        public void OnForward(InputAction.CallbackContext context)
         {
-            Debug.Log("ForwardInput: " + ForwardInput);
-            ForwardInput = value.Get<float>();
-            
+            ForwardInput = context.ReadValue<float>();
         }
 
-        private void OnRotation(InputValue value)
+        public void OnRotation(InputAction.CallbackContext context)
         {
-            Debug.Log("RotationInput: " + RotationInput);
-            RotationInput = value.Get<float>();
-            
+            RotationInput = context.ReadValue<float>();
         }
 
-        private void OnShoot(InputValue value)
+        public void OnShoot(InputAction.CallbackContext context)
         {
-            ShootInput = value.isPressed;
-            Debug.Log("ShootInput: " + ShootInput);
+            ShootInput = context.performed;
         }
     }
 }

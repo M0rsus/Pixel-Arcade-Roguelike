@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameManager : MonoBehaviour
+    public class GameUpdate : MonoBehaviour
     {
         private static readonly List<IOnUpdateListener> _onUpdateListeners = new();
         private static readonly List<IOnFixedUpdateListener> _onFixedUpdateListeners = new();

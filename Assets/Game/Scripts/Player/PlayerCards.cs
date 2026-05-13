@@ -13,20 +13,18 @@ namespace Game
         void Awake()
         {
             Instance = this;
-            GameManager.Register(this);
+            GameUpdate.Register(this);
         }
 
         void OnDestroy()
         {
-            GameManager.Unregister(this);
+            GameUpdate.Unregister(this);
         }
         
         public void OnUpdate(float deltaTime)
         {
             foreach (var card in _cards)
-            {
                 card.OnUpdate();
-            }
         }
         public void AddCard(Card card)
         {
