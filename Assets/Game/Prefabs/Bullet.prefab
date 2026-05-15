@@ -132,6 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a23dc5fa404e1cb5e82a6926a0b16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.BulletComponent
-  bulletSpeed: 4
-  bulletDamage: 2
+  bulletSpeed:
+    <Value>k__BackingField: 4
+  bulletDamage:
+    <Value>k__BackingField: 2
+  lifeTime:
+    <Value>k__BackingField: 10
+  range:
+    <Value>k__BackingField: 10
   rigidbodyBullet: {fileID: 4683611179355464682}

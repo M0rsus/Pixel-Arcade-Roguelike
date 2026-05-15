@@ -26,22 +26,28 @@ namespace Game
         void Update()
         {
             float deltaTime = Time.deltaTime;
-            foreach (var onUpdateListener in _onUpdateListeners)
-                onUpdateListener.OnUpdate(deltaTime);
+            for (int i = _onUpdateListeners.Count - 1; i >= 0; i--)
+            {
+                _onUpdateListeners[i].OnUpdate(deltaTime);
+            }
         }
 
         void FixedUpdate()
         {
             float fixedDeltaTime = Time.fixedDeltaTime;
-            foreach (var onFixedUpdateListener in _onFixedUpdateListeners)
-                onFixedUpdateListener.OnFixedUpdate(fixedDeltaTime);
+            for (int i = _onFixedUpdateListeners.Count - 1; i >= 0; i--)
+            {
+                _onFixedUpdateListeners[i].OnFixedUpdate(fixedDeltaTime);
+            }
         }
 
         void LateUpdate()
         {
             float deltaTime = Time.deltaTime;
-            foreach (var onLateUpdateListener in _onLateUpdateListeners)
-                onLateUpdateListener.OnLateUpdate(deltaTime);
+            for (int i = _onLateUpdateListeners.Count - 1; i >= 0; i--)
+            {
+                _onLateUpdateListeners[i].OnLateUpdate(deltaTime);
+            }
         }
     }
 }

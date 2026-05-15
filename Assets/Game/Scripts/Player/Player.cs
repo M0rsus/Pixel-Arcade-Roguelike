@@ -5,6 +5,8 @@ namespace Game
     public class Player : MonoBehaviour, IOnUpdateListener, IOnFixedUpdateListener
     {
         [SerializeField] 
+        private Stats stats; 
+        [SerializeField] 
         private MoveComponent moveComponent;
         [SerializeField] 
         private ShootComponent shootComponent; 
@@ -26,8 +28,8 @@ namespace Game
         }
         void Start()
         {
-            moveComponent.Initialize(input);
-            shootComponent.Initialize(input, spawnBulletComponent);
+            moveComponent.Initialize(stats, input);
+            shootComponent.Initialize(stats, input, spawnBulletComponent);
         }
 
         public void OnUpdate(float deltaTime)
