@@ -14,8 +14,11 @@ namespace Game
         private float _bulletDamage;
         private float _lifeTime;
         private float _range;
+        private float _bounces;
+        private bool _canBounceOffEnemies;
         
         private Vector3 _startPosition;
+        private Vector2 _direction;
 
         void Awake()
         {
@@ -27,6 +30,7 @@ namespace Game
         {
             StartCoroutine(LifeTimeBullet());
             _startPosition = transform.position;
+            _direction = rigidbodyBullet.transform.up;
         }
 
         void OnDestroy()
@@ -42,14 +46,25 @@ namespace Game
         }
         public void OnFixedUpdate(float deltaTime)
         {
-            Vector2 move = rigidbodyBullet.transform.up * _bulletSpeed * deltaTime;
-            rigidbodyBullet.MovePosition(rigidbodyBullet.position + move);
+            Vector2 move = _direction * _bulletSpeed;
+            /*rigidbodyBullet.MovePosition(rigidbodyBullet.position + move);*/
+            rigidbodyBullet.linearVelocity = move;
         }
 
         void OnCollisionEnter2D(Collision2D collision)
         {
             string objectTag = collision.gameObject.tag;
             Debug.Log(objectTag);
+            if ((objectTag == "Enemy" && !_canBounceOffEnemies) || _bounces <= 0)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Vector2 normal = collision.contacts[0].normal;
+            _direction = Vector2.Reflect(_direction, normal).normalized;
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+            rigidbodyBullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            _bounces--;
         }
 
         public void Initialize(Stats stats)
@@ -58,6 +73,8 @@ namespace Game
             _bulletSpeed = stats.bulletSpeed.GetValue();
             _lifeTime = stats.lifeTime.GetValue();
             _range = stats.range.GetValue();
+            _bounces = stats.bounces.GetValue();
+            _canBounceOffEnemies = stats.canBounceOffEnemies;
         }
 
         private IEnumerator LifeTimeBullet()
