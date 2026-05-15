@@ -47,7 +47,6 @@ namespace Game
         public void OnFixedUpdate(float deltaTime)
         {
             Vector2 move = _direction * _bulletSpeed;
-            /*rigidbodyBullet.MovePosition(rigidbodyBullet.position + move);*/
             rigidbodyBullet.linearVelocity = move;
         }
 
@@ -60,6 +59,7 @@ namespace Game
                 Destroy(gameObject);
                 return;
             }
+            
             Vector2 normal = collision.contacts[0].normal;
             _direction = Vector2.Reflect(_direction, normal).normalized;
             float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
@@ -74,7 +74,7 @@ namespace Game
             _lifeTime = stats.lifeTime.GetValue();
             _range = stats.range.GetValue();
             _bounces = stats.bounces.GetValue();
-            _canBounceOffEnemies = stats.canBounceOffEnemies;
+            _canBounceOffEnemies = stats.bounceOffEnemies;
         }
 
         private IEnumerator LifeTimeBullet()

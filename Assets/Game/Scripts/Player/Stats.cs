@@ -12,7 +12,7 @@
         public Stat lifeTime;
         public Stat range;
         public Stat bounces;
-        public bool canBounceOffEnemies;
+        public bool bounceOffEnemies;
         public Stat cooldown;
     }
 }
