@@ -4,12 +4,16 @@ namespace Game
 {
     public class BasicEnemy : MonoBehaviour, IOnUpdateListener, IOnFixedUpdateListener
     {
+        [SerializeField]
+        private Rigidbody2D rigidBody;
+        [SerializeField]
+        private EnemyInput input;
+        [SerializeField] 
+        private MoveComponent moveComponent;
+        [SerializeField] 
+        private RotationComponent rotationComponent;
         [SerializeField] 
         private Stats stats; 
-        [SerializeField]
-        private MoveComponent moveComponent;
-        [SerializeField]
-        private AIChase ai;
 
         void Awake()
         {
@@ -23,14 +27,21 @@ namespace Game
             GameUpdate.Unregister(onFixedUpdateListener: this);
         }
 
+        void Start()
+        {
+            moveComponent.Initialize(rigidBody, input, stats);
+            rotationComponent.Initialize(rigidBody, input, stats);
+        }
+
         public void OnUpdate(float deltaTime)
         {
-            ai.OnUpdate(deltaTime);
+            input.OnUpdate(deltaTime);
         }
 
         public void OnFixedUpdate(float deltaTime)
         {
-            
+            moveComponent.OnFixedUpdate(deltaTime);
+            rotationComponent.OnFixedUpdate(deltaTime);
         }
     }
 }

@@ -3,20 +3,49 @@
 namespace Game
 {
     [System.Serializable]
-    public class AIChase
+    public class AIChase : AI
     {
         [SerializeField]
-        private Transform playerPosition;
+        private Transform playerTransform;
         [SerializeField]
-        private Transform enemyPosition;
+        private Transform enemyTransform;
         [SerializeField]
         private float distanceFromPlayer;
-        
-        public Vector2 Direction { get; private set; }
+        [SerializeField] 
+        private bool moveOutsideChaseRange;
+        [SerializeField] [Min(0.5f)]
+        private float timeBetweenChangeDirection = 0.5f;
 
-        public void OnUpdate(float deltaTime)
+        private float _timer;
+        private Vector3 _localDirection;
+
+        public override float Angle { get; set; }
+        public override bool IsMoving { get; set; }
+
+        public override void OnUpdate(float deltaTime)
         {
-            Direction = playerPosition.position - enemyPosition.position;
+            IsMoving = false;
+            
+            Vector2 direction = playerTransform.position - enemyTransform.position;
+            float distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
+
+            if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
+            {
+                IsMoving = true;
+            }
+            else if (moveOutsideChaseRange)
+            {
+                IsMoving = true;
+                _timer += deltaTime;
+                direction = _localDirection - enemyTransform.position;
+                
+                if (_timer > timeBetweenChangeDirection)
+                {
+                    _localDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1, 1f)) - enemyTransform.position;
+                    _timer = 0;
+                }
+            }
+            Angle = Vector2.SignedAngle(enemyTransform.up, direction);
         }
     }
 }
