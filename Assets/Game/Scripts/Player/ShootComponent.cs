@@ -6,17 +6,18 @@ namespace Game
     [Serializable]
     public sealed class ShootComponent
     {
+        private IShootable _shootable;
+        private IBulletSpawner _bulletSpawner;
         private Stat _cooldown;
         
-        private IControllable _controllable;
-        private IBulletSpawner _bulletSpawner;
         private float _timer = float.MaxValue;
         
-        public void Initialize(Stats stats, IControllable controllable, IBulletSpawner bulletSpawner)
+        public void Initialize(IShootable shootable, IBulletSpawner bulletSpawner, Stats stats)
         {
-            _cooldown = stats.cooldown;
-            _controllable = controllable;
+            _shootable = shootable;
             _bulletSpawner = bulletSpawner;
+            _cooldown = stats.shootCooldown;
+            
             _bulletSpawner.Initialize(stats);
         }
 
@@ -28,7 +29,7 @@ namespace Game
 
         public void TryShoot()
         {
-            if (_controllable.ShootInput && _timer > _cooldown.GetValue())
+            if (_shootable.ShootInput && _timer > _cooldown.GetValue())
                 Shoot();
         }
 

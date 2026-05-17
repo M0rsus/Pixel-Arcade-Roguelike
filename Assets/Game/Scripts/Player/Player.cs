@@ -4,16 +4,20 @@ namespace Game
 {
     public class Player : MonoBehaviour, IOnUpdateListener, IOnFixedUpdateListener
     {
-        [SerializeField] 
-        private Stats stats; 
+        [SerializeField]
+        private Rigidbody2D rigidBody;
+        [SerializeField]
+        private PlayerInput input;
         [SerializeField] 
         private MoveComponent moveComponent;
         [SerializeField] 
-        private ShootComponent shootComponent; 
+        private RotationComponent rotationComponent;
+        [SerializeField] 
+        private ShootComponent shootComponent;
         [SerializeField]
-        private PlayerInput input;
-        [SerializeField]
-        private SpawnBulletComponent spawnBulletComponent;
+        private SpawnBulletComponent spawnBulletComponent; 
+        [SerializeField] 
+        private Stats stats; 
 
         void Awake()
         {
@@ -28,8 +32,9 @@ namespace Game
         }
         void Start()
         {
-            moveComponent.Initialize(stats, input);
-            shootComponent.Initialize(stats, input, spawnBulletComponent);
+            moveComponent.Initialize(rigidBody, input, stats);
+            rotationComponent.Initialize(rigidBody, input, stats);
+            shootComponent.Initialize(input, spawnBulletComponent, stats);
         }
 
         public void OnUpdate(float deltaTime)
@@ -40,6 +45,7 @@ namespace Game
         public void OnFixedUpdate(float deltaTime)
         {
             moveComponent.OnFixedUpdate(deltaTime);
+            rotationComponent.OnFixedUpdate(deltaTime);
         }
     }
 }

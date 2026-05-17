@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Game
 {
-    public sealed class PlayerInput : MonoBehaviour, IControllable
+    public sealed class PlayerInput : MonoBehaviour, IMoveable, IRotatable, IShootable
     {
         public float ForwardInput { get; private set; }
         public float RotationInput {get; private set;}

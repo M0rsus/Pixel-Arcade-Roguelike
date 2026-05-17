@@ -7,27 +7,21 @@ namespace Game
     [Serializable]
     public sealed class MoveComponent
     {
+        private Rigidbody2D _rigidbody;
+        private IMoveable _moveable;
         private Stat _moveSpeed;
-        private Stat _rotationSpeed;
-        [SerializeField] 
-        private Rigidbody2D rigidbody;
-
-        private IControllable _controllable;
         
-        public void Initialize(Stats stats, IControllable controllable)
+        public void Initialize(Rigidbody2D rb, IMoveable moveable, Stats stats)
         {
+            _rigidbody = rb;
+            _moveable = moveable;
             _moveSpeed = stats.moveSpeed;
-            _rotationSpeed = stats.rotationSpeed;
-            _controllable = controllable;
         }
         
         public void OnFixedUpdate(float deltaTime)
         {
-            var rotation = _controllable.RotationInput * _rotationSpeed.GetValue() * deltaTime;
-            rigidbody.MoveRotation(rigidbody.rotation + rotation);
-
-            Vector2 move = rigidbody.transform.up * _controllable.ForwardInput * _moveSpeed.GetValue() * deltaTime;
-            rigidbody.AddForce(move);
+            Vector2 move = _rigidbody.transform.up * _moveable.ForwardInput * _moveSpeed.GetValue() * deltaTime;
+            _rigidbody.AddForce(move);
         }
     }
 }
