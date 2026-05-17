@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 97342504}
   - component: {fileID: 97342507}
   - component: {fileID: 97342506}
-  - component: {fileID: 97342505}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -153,35 +152,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 495392473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &97342505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97342503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
-  Composition:
-    ScreenPosition: {x: 0, y: 0}
-    DeadZone:
-      Enabled: 1
-      Size: {x: 0.2, y: 0.2}
-    HardLimits:
-      Enabled: 0
-      Size: {x: 0.796607, y: 0.8}
-      Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
-  Lookahead:
-    Enabled: 0
-    Time: 0
-    Smoothing: 0
-    IgnoreY: 0
 --- !u!114 &97342506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +196,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 54
+    OrthographicSize: 6
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2679,8 +2649,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 54
+  orthographic: 1
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3393,6 +3363,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
   m_PrefabInstance: {fileID: 5803945923883561433}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1266755560 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8109371843084304395, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+  m_PrefabInstance: {fileID: 5803945923883561433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1384758520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,6 +3627,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1151476826}
     m_Modifications:
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 1266755560}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.range.<Value>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.lifeTime.<Value>k__BackingField
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.maxHealth.<Value>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.moveSpeed.<Value>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.bulletSpeed.<Value>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.bulletDamage.<Value>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.rotationSpeed.<Value>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: stats.shootCooldown.<Value>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -3695,6 +3706,10 @@ PrefabInstance:
     - target: {fileID: 5817885745359894659, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151632724555760468, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
