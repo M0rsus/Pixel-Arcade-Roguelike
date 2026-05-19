@@ -52,14 +52,14 @@ namespace Game
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            string objectTag = collision.gameObject.tag;
-            Debug.Log(objectTag);
-            if ((objectTag == "Enemy" && !_canBounceOffEnemies) || _bounces <= 0)
+            if (collision.gameObject.TryGetComponent<IEntity>(out var component))
+                component.Damageable.TakeDamage(_bulletDamage);
+            
+            if (!_canBounceOffEnemies || _bounces <= 0)
             {
                 Destroy(gameObject);
                 return;
             }
-            
             Vector2 normal = collision.contacts[0].normal;
             _direction = Vector2.Reflect(_direction, normal).normalized;
             float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
@@ -74,7 +74,7 @@ namespace Game
             _lifeTime = stats.lifeTime.GetValue();
             _range = stats.range.GetValue();
             _bounces = stats.bounces.GetValue();
-            _canBounceOffEnemies = stats.bounceOffEnemies;
+            _canBounceOffEnemies = stats.bounceOffEnemies.GetValue();
         }
 
         private IEnumerator LifeTimeBullet()

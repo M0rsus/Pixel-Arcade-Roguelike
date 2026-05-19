@@ -8,7 +8,7 @@ namespace Game
     {
         private IShootable _shootable;
         private IBulletSpawner _bulletSpawner;
-        private Stat _cooldown;
+        private StatFloat _cooldown;
         
         private float _timer = float.MaxValue;
         

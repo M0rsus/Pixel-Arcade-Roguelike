@@ -1,20 +1,32 @@
-﻿namespace Game
+﻿using Demo;
+using UnityEngine;
+
+namespace Game
 {
-    [System.Serializable]
-    public class Stats
+    [CreateAssetMenu(fileName = "Stats", menuName = "Game/Stats")]
+    public class Stats : ScriptableObject
     {
-        public Stat maxHealth;
-        public Stat maxArmor;
-        public Stat moveSpeed;
-        public Stat rotationSpeed;
-        public Stat contactDamage;
-        public Stat contactDamageCooldown;
-        public Stat bulletDamage;
-        public Stat shootCooldown;
-        public Stat bulletSpeed;
-        public Stat lifeTime;
-        public Stat range;
-        public Stat bounces;
-        public bool bounceOffEnemies;
+        [Header("Vitality")]
+        public StatInt maxHealth;
+        public StatFloat healthRegen;
+        public StatFloat lifeSteal;
+        public StatInt maxArmor;
+        public StatFloat armorRegen;
+        public StatBool regenArmorAtFullHealth;
+        
+        [Header("Movement")]
+        public StatFloat moveSpeed;
+        public StatFloat rotationSpeed;
+        
+        [Header("Power")]
+        public StatInt contactDamage;
+        public StatFloat contactDamageCooldown;
+        public StatInt bulletDamage;
+        public StatFloat shootCooldown;
+        public StatFloat bulletSpeed;
+        public StatFloat lifeTime;
+        public StatFloat range;
+        public StatInt bounces;
+        public StatBool bounceOffEnemies;
     }
 }

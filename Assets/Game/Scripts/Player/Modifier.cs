@@ -1,10 +1,10 @@
 ﻿namespace Game
 {
-    public class Modifier
+    public class Modifier<T>
     {
-        public float Value { get; private set; }
+        public T Value { get; private set; }
 
-        public Modifier(float value)
+        public Modifier(T value)
         {
             Value = value;
         }

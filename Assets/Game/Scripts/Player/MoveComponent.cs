@@ -11,7 +11,7 @@ namespace Game
         private Mode mode;
         private Rigidbody2D _rigidbody;
         private IMoveable _moveable;
-        private Stat _moveSpeed;
+        private StatFloat _moveSpeed;
         
         public void Initialize(Rigidbody2D rb, IMoveable moveable, Stats stats)
         {

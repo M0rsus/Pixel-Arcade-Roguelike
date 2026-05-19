@@ -5,26 +5,34 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class Stat
+    public class StatFloat : Stat<float> {}
+    [Serializable]
+    public class StatInt : Stat<int> {}
+
+    [Serializable]
+    public class StatBool : Stat<bool> {}
+    
+    [Serializable]
+    public class Stat<T>
     {
         [field: SerializeField]
-        public float Value { get; private set; }
+        public T Value { get; protected set; }
         
-        private List<Modifier> _modifiers = new List<Modifier>();
+        private List<Modifier<T>> _modifiers = new();
 
-        public float GetValue()
+        public T GetValue()
         {
-            float value = Value;
-            if (_modifiers.Count > 0) {}
+            var value = Value;
+            if (_modifiers.Count <= 0) return value;
             foreach (var modifier in _modifiers)
                 value = modifier.Value;
             return value;
         }
-        public void AddModifier(Modifier modifier)
+        public void AddModifier(Modifier<T> modifier)
         {
             _modifiers.Add(modifier);
         }
-        public void RemoveModifier(Modifier modifier)
+        public void RemoveModifier(Modifier<T> modifier)
         {
             _modifiers.Remove(modifier);
         }

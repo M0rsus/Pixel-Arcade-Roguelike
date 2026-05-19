@@ -7,7 +7,7 @@ namespace Game
     {
         private Rigidbody2D _rigidbody;
         private IRotatable _rotatable;
-        private Stat _rotationSpeed;
+        private StatFloat _rotationSpeed;
         
         public void Initialize(Rigidbody2D rb, IRotatable rotatable, Stats stats)
         {

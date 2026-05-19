@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46a3eacea2a44c88f25e5070db60831, type: 3}
+  m_Name: PlayerStats
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Stats
+  maxHealth:
+    <Value>k__BackingField: 100
+  healthRegen:
+    <Value>k__BackingField: 10
+  lifeSteal:
+    <Value>k__BackingField: 0
+  maxArmor:
+    <Value>k__BackingField: 100
+  armorRegen:
+    <Value>k__BackingField: 5
+  regenArmorAtFullHealth:
+    <Value>k__BackingField: 1
+  moveSpeed:
+    <Value>k__BackingField: 4
+  rotationSpeed:
+    <Value>k__BackingField: 100
+  contactDamage:
+    <Value>k__BackingField: 0
+  contactDamageCooldown:
+    <Value>k__BackingField: 0
+  bulletDamage:
+    <Value>k__BackingField: 90
+  shootCooldown:
+    <Value>k__BackingField: 1
+  bulletSpeed:
+    <Value>k__BackingField: 0.2
+  lifeTime:
+    <Value>k__BackingField: 10
+  range:
+    <Value>k__BackingField: 10
+  bounces:
+    <Value>k__BackingField: 1
+  bounceOffEnemies:
+    <Value>k__BackingField: 0

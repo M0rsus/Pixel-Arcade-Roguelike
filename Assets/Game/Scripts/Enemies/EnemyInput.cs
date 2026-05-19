@@ -32,7 +32,6 @@ namespace Game
                     RotationInput = 0f;
                     break;
             }
-            Debug.Log(ai.Angle);
             ShootInput = true;
         }
     }
