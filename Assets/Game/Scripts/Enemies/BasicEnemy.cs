@@ -47,6 +47,7 @@ namespace Game
 
         public void OnUpdate(float deltaTime)
         {
+            input.OnUpdate(deltaTime);
             damageReceiverComponent.OnUpdate(deltaTime);
         }
 

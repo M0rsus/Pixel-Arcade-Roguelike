@@ -15,17 +15,14 @@ namespace Game
         public void OnUpdate(float deltaTime)
         {
             ai.OnUpdate(deltaTime);
-            if (ai.IsMoving)
-                ForwardInput = 1f;
-            else
-                ForwardInput = 0f;
+            ForwardInput = ai.IsMoving ? 1f : 0f;
             
             switch (ai.Angle)
             { 
-                case > 1:
+                case > 2f:
                     RotationInput = 1f;
                     break;
-                case < -1:
+                case < -2f:
                     RotationInput = -1f;
                     break;
                 default:

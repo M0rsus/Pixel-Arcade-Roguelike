@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 97342503}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 4, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 1266755554}
+    TrackingTarget: {fileID: 1064520981}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -2869,7 +2869,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 4, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3442,7 +3442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
       propertyPath: m_TagString
@@ -3562,6 +3562,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1064520981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+  m_PrefabInstance: {fileID: 2058218337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1086433020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,19 +3673,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1266755554}
+  - {fileID: 1064520981}
   m_Father: {fileID: 1966700781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1266755554 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-  m_PrefabInstance: {fileID: 5803945923883561433}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1266755560 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 8109371843084304395, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-  m_PrefabInstance: {fileID: 5803945923883561433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1384758520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,29 +3868,29 @@ MonoBehaviour:
   rigidBody: {fileID: 1644871387}
   input:
     ai:
-      rid: 8057921988898062411
+      rid: 8057922056475902027
   damageReceiverComponent:
     healthComponent:
       _currentHealth: 0
-      delayRegen: 0
+      delayRegen: 0.1
     armorComponent:
       _currentArmor: 0
-      cooldownArmorRegen: 0
-      delayRegen: 0
+      cooldownArmorRegen: 4
+      delayRegen: 1
   moveComponent:
     mode: 1
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 53cb5fc01cc4bac419c644262314e929, type: 2}
   references:
     version: 2
     RefIds:
-    - rid: 8057921988898062411
+    - rid: 8057922056475902027
       type: {class: AIChase, ns: Game, asm: Assembly-CSharp}
       data:
-        playerTransform: {fileID: 1266755554}
+        playerTransform: {fileID: 1064520981}
         enemyTransform: {fileID: 1644871388}
-        distanceFromPlayer: 1
+        distanceFromPlayer: 0
         moveOutsideChaseRange: 0
-        timeBetweenChangeDirection: 2
+        timeBetweenChangeDirection: 0.5
 --- !u!50 &1644871387 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 3594143766501770066, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
@@ -3985,7 +3980,7 @@ Transform:
   - {fileID: 1151476826}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5803945923883561433
+--- !u!1001 &2058218337
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3993,309 +3988,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1151476826}
     m_Modifications:
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats
-      value: 
-      objectReference: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: rigidBody
-      value: 
-      objectReference: {fileID: 1266755560}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.range
-      value: 8057922010184941833
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bounces
-      value: 8057922010184941834
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.lifeTime
-      value: 8057922010184941832
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.maxArmor
-      value: 8057922010184941822
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.lifeSteal
-      value: 8057922010184941821
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.maxHealth
-      value: 8057922010184941819
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.moveSpeed
-      value: 8057922010184941825
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.armorRegen
-      value: 8057922010184941823
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bulletSpeed
-      value: 8057922010184941831
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.healthRegen
-      value: 8057922010184941820
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bulletDamage
-      value: 8057922010184941829
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.contactDamage
-      value: 8057922010184941827
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.rotationSpeed
-      value: 8057922010184941826
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.shootCooldown
-      value: 8057922010184941830
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bounceOffEnemies
-      value: 8057922010184941835
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.contactDamageCooldown
-      value: 8057922010184941828
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.regenArmorOnlyAtFullHealth
-      value: 8057922010184941824
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.range.<Value>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bounces.<Value>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.lifeTime.<Value>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.maxArmor.<Value>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941819]'
-      value: Assembly-CSharp Game.StatInt
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941820]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941821]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941822]'
-      value: Assembly-CSharp Game.StatInt
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941823]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941824]'
-      value: Assembly-CSharp Game.StatBool
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941825]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941826]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941827]'
-      value: Assembly-CSharp Game.StatInt
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941828]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941829]'
-      value: Assembly-CSharp Game.StatInt
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941830]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941831]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941832]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941833]'
-      value: Assembly-CSharp Game.StatFloat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941834]'
-      value: Assembly-CSharp Game.StatInt
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: 'managedReferences[8057922010184941835]'
-      value: Assembly-CSharp Game.StatBool
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.maxHealth.<Value>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.moveSpeed.<Value>k__BackingField
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.armorRegen.<Value>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiver.armorComponent.delayRegen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bulletSpeed.<Value>k__BackingField
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.healthRegen.<Value>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiver.healthComponent.delayRegen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bulletDamage.<Value>k__BackingField
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.rotationSpeed.<Value>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.shootCooldown.<Value>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiver.healthComponent._currentHealth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.bounceOffEnemies.<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiver.armorComponent.cooldownArmorRegen
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiverComponent.armorComponent.delayRegen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiverComponent.healthComponent.delayRegen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: stats.regenArmorOnlyAtFullHealth.<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: damageReceiverComponent.armorComponent.cooldownArmorRegen
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941819].<Value>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941820].<Value>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941821].<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941822].<Value>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941823].<Value>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941824].<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941825].<Value>k__BackingField
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941826].<Value>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941827].<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941828].<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941829].<Value>k__BackingField
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941830].<Value>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941831].<Value>k__BackingField
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941832].<Value>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941833].<Value>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941834].<Value>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3730107141297980611, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: managedReferences[8057922010184941835].<Value>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4307,15 +4006,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5037822259495954682, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4332,14 +4031,6 @@ PrefabInstance:
     - target: {fileID: 5817885745359894659, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5817885745359894659, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151632724555760468, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
