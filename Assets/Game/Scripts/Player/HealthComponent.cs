@@ -16,7 +16,7 @@ namespace Game
         private float _currentHealth;
 
         [SerializeField]
-        private float delayRegen;
+        private float delayRegen = 0.1f;
         
         private float _timer;
         
@@ -55,6 +55,9 @@ namespace Game
 
         public void OnUpdate(float deltaTime)
         {
+            if (_healthRegen.GetValue() == 0)
+                return;
+            
             _timer += deltaTime;
             if (_timer > delayRegen && _currentHealth < _maxHealth.GetValue())
                 Regen();

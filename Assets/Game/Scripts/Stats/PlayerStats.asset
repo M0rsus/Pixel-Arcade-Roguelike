@@ -15,17 +15,17 @@ MonoBehaviour:
   maxHealth:
     <Value>k__BackingField: 100
   healthRegen:
-    <Value>k__BackingField: 10
+    <Value>k__BackingField: 0
   lifeSteal:
     <Value>k__BackingField: 0
   maxArmor:
-    <Value>k__BackingField: 100
+    <Value>k__BackingField: 0
   armorRegen:
-    <Value>k__BackingField: 5
+    <Value>k__BackingField: 0
   regenArmorAtFullHealth:
     <Value>k__BackingField: 1
   moveSpeed:
-    <Value>k__BackingField: 4
+    <Value>k__BackingField: 6
   rotationSpeed:
     <Value>k__BackingField: 100
   contactDamage:
@@ -33,15 +33,15 @@ MonoBehaviour:
   contactDamageCooldown:
     <Value>k__BackingField: 0
   bulletDamage:
-    <Value>k__BackingField: 90
+    <Value>k__BackingField: 60
   shootCooldown:
-    <Value>k__BackingField: 1
+    <Value>k__BackingField: 2
   bulletSpeed:
-    <Value>k__BackingField: 0.2
+    <Value>k__BackingField: 4
   lifeTime:
     <Value>k__BackingField: 10
   range:
-    <Value>k__BackingField: 10
+    <Value>k__BackingField: 12
   bounces:
     <Value>k__BackingField: 1
   bounceOffEnemies:

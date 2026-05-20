@@ -15,9 +15,9 @@ namespace Game
         private float _currentArmor;
 
         [SerializeField] 
-        private float cooldownArmorRegen;
+        private float cooldownArmorRegen = 4f;
         [SerializeField]
-        private float delayRegen;
+        private float delayRegen = 1f;
 
         private float _timer;
         private bool _canArmorRegen;
@@ -73,6 +73,9 @@ namespace Game
 
         public void OnUpdate(float deltaTime)
         {
+            if (_armorRegen.GetValue() == 0)
+                return;
+            
             if (IsRegenAllowed)
                 _timer += deltaTime;
             
