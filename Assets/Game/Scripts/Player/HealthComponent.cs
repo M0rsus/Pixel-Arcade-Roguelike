@@ -46,8 +46,6 @@ namespace Game
         {
             _currentHealth += amount;
             
-            Debug.Log("Current Health: " + _currentHealth);
-            
             if (_currentHealth < _maxHealth.GetValue()) return;
             
             _currentHealth = _maxHealth.GetValue();
