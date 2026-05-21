@@ -22,6 +22,7 @@ namespace Game
             armorComponent.Initialize(stats);
             _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             UpdateSubscriptions();
+            armorComponent.MaxArmor.OnValueChange += UpdateSubscriptions;
         }
 
         private void ActivateArmorRegen()
@@ -40,6 +41,8 @@ namespace Game
         {
             healthComponent.OnHealthFull -= ActivateArmorRegen;
             healthComponent.OnHealthNotFull -= DeactivateArmorRegen;
+            armorComponent.MaxArmor.OnValueChange -= UpdateSubscriptions;
+            armorComponent.OnDisable();
         }
 
         public void UpdateSubscriptions()
@@ -51,7 +54,8 @@ namespace Game
 
             if (!_regenArmorAtFullHealth.GetValue())
             {
-                ActivateArmorRegen();
+                if (armorComponent.HasRegen)
+                    ActivateArmorRegen();
                 return;
             }
 

@@ -15,6 +15,8 @@ namespace Game
     [Serializable]
     public class Stat<T>
     {
+        public event Action OnValueChange;
+        
         [field: SerializeField]
         public T Value { get; protected set; }
         
@@ -31,10 +33,17 @@ namespace Game
         public void AddModifier(Modifier<T> modifier)
         {
             _modifiers.Add(modifier);
+            OnValueChange?.Invoke();
         }
         public void RemoveModifier(Modifier<T> modifier)
         {
             _modifiers.Remove(modifier);
+            OnValueChange?.Invoke();
+        }
+        
+        public void Refresh()
+        {
+            OnValueChange?.Invoke();
         }
     }
 }

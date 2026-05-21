@@ -3396,6 +3396,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1777744973245780976, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
+      propertyPath: managedReferences[8057922056475902027].playerTransform
+      value: 
+      objectReference: {fileID: 1064520981}
     - target: {fileID: 2439761971322729150, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.223326
@@ -3441,24 +3445,13 @@ PrefabInstance:
       value: BasicEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
       propertyPath: m_TagString
       value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594143766501770066, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
-      propertyPath: m_Constraints
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1644871385}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
 --- !u!1 &994094170
 GameObject:
@@ -3848,59 +3841,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608744908}
   m_CullTransparentMesh: 1
---- !u!1 &1644871384 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
-  m_PrefabInstance: {fileID: 943674463}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1644871385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644871384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f445e497264bdca1dcc9360b75b59b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.BasicEnemy
-  rigidBody: {fileID: 1644871387}
-  input:
-    ai:
-      rid: 8057922056475902027
-  damageReceiverComponent:
-    healthComponent:
-      _currentHealth: 0
-      delayRegen: 0.1
-    armorComponent:
-      _currentArmor: 0
-      cooldownArmorRegen: 4
-      delayRegen: 1
-  moveComponent:
-    mode: 1
-  stats: {fileID: 11400000, guid: 53cb5fc01cc4bac419c644262314e929, type: 2}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8057922056475902027
-      type: {class: AIChase, ns: Game, asm: Assembly-CSharp}
-      data:
-        playerTransform: {fileID: 1064520981}
-        enemyTransform: {fileID: 1644871388}
-        distanceFromPlayer: 0
-        moveOutsideChaseRange: 0
-        timeBetweenChangeDirection: 0.5
---- !u!50 &1644871387 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 3594143766501770066, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
-  m_PrefabInstance: {fileID: 943674463}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1644871388 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2439761971322729150, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
-  m_PrefabInstance: {fileID: 943674463}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1815021755
 GameObject:
   m_ObjectHideFlags: 0

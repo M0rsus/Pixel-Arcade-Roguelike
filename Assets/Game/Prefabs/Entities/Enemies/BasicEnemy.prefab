@@ -193,9 +193,10 @@ GameObject:
   - component: {fileID: 2439761971322729150}
   - component: {fileID: 3594143766501770066}
   - component: {fileID: 8436732983007944876}
+  - component: {fileID: 1777744973245780976}
   m_Layer: 0
   m_Name: BasicEnemy
-  m_TagString: Entity
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,6 +290,44 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &1777744973245780976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096161144569841077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f445e497264bdca1dcc9360b75b59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.BasicEnemy
+  rigidBody: {fileID: 3594143766501770066}
+  input:
+    ai:
+      rid: 8057922056475902027
+  damageReceiverComponent:
+    healthComponent:
+      _currentHealth: 0
+      delayRegen: 0.1
+    armorComponent:
+      _currentArmor: 0
+      cooldownArmorRegen: 4
+      delayRegen: 1
+  moveComponent:
+    mode: 1
+  stats: {fileID: 11400000, guid: 53cb5fc01cc4bac419c644262314e929, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8057922056475902027
+      type: {class: AIChase, ns: Game, asm: Assembly-CSharp}
+      data:
+        playerTransform: {fileID: 0}
+        enemyTransform: {fileID: 2439761971322729150}
+        distanceFromPlayer: 0
+        moveOutsideChaseRange: 0
+        timeBetweenChangeDirection: 0.5
 --- !u!1 &8314115487396723089
 GameObject:
   m_ObjectHideFlags: 0

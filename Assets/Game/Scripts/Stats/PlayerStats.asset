@@ -25,7 +25,7 @@ MonoBehaviour:
   regenArmorAtFullHealth:
     <Value>k__BackingField: 1
   moveSpeed:
-    <Value>k__BackingField: 6
+    <Value>k__BackingField: 3
   rotationSpeed:
     <Value>k__BackingField: 100
   contactDamage:
@@ -35,7 +35,7 @@ MonoBehaviour:
   bulletDamage:
     <Value>k__BackingField: 60
   shootCooldown:
-    <Value>k__BackingField: 2
+    <Value>k__BackingField: 1
   bulletSpeed:
     <Value>k__BackingField: 4
   lifeTime:

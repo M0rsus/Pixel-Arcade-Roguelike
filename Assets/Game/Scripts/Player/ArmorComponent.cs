@@ -7,9 +7,10 @@ namespace Game
     [Serializable]
     public class ArmorComponent
     {
-        public static event Action OnArmorLost;
+        public event Action OnArmorLost;
+
+        public StatInt MaxArmor { get; private set; }
         
-        private StatInt _maxArmor;
         private StatFloat _armorRegen;
         [SerializeField]
         private float _currentArmor;
@@ -21,6 +22,7 @@ namespace Game
 
         private float _timer;
         private bool _canArmorRegen;
+        public bool HasRegen { get; private set; }
 
         private bool _isRegenAllowed;
         public bool IsRegenAllowed
@@ -36,9 +38,20 @@ namespace Game
 
         public void Initialize(Stats stats)
         {
-            _maxArmor = stats.maxArmor;
-            _currentArmor = _maxArmor.GetValue();
+            MaxArmor = stats.maxArmor;
+            _currentArmor = MaxArmor.GetValue();
             _armorRegen = stats.armorRegen;
+            MaxArmor.OnValueChange += CheckArmor;
+        }
+
+        public void OnDisable()
+        {
+            MaxArmor.OnValueChange -= CheckArmor;
+        }
+
+        private void CheckArmor()
+        {
+            HasRegen = MaxArmor.GetValue() > 0;
         }
 
         public float TakeDamage(float damage)
@@ -60,12 +73,22 @@ namespace Game
         public void Heal(float amount)
         {
             _currentArmor += amount;
-            if (_currentArmor > _maxArmor.GetValue())
-                _currentArmor = _maxArmor.GetValue();
+            if (_currentArmor > MaxArmor.GetValue())
+                _currentArmor = MaxArmor.GetValue();
         }
 
-        public void Regen()
+        private void Regen(float deltaTime)
         {
+            if (IsRegenAllowed)
+                _timer += deltaTime;
+            
+            if (_timer >= cooldownArmorRegen && !_canArmorRegen)
+                _canArmorRegen = true;
+            
+            if (!_canArmorRegen) return;
+
+            if (!(_timer > delayRegen) || !(_currentArmor < MaxArmor.GetValue())) return;
+            
             float regenArmor = _armorRegen.GetValue() * delayRegen;
             Heal(regenArmor);
             _timer = 0;
@@ -73,20 +96,8 @@ namespace Game
 
         public void OnUpdate(float deltaTime)
         {
-            if (_armorRegen.GetValue() == 0)
-                return;
-            
-            if (IsRegenAllowed)
-                _timer += deltaTime;
-            
-            if (_timer >= cooldownArmorRegen && !_canArmorRegen)
-                _canArmorRegen = true;
-            
-            if (!_canArmorRegen)
-                return;
-            
-            if (_timer > delayRegen && _currentArmor < _maxArmor.GetValue())
-                Regen();
+            if (HasRegen)
+                Regen(deltaTime);
         }
     }
 }
