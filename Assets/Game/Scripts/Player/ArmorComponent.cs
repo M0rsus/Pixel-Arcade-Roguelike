@@ -1,5 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game
@@ -8,50 +9,34 @@ namespace Game
     public class ArmorComponent
     {
         public event Action OnArmorLost;
-
-        public StatInt MaxArmor { get; private set; }
         
-        private StatFloat _armorRegen;
-        [SerializeField]
-        private float _currentArmor;
-
+        private CancellationToken _ct;
+        private CancellationTokenSource _cts;
+        
         [SerializeField] 
         private float cooldownArmorRegen = 4f;
         [SerializeField]
         private float delayRegen = 1f;
+        
+        public StatInt MaxArmor { get; private set; }
+        private StatFloat _armorRegen;
+        [SerializeField]
+        private float _currentArmor;
+        
+        public bool IsActiveRegen { get; set; }
 
-        private float _timer;
-        private bool _canArmorRegen;
-        public bool HasRegen { get; private set; }
-
-        private bool _isRegenAllowed;
-        public bool IsRegenAllowed
-        {
-            get => _isRegenAllowed;
-            set
-            {
-                _isRegenAllowed = value;
-                if (!value)
-                    _timer = 0;
-            }
-        }
-
-        public void Initialize(Stats stats)
+        public void Initialize(Stats stats, CancellationToken ct)
         {
             MaxArmor = stats.maxArmor;
             _currentArmor = MaxArmor.GetValue();
             _armorRegen = stats.armorRegen;
-            MaxArmor.OnValueChange += CheckArmor;
+            _ct = ct;
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
         }
 
-        public void OnDisable()
+        public bool CheckArmor()
         {
-            MaxArmor.OnValueChange -= CheckArmor;
-        }
-
-        private void CheckArmor()
-        {
-            HasRegen = MaxArmor.GetValue() > 0;
+            return MaxArmor.GetValue() > 0 && _armorRegen.GetValue() > 0;
         }
 
         public float TakeDamage(float damage)
@@ -65,8 +50,8 @@ namespace Game
                     OnArmorLost?.Invoke();
                 _currentArmor = 0;
             }
-            _timer = 0;
-            _canArmorRegen = false;
+            CancelRegen();
+            Regen().Forget();
             return excessDamage;
         }
         
@@ -77,27 +62,38 @@ namespace Game
                 _currentArmor = MaxArmor.GetValue();
         }
 
-        private void Regen(float deltaTime)
+        public async UniTaskVoid Regen()
         {
-            if (IsRegenAllowed)
-                _timer += deltaTime;
-            
-            if (_timer >= cooldownArmorRegen && !_canArmorRegen)
-                _canArmorRegen = true;
-            
-            if (!_canArmorRegen) return;
-
-            if (!(_timer > delayRegen) || !(_currentArmor < MaxArmor.GetValue())) return;
-            
-            float regenArmor = _armorRegen.GetValue() * delayRegen;
-            Heal(regenArmor);
-            _timer = 0;
+            try
+            {
+                if (!IsActiveRegen) return;
+                
+                await UniTask.Delay(
+                    TimeSpan.FromSeconds(cooldownArmorRegen), 
+                    ignoreTimeScale: false, 
+                    cancellationToken: _cts.Token);
+                
+                while (_currentArmor < MaxArmor.GetValue())
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
+                        ignoreTimeScale: false,
+                        cancellationToken: _cts.Token);
+                
+                    float regenArmor = _armorRegen.GetValue() * delayRegen;
+                    Heal(regenArmor);
+                }
+            }
+            catch (OperationCanceledException) { }
         }
-
-        public void OnUpdate(float deltaTime)
+        public void CancelRegen()
         {
-            if (HasRegen)
-                Regen(deltaTime);
+            if (_cts != null)
+            {
+                _cts.Cancel();
+                _cts.Dispose();
+            }
+            
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
         }
     }
 }

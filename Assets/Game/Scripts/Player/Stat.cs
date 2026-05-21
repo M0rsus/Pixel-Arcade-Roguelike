@@ -18,7 +18,7 @@ namespace Game
         public event Action OnValueChange;
         
         [field: SerializeField]
-        public T Value { get; protected set; }
+        public T Value { get; private set; }
         
         private List<Modifier<T>> _modifiers = new();
 

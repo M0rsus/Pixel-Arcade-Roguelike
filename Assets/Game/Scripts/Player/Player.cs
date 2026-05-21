@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using UnityEngine;
 
 namespace Game
 {
@@ -29,11 +30,13 @@ namespace Game
         private Stats stats; 
         
         public IDamageable Damageable => damageReceiverComponent;
+        private CancellationToken _ct;
 
         void Awake()
         {
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
+            _ct = CancellationToken.None;
         }
 
         void OnDisable()
@@ -48,7 +51,7 @@ namespace Game
         }
         void Start()
         {
-            damageReceiverComponent.Initialize(stats);
+            damageReceiverComponent.Initialize(stats, _ct);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
             shootComponent.Initialize(input, spawnBulletComponent, stats);
