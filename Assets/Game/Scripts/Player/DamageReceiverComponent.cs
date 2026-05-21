@@ -18,7 +18,7 @@ namespace Game
 
         public void Initialize(Stats stats, CancellationToken ct)
         {
-            healthComponent.Initialize(stats);
+            healthComponent.Initialize(stats, ct);
             armorComponent.Initialize(stats, ct);
             _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             
@@ -70,13 +70,8 @@ namespace Game
             if (armorComponent != null)
                 _excessDamage = armorComponent.TakeDamage(damage);
             
-            if (_excessDamage <= 0)
-                return;
+            if (_excessDamage <= 0) return;
             healthComponent?.TakeDamage(damage);
-        }
-        public void OnUpdate(float deltaTime)
-        {
-            healthComponent?.OnUpdate(deltaTime);
         }
     }
 }

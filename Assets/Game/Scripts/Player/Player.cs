@@ -61,7 +61,6 @@ namespace Game
         public void OnUpdate(float deltaTime)
         {
             shootComponent.OnUpdate(deltaTime);
-            damageReceiverComponent.OnUpdate(deltaTime);
         }
 
         public void OnFixedUpdate(float deltaTime)
