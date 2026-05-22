@@ -18,7 +18,6 @@ namespace Game
         
         public void OnFixedUpdate(float deltaTime)
         {
-            Debug.Log(_rotatable.RotationInput);
             var rotation = _rotatable.RotationInput * _rotationSpeed.GetValue() * deltaTime;
             _rigidbody.MoveRotation(_rigidbody.rotation + rotation);
         }

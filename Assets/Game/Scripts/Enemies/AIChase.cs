@@ -24,10 +24,19 @@ namespace Game
 
         public override void OnUpdate(float deltaTime)
         {
-            agent.SetDestination(playerTransform.position);
-            /*IsMoving = false;
             
-            Vector2 direction = playerTransform.position - enemyTransform.position;
+        }
+
+        public override void OnFixedUpdate(float deltaTime)
+        {
+            agent.SetDestination(playerTransform.position);
+            
+            if (!agent.hasPath) return;
+            
+            IsMoving = false;
+            
+            Vector2 direction = agent.desiredVelocity.normalized;
+            
             float distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
 
             if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
@@ -46,18 +55,6 @@ namespace Game
                     _timer = 0;
                 }
             }
-            Angle = Vector2.SignedAngle(enemyTransform.up, direction);*/
-        }
-
-        public override void OnFixedUpdate(float deltaTime)
-        {
-            if (!agent.hasPath) return;
-            
-            IsMoving = true;
-            
-            Vector2 direction = agent.desiredVelocity.normalized;
-            
-            //Vector2 direction = (agent.steeringTarget - enemyTransform.position).normalized;
             
             Angle = Vector2.SignedAngle(enemyTransform.up, direction);
             
