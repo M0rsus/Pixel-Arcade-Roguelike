@@ -8,6 +8,7 @@ namespace Game
     [Serializable]
     public class ArmorComponent
     {
+        public event Action OnArmorFull;
         public event Action OnArmorLost;
         
         private CancellationToken _ct;
@@ -41,29 +42,32 @@ namespace Game
 
         public float TakeDamage(float damage)
         {
-            float prevArmor = _currentArmor;
+            int maxArmor = MaxArmor.GetValue();
+            
             _currentArmor -= damage;
+            
             float excessDamage = -_currentArmor;
-            if (_currentArmor <= 0)
-            {
-                if (prevArmor > 0)
-                    OnArmorLost?.Invoke();
-                _currentArmor = 0;
-            }
+            
+            if (_currentArmor <= 0) OnArmorLost?.Invoke();
+            if (_currentArmor >= maxArmor) OnArmorFull?.Invoke();
+            
+            _currentArmor = Mathf.Clamp(_currentArmor, 0, maxArmor);
+            
             CancelRegen();
             Regen().Forget();
             return excessDamage;
         }
         
-        public void Heal(float amount)
+        public void Heal(float amount) 
         {
-            _currentArmor += amount;
-            if (_currentArmor > MaxArmor.GetValue())
-                _currentArmor = MaxArmor.GetValue();
+            int maxArmor = MaxArmor.GetValue();
             
-            if (_currentArmor > 0) return;
-            _currentArmor = 0;
-            OnArmorLost?.Invoke();
+            _currentArmor += amount;
+            
+            if (_currentArmor >= maxArmor) OnArmorFull?.Invoke();
+            if (_currentArmor <= 0) OnArmorLost?.Invoke();
+            
+            _currentArmor = Mathf.Clamp(_currentArmor, 0, maxArmor);
         }
 
         public async UniTaskVoid Regen()
@@ -77,7 +81,7 @@ namespace Game
                     ignoreTimeScale: false, 
                     cancellationToken: _cts.Token);
                 
-                while (_currentArmor < MaxArmor.GetValue() && _currentArmor >= 0)
+                while (_currentArmor < MaxArmor.GetValue())
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,

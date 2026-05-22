@@ -8,9 +8,9 @@ namespace Game
     [Serializable]
     public class HealthComponent
     {
-        public event Action OnDeath;
         public event Action OnHealthFull;
         public event Action OnHealthNotFull;
+        public event Action OnDeath;
         
         private CancellationToken _ct;
         private CancellationTokenSource _cts;
@@ -44,12 +44,13 @@ namespace Game
 
         public void Heal(float amount)
         {
+            int maxHealth = _maxHealth.GetValue();
             _currentHealth += amount;
             
-            if (_currentHealth < _maxHealth.GetValue()) return;
+            if (_currentHealth >= maxHealth) OnHealthFull?.Invoke();
             
-            _currentHealth = _maxHealth.GetValue();
-            OnHealthFull?.Invoke();
+            _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+            
         }
         public async UniTaskVoid Regen()
         {
