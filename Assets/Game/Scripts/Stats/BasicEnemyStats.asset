@@ -27,7 +27,7 @@ MonoBehaviour:
   moveSpeed:
     <Value>k__BackingField: 2.5
   rotationSpeed:
-    <Value>k__BackingField: 300
+    <Value>k__BackingField: 360
   contactDamage:
     <Value>k__BackingField: 40
   contactDamageCooldown:

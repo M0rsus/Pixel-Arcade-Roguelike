@@ -42,6 +42,7 @@ namespace Game
         }
         void Start()
         {
+            input.Initialize();
             damageReceiverComponent.Initialize(stats, _ct);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
@@ -55,6 +56,7 @@ namespace Game
 
         public void OnFixedUpdate(float deltaTime)
         {
+            input.OnFixedUpdate(deltaTime);
             moveComponent.OnFixedUpdate(deltaTime);
             rotationComponent.OnFixedUpdate(deltaTime);
             contactComponent.OnFixedUpdate(deltaTime);

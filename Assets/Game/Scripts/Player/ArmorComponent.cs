@@ -60,6 +60,10 @@ namespace Game
             _currentArmor += amount;
             if (_currentArmor > MaxArmor.GetValue())
                 _currentArmor = MaxArmor.GetValue();
+            
+            if (_currentArmor > 0) return;
+            _currentArmor = 0;
+            OnArmorLost?.Invoke();
         }
 
         public async UniTaskVoid Regen()
@@ -73,7 +77,7 @@ namespace Game
                     ignoreTimeScale: false, 
                     cancellationToken: _cts.Token);
                 
-                while (_currentArmor < MaxArmor.GetValue())
+                while (_currentArmor < MaxArmor.GetValue() && _currentArmor >= 0)
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,

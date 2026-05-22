@@ -15,15 +15,15 @@ MonoBehaviour:
   maxHealth:
     <Value>k__BackingField: 100
   healthRegen:
-    <Value>k__BackingField: 0
+    <Value>k__BackingField: 4.71
   lifeSteal:
     <Value>k__BackingField: 0
   maxArmor:
-    <Value>k__BackingField: 0
+    <Value>k__BackingField: 55
   armorRegen:
-    <Value>k__BackingField: 0
+    <Value>k__BackingField: -8.62
   regenArmorAtFullHealth:
-    <Value>k__BackingField: 1
+    <Value>k__BackingField: 0
   moveSpeed:
     <Value>k__BackingField: 3
   rotationSpeed:

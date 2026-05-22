@@ -45,7 +45,6 @@ namespace Game
         public void OnDisable()
         {
             healthComponent.OnHealthFull -= ActivateArmorRegen;
-            healthComponent.OnHealthNotFull -= DeactivateArmorRegen;
             armorComponent.MaxArmor.OnValueChange -= UpdateSubscriptions;
             _regenArmorAtFullHealth.OnValueChange -= UpdateSubscriptions;
             armorComponent.CancelRegen();
@@ -59,7 +58,11 @@ namespace Game
             armorComponent.OnArmorLost -= DeactivateArmorRegen;
 
             if (!_regenArmorAtFullHealth.GetValue())
+            {
+                if (armorComponent.CheckArmor())
+                    ActivateArmorRegen();
                 return;
+            }
             
             healthComponent.OnHealthFull += ActivateArmorRegen;
             armorComponent.OnArmorLost += DeactivateArmorRegen;
