@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 179243733}
   m_Layer: 0
   m_Name: Bounds
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2837,7 +2837,7 @@ GameObject:
   - component: {fileID: 267785804}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6708,9 +6708,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 513998642}
     - target: {fileID: 1777744973245780976, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
+      propertyPath: managedReferences[8057922056475902027].bounds
+      value: 
+      objectReference: {fileID: 179243733}
+    - target: {fileID: 1777744973245780976, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
       propertyPath: managedReferences[8057922056475902027].playerTransform
       value: 
       objectReference: {fileID: 1064520981}
+    - target: {fileID: 1777744973245780976, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
+      propertyPath: managedReferences[8057922056475902027].distanceFromPlayer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1777744973245780976, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
+      propertyPath: managedReferences[8057922056475902027].timeBetweenChangeDirection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2439761971322729150, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.223326
@@ -7070,7 +7082,7 @@ GameObject:
   - component: {fileID: 1511852718}
   m_Layer: 0
   m_Name: PlayerDoors
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -44,11 +44,12 @@ namespace Game
         {
             int maxArmor = MaxArmor.GetValue();
             
+            float prevArmor = _currentArmor;
             _currentArmor -= damage;
             
             float excessDamage = -_currentArmor;
             
-            if (_currentArmor <= 0) OnArmorLost?.Invoke();
+            if (_currentArmor <= 0 && prevArmor > 0) OnArmorLost?.Invoke();
             if (_currentArmor >= maxArmor) OnArmorFull?.Invoke();
             
             _currentArmor = Mathf.Clamp(_currentArmor, 0, maxArmor);

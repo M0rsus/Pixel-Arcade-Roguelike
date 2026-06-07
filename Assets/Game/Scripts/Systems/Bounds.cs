@@ -18,5 +18,10 @@ namespace Game
             return left.position.x < position.x && position.x < right.position.x &&
                    up.position.y > position.y && position.y > bottom.position.y;
         }
+        
+        public float GetMinX() => left.position.x;
+        public float GetMaxX() => right.position.x;
+        public float GetMinY() => bottom.position.y;
+        public float GetMaxY() => up.position.y;
     }
 }

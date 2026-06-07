@@ -6,6 +6,8 @@ namespace Game
     public class AIChase : AI
     {
         [SerializeField]
+        private Bounds bounds;
+        [SerializeField]
         private Transform playerTransform;
         [SerializeField]
         private Transform enemyTransform;
@@ -16,11 +18,10 @@ namespace Game
         [SerializeField] [Min(0.5f)]
         private float timeBetweenChangeDirection = 0.5f;
 
-        private float _timer;
+        private float _timer = float.MaxValue;
         private Vector3 _localDirection;
 
         public override float Angle { get; set; }
-        public override bool IsMoving { get; set; }
 
         public override void OnUpdate(float deltaTime)
         {
@@ -29,34 +30,43 @@ namespace Game
 
         public override void OnFixedUpdate(float deltaTime)
         {
-            agent.SetDestination(playerTransform.position);
-            
-            if (!agent.hasPath) return;
-            
-            IsMoving = false;
-            
-            Vector2 direction = agent.desiredVelocity.normalized;
+            _timer += deltaTime;
             
             float distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
 
             if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
             {
-                IsMoving = true;
+                state = State.Forward;
+                agent.SetDestination(playerTransform.position);
+                if (!agent.hasPath) return;
             }
-            else if (moveOutsideChaseRange)
+            else
             {
-                IsMoving = true;
-                _timer += deltaTime;
-                direction = _localDirection - enemyTransform.position;
-                
-                if (_timer > timeBetweenChangeDirection)
+                if (moveOutsideChaseRange)
                 {
-                    _localDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1, 1f)) - enemyTransform.position;
-                    _timer = 0;
+                    state = State.Forward;
+                    
+                    if (_timer > timeBetweenChangeDirection)
+                    {
+                        _localDirection = new Vector3(
+                            Random.Range(bounds.GetMinX(), bounds.GetMaxX()), 
+                            Random.Range(bounds.GetMinY(), bounds.GetMaxY()));
+                        
+                        agent.SetDestination(_localDirection);
+                        _timer = 0;
+                    }
+                }
+                else
+                {
+                    state = State.Idle;
+                    if (agent.hasPath) agent.ResetPath();
                 }
             }
-            
-            Angle = Vector2.SignedAngle(enemyTransform.up, direction);
+            if (agent.hasPath && agent.desiredVelocity.sqrMagnitude > 0.01f)
+            {
+                Vector2 direction = agent.desiredVelocity.normalized;
+                Angle = Vector2.SignedAngle(enemyTransform.up, direction);
+            }
             
             agent.nextPosition = enemyTransform.position;
         }

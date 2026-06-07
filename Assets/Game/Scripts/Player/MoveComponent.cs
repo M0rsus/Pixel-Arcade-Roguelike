@@ -31,6 +31,8 @@ namespace Game
                 case Mode.MovePosition:
                     _rigidbody.MovePosition(_rigidbody.position + move);
                     break;
+                default:
+                    throw new ArgumentException("No mode selected");
             }
         }
 

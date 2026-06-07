@@ -9,8 +9,9 @@ namespace Game
         [SerializeField]
         protected NavMeshAgent agent;
         
+        protected State state;
+        
         public abstract float Angle { get; set; }
-        public abstract bool IsMoving { get; set; }
 
         public void Initialize()
         {
@@ -18,7 +19,18 @@ namespace Game
             agent.updateUpAxis = false;
             agent.updatePosition = false;
         }
+        public string GetState()
+        {
+            return state.ToString();
+        }
         public abstract void OnUpdate(float deltaTime);
         public abstract void OnFixedUpdate(float deltaTime);
+
+        protected enum State
+        {
+            Forward,
+            Idle,
+            Backward
+        }
     }
 }
