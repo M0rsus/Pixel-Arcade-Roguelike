@@ -4,4 +4,6 @@
     {
         public IDamageable Damageable { get; }
     }
+    public interface IEnemy : IEntity { }
+    public interface IPlayer : IEntity { }
 }

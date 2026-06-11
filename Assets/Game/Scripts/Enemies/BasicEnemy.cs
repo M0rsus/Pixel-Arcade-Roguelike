@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BasicEnemy : MonoBehaviour, IEntity, IOnUpdateListener, IOnFixedUpdateListener
+    public class BasicEnemy : MonoBehaviour, IEnemy, IOnUpdateListener, IOnFixedUpdateListener
     {
         [Header("General")]
         [SerializeField]
@@ -47,7 +47,7 @@ namespace Game
             damageReceiverComponent.Initialize(stats, _ct);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
-            contactComponent.Initialize(stats);
+            contactComponent.Initialize(stats, this);
         }
 
         public void OnUpdate(float deltaTime)

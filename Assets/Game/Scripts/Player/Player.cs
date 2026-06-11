@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Player : MonoBehaviour, IEntity, IOnUpdateListener, IOnFixedUpdateListener
+    public class Player : MonoBehaviour, IPlayer, IOnUpdateListener, IOnFixedUpdateListener
     {
         [Header("General")]
         [SerializeField]
@@ -56,7 +56,7 @@ namespace Game
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
             shootComponent.Initialize(input, spawnBulletComponent, stats);
-            contactComponent.Initialize(stats);
+            contactComponent.Initialize(stats, this);
         }
 
         public void OnUpdate(float deltaTime)
