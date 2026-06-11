@@ -48,6 +48,7 @@ namespace Game
         {
             GameUpdate.Unregister(onUpdateListener: this);
             GameUpdate.Unregister(onFixedUpdateListener: this);
+            damageReceiverComponent.OnDestroy();
         }
         void Start()
         {

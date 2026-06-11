@@ -44,6 +44,18 @@ namespace Game
         }
         public virtual void OnStartWave() {}
         public virtual void OnEndWave() {}
+
+        public void OnEnable()
+        {
+            GameManager.OnStartWave += OnStartWave;
+            GameManager.OnEndWave += OnEndWave;
+        }
+
+        public void OnDisable()
+        {
+            GameManager.OnStartWave -= OnStartWave;
+            GameManager.OnEndWave -= OnEndWave;
+        }
         
         private enum CardState
         {

@@ -36,8 +36,11 @@ namespace Game
         {
             _currentHealth -= damage;
             OnHealthNotFull?.Invoke();
-            CancelRegen();
+            
+            ClearCancellationTokenSource();
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
             Regen().Forget();
+            
             if (_currentHealth <= 0)
                 Die();
         }
@@ -68,15 +71,12 @@ namespace Game
             }
             catch (OperationCanceledException) { }
         }
-        public void CancelRegen()
+        public void ClearCancellationTokenSource()
         {
-            if (_cts != null)
-            {
-                _cts.Cancel();
-                _cts.Dispose();
-            }
-            
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
+            if (_cts == null) return;
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
         }
 
         private void Die()

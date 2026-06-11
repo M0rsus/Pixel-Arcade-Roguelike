@@ -9,7 +9,7 @@ namespace Game
         [SerializeReference] [SRDemo]
         private Card card;
 
-        void Awake()
+        private void Awake()
         {
             _playerCards = PlayerCards.Instance;
             GameUpdate.Register(this);
@@ -25,11 +25,21 @@ namespace Game
             Destroy(gameObject);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             card.OnPick();
             _playerCards.AddCard(card.CloneCard());
             GameUpdate.Unregister(this);
+        }
+
+        private void OnEnable()
+        {
+            card.OnEnable();
+        }
+
+        private void OnDisable()
+        {
+            card.OnDisable();
         }
     }
 }

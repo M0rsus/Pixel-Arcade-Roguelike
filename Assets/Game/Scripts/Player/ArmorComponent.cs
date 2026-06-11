@@ -54,8 +54,10 @@ namespace Game
             
             _currentArmor = Mathf.Clamp(_currentArmor, 0, maxArmor);
             
-            CancelRegen();
+            ClearCancellationTokenSource();
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
             Regen().Forget();
+            
             return excessDamage;
         }
         
@@ -94,15 +96,12 @@ namespace Game
             }
             catch (OperationCanceledException) { }
         }
-        public void CancelRegen()
+        public void ClearCancellationTokenSource()
         {
-            if (_cts != null)
-            {
-                _cts.Cancel();
-                _cts.Dispose();
-            }
-            
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
+            if (_cts == null) return;
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
         }
     }
 }

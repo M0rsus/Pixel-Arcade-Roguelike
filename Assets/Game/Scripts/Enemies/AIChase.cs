@@ -6,9 +6,7 @@ namespace Game
     public class AIChase : AI
     {
         [SerializeField]
-        private Bounds bounds;
-        [SerializeField]
-        private Transform playerTransform;
+        private GameObject player;
         [SerializeField]
         private Transform enemyTransform;
         [SerializeField]
@@ -23,21 +21,18 @@ namespace Game
 
         public override float Angle { get; set; }
 
-        public override void OnUpdate(float deltaTime)
-        {
-            
-        }
+        public override void OnUpdate(float deltaTime) {}
 
         public override void OnFixedUpdate(float deltaTime)
         {
             _timer += deltaTime;
             
-            float distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
+            float distance = (player.transform.position - enemyTransform.position).sqrMagnitude;
 
             if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
             {
                 state = State.Forward;
-                agent.SetDestination(playerTransform.position);
+                agent.SetDestination(player.transform.position);
                 if (!agent.hasPath) return;
             }
             else

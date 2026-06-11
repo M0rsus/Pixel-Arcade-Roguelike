@@ -4,6 +4,8 @@ namespace Game
 {
     public class Bounds : MonoBehaviour
     {
+        public static Bounds Instance { get; private set; }
+        
         [SerializeField] 
         private Transform left;
         [SerializeField] 
@@ -13,6 +15,11 @@ namespace Game
         [SerializeField] 
         private Transform bottom;
 
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+        }
         public bool InBounds(Vector3 position)
         {
             return left.position.x < position.x && position.x < right.position.x &&

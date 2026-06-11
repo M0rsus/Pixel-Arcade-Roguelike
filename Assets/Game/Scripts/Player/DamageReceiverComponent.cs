@@ -47,7 +47,12 @@ namespace Game
             healthComponent.OnHealthFull -= ActivateArmorRegen;
             armorComponent.MaxArmor.OnValueChange -= UpdateSubscriptions;
             _regenArmorAtFullHealth.OnValueChange -= UpdateSubscriptions;
-            armorComponent.CancelRegen();
+        }
+
+        public void OnDestroy()
+        {
+            healthComponent.ClearCancellationTokenSource();
+            armorComponent.ClearCancellationTokenSource();
         }
 
         public void UpdateSubscriptions()

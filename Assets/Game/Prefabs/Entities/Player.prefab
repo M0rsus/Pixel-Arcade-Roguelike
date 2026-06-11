@@ -371,9 +371,9 @@ MonoBehaviour:
       _currentHealth: 0
       delayRegen: 0.1
     armorComponent:
-      _currentArmor: 0
       cooldownArmorRegen: 4
       delayRegen: 0.1
+      _currentArmor: 0
   moveComponent:
     mode: 0
   spawnBulletComponent: {fileID: 4114014089074492704}

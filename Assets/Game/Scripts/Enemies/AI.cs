@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Game
@@ -6,6 +7,7 @@ namespace Game
     [System.Serializable]
     public abstract class AI
     {
+        protected Bounds bounds;
         [SerializeField]
         protected NavMeshAgent agent;
         
@@ -18,6 +20,7 @@ namespace Game
             agent.updateRotation = false;
             agent.updateUpAxis = false;
             agent.updatePosition = false;
+            bounds = Bounds.Instance;
         }
         public string GetState()
         {
