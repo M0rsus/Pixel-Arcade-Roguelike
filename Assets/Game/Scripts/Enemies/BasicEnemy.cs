@@ -27,6 +27,7 @@ namespace Game
 
         public IDamageable Damageable => damageReceiverComponent;
         private CancellationToken _ct;
+        private CancellationToken _stuckToken;
 
         void Awake()
         {
@@ -40,10 +41,11 @@ namespace Game
             GameUpdate.Unregister(onUpdateListener: this);
             GameUpdate.Unregister(onFixedUpdateListener: this);
             damageReceiverComponent.OnDestroy();
+            input.OnDestroy();
         }
         void Start()
         {
-            input.Initialize();
+            input.Initialize(_ct, _stuckToken);
             damageReceiverComponent.Initialize(stats, _ct);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
@@ -66,6 +68,12 @@ namespace Game
         public void OnCollisionStay2D(Collision2D collision)
         {
             contactComponent.OnContact(collision);
+            input.OnCollisionStay2D(collision);
+        }
+
+        public void OnCollisionExit2D(Collision2D collision)
+        {
+            input.OnCollisionExit2D(collision);
         }
     }
 }

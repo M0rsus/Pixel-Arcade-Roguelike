@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
-    [System.Serializable]
+    [Serializable]
     public class AIChase : AI
     {
+        
         [SerializeField]
         private Transform enemyTransform;
         [SerializeField]
@@ -16,6 +21,8 @@ namespace Game
 
         private float _timer = float.MaxValue;
         private Vector3 _localDirection;
+        private bool _timerIsRunning;
+        private bool _isStuckSituation;
 
         public override float Angle { get; set; }
 
@@ -61,7 +68,53 @@ namespace Game
                 Vector2 direction = agent.desiredVelocity.normalized;
                 Angle = Vector2.SignedAngle(enemyTransform.up, direction);
             }
+
+            if (_isStuckSituation)
+            {
+                Debug.Log("Backward");
+                state = State.Backward;
+            }
             agent.nextPosition = enemyTransform.position;
+        }
+
+        public override void OnCollisionStay2D(Collision2D collision)
+        {
+            if (_timerIsRunning) return;
+            
+            ClearCancellationTokenSource();
+            cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            Sticking().Forget();
+        }
+
+        public override void OnCollisionExit2D(Collision2D collision)
+        {
+            ClearCancellationTokenSource();
+        }
+
+        private async UniTaskVoid Sticking()
+        {
+            try
+            {
+                _timerIsRunning = true;
+
+                await UniTask.Delay(
+                    TimeSpan.FromSeconds(2.5f),
+                    ignoreTimeScale: false,
+                    cancellationToken: cts.Token);
+
+                _isStuckSituation = true;
+
+                await UniTask.Delay(
+                    TimeSpan.FromSeconds(0.4f),
+                    ignoreTimeScale: false,
+                    cancellationToken: stuckToken);
+            }
+            catch (OperationCanceledException) { }
+            finally
+            {
+                _isStuckSituation = false; 
+                _timerIsRunning = false;
+            }
         }
     }
 }

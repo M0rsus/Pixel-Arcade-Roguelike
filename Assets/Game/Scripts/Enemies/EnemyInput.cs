@@ -1,4 +1,5 @@
-﻿using Demo;
+﻿using System.Threading;
+using Demo;
 using UnityEngine;
 
 namespace Game
@@ -12,9 +13,9 @@ namespace Game
         public float RotationInput {get; private set;}
         public bool ShootInput { get; private set; }
 
-        public void Initialize()
+        public void Initialize(CancellationToken ct, CancellationToken stuckToken)
         {
-            ai.Initialize();
+            ai.Initialize(ct, stuckToken);
         }
 
         public void OnUpdate(float deltaTime)
@@ -24,7 +25,7 @@ namespace Game
             {
                 "Forward" => 1f,
                 "Idle" => 0f,
-                "Backward" => -1f,
+                "Backward" => -0.5f,
                 _ => ForwardInput
             };
             
@@ -33,13 +34,26 @@ namespace Game
                 RotationInput = 0f;
             
             ShootInput = true;
-            //Debug.Log($"ForwardInput: <color=yellow>{ForwardInput}</color>");
-            //Debug.Log($"RotationInput: <color=yellow>{RotationInput}</color>");
+        }
+
+        public void OnDestroy()
+        {
+            ai.ClearCancellationTokenSource();
         }
 
         public void OnFixedUpdate(float deltaTime)
         {
             ai.OnFixedUpdate(deltaTime);
+        }
+
+        public void OnCollisionStay2D(Collision2D collision)
+        {
+            ai.OnCollisionStay2D(collision);
+        }
+
+        public void OnCollisionExit2D(Collision2D collision)
+        {
+            ai.OnCollisionExit2D(collision);
         }
     }
 }

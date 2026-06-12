@@ -362,7 +362,7 @@ MonoBehaviour:
       data:
         agent: {fileID: 302703249264968001}
         enemyTransform: {fileID: 2439761971322729150}
-        distanceFromPlayer: 4
+        distanceFromPlayer: 12
         moveOutsideChaseRange: 0
         timeBetweenChangeDirection: 3
 --- !u!1 &7315122017715758177
