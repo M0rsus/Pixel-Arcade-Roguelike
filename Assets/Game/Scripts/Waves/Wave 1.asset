@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.WaveData
   points: 10
   enemySpawnOptions:
-  - points: 1
+  - points: 10
     weight: 1000
     prefab: {fileID: 3096161144569841077, guid: de725cf9c77e1914ab80f73b9ebf7133, type: 3}

@@ -8,6 +8,7 @@ namespace Game
     public abstract class AI
     {
         protected Bounds bounds;
+        protected Transform playerTransform;
         [SerializeField]
         protected NavMeshAgent agent;
         
@@ -20,7 +21,8 @@ namespace Game
             agent.updateRotation = false;
             agent.updateUpAxis = false;
             agent.updatePosition = false;
-            bounds = Bounds.Instance;
+            bounds = LevelContext.Instance.LevelBounds;
+            playerTransform = LevelContext.Instance.PlayerTransform;
         }
         public string GetState()
         {

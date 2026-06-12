@@ -8,6 +8,9 @@ namespace Game
         
         [field: SerializeField] 
         public Bounds LevelBounds { get; private set; }
+        
+        [field: SerializeField] 
+        public Transform PlayerTransform { get; private set; }
 
         private void Awake()
         {

@@ -6,8 +6,6 @@ namespace Game
     public class AIChase : AI
     {
         [SerializeField]
-        private GameObject player;
-        [SerializeField]
         private Transform enemyTransform;
         [SerializeField]
         private float distanceFromPlayer;
@@ -27,12 +25,13 @@ namespace Game
         {
             _timer += deltaTime;
             
-            float distance = (player.transform.position - enemyTransform.position).sqrMagnitude;
+            float distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
 
             if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
             {
+                Debug.Log("Forward");
                 state = State.Forward;
-                agent.SetDestination(player.transform.position);
+                agent.SetDestination(playerTransform.position);
                 if (!agent.hasPath) return;
             }
             else
@@ -62,7 +61,6 @@ namespace Game
                 Vector2 direction = agent.desiredVelocity.normalized;
                 Angle = Vector2.SignedAngle(enemyTransform.up, direction);
             }
-            
             agent.nextPosition = enemyTransform.position;
         }
     }

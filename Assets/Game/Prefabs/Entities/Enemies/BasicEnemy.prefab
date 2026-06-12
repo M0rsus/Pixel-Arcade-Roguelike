@@ -361,10 +361,9 @@ MonoBehaviour:
       type: {class: AIChase, ns: Game, asm: Assembly-CSharp}
       data:
         agent: {fileID: 302703249264968001}
-        player: {fileID: 5817885745359894659, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
         enemyTransform: {fileID: 2439761971322729150}
-        distanceFromPlayer: 1
-        moveOutsideChaseRange: 1
+        distanceFromPlayer: 4
+        moveOutsideChaseRange: 0
         timeBetweenChangeDirection: 3
 --- !u!1 &7315122017715758177
 GameObject:
