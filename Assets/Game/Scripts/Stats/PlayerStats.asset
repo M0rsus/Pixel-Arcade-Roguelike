@@ -27,7 +27,7 @@ MonoBehaviour:
   moveSpeed:
     <Value>k__BackingField: 2
   rotationSpeed:
-    <Value>k__BackingField: 100
+    <Value>k__BackingField: 180
   contactDamage:
     <Value>k__BackingField: 0
   contactDamageCooldown:
@@ -39,10 +39,10 @@ MonoBehaviour:
   bulletSpeed:
     <Value>k__BackingField: 4
   lifeTime:
-    <Value>k__BackingField: 10
-  range:
     <Value>k__BackingField: 12
+  range:
+    <Value>k__BackingField: 10
   bounces:
-    <Value>k__BackingField: 1
+    <Value>k__BackingField: 0
   bounceOffEnemies:
     <Value>k__BackingField: 0

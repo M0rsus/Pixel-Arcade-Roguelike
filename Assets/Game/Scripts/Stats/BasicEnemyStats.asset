@@ -29,9 +29,9 @@ MonoBehaviour:
   rotationSpeed:
     <Value>k__BackingField: 360
   contactDamage:
-    <Value>k__BackingField: 40
+    <Value>k__BackingField: 30
   contactDamageCooldown:
-    <Value>k__BackingField: 2
+    <Value>k__BackingField: 1
   bulletDamage:
     <Value>k__BackingField: 0
   shootCooldown:
