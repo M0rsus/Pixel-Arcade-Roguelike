@@ -1,10 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using UnityEngine;
 
 namespace Game
 {
     public class Player : MonoBehaviour, IPlayer, IOnUpdateListener, IOnFixedUpdateListener
     {
+        public static event Action Destroyed;
         [Header("General")]
         [SerializeField]
         private Rigidbody2D rigidBody;
@@ -49,10 +51,11 @@ namespace Game
             GameUpdate.Unregister(onUpdateListener: this);
             GameUpdate.Unregister(onFixedUpdateListener: this);
             damageReceiverComponent.OnDestroy();
+            Destroyed?.Invoke();
         }
         void Start()
         {
-            damageReceiverComponent.Initialize(stats, _ct);
+            damageReceiverComponent.Initialize(this, stats, _ct);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
             shootComponent.Initialize(input, spawnBulletComponent, stats);

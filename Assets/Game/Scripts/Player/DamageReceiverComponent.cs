@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game
 {
@@ -14,16 +15,19 @@ namespace Game
         
         private StatBool _regenArmorAtFullHealth;
 
+        private MonoBehaviour _entity;
         private float _excessDamage;
 
-        public void Initialize(Stats stats, CancellationToken ct)
+        public void Initialize(MonoBehaviour entity, Stats stats, CancellationToken ct)
         {
+            _entity = entity;
             healthComponent.Initialize(stats, ct);
             armorComponent.Initialize(stats, ct);
             _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             
             armorComponent.MaxArmor.OnValueChange += UpdateSubscriptions;
             _regenArmorAtFullHealth.OnValueChange += UpdateSubscriptions;
+            healthComponent.OnDeath += Death;
             UpdateSubscriptions();
             if (armorComponent.CheckArmor())
                 ActivateArmorRegen();
@@ -53,6 +57,7 @@ namespace Game
         {
             healthComponent.ClearCancellationTokenSource();
             armorComponent.ClearCancellationTokenSource();
+            healthComponent.OnDeath -= Death;
         }
 
         public void UpdateSubscriptions()
@@ -80,6 +85,11 @@ namespace Game
             
             if (_excessDamage <= 0) return;
             healthComponent?.TakeDamage(damage);
+        }
+
+        private void Death()
+        {
+            Object.Destroy(_entity.gameObject);
         }
     }
 }

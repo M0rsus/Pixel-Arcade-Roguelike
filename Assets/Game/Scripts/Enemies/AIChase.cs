@@ -9,7 +9,6 @@ namespace Game
     [Serializable]
     public class AIChase : AI
     {
-        
         [SerializeField]
         private Transform enemyTransform;
         [SerializeField]
@@ -31,8 +30,10 @@ namespace Game
         public override void OnFixedUpdate(float deltaTime)
         {
             _timer += deltaTime;
-            
-            float distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
+            float distance = float.MaxValue;
+
+            if (playerTransform != null)
+                distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
 
             if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
             {
@@ -115,6 +116,11 @@ namespace Game
                 _isStuckSituation = false; 
                 _timerIsRunning = false;
             }
+        }
+
+        protected override void PlayerDestroyed()
+        {
+            moveOutsideChaseRange = true;
         }
     }
 }

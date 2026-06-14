@@ -39,6 +39,7 @@ namespace Game
         public void OnDestroy()
         {
             ai.ClearCancellationTokenSource();
+            ai.OnDestroy();
         }
 
         public void OnFixedUpdate(float deltaTime)

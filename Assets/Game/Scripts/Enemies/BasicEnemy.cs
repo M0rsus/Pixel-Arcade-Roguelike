@@ -46,7 +46,7 @@ namespace Game
         void Start()
         {
             input.Initialize(_ct, _stuckToken);
-            damageReceiverComponent.Initialize(stats, _ct);
+            damageReceiverComponent.Initialize(this, stats, _ct);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
             contactComponent.Initialize(stats, this);
