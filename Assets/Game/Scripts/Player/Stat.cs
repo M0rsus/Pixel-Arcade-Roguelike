@@ -5,12 +5,25 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class StatFloat : Stat<float> {}
-    [Serializable]
-    public class StatInt : Stat<int> {}
+    public class StatFloat : Stat<float>
+    {
+        public StatFloat() : base() { }
+        public StatFloat(float value) : base(value) { }
+    }
 
     [Serializable]
-    public class StatBool : Stat<bool> {}
+    public class StatInt : Stat<int>
+    {
+        public StatInt() : base() { }
+        public StatInt(int value) : base(value) { }
+    }
+
+    [Serializable]
+    public class StatBool : Stat<bool>
+    {
+        public StatBool() : base() { }
+        public StatBool(bool value) : base(value) { }
+    }
     
     [Serializable]
     public class Stat<T>
@@ -18,9 +31,16 @@ namespace Game
         public event Action OnValueChange;
         
         [field: SerializeField]
-        public T Value { get; private set; }
+        public T Value { get; set; }
         
         private List<Modifier<T>> _modifiers = new();
+        
+        public Stat() : this (default(T)) { }
+
+        public Stat(T value)
+        {
+            Value = value;
+        }
 
         public T GetValue()
         {

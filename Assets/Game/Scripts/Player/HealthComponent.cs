@@ -14,11 +14,13 @@ namespace Game
         
         private CancellationToken _ct;
         private CancellationTokenSource _cts;
-        
+
+        [SerializeField]
+        private UI.SliderView healthView;
         private StatInt _maxHealth;
         private StatFloat _healthRegen;
         [SerializeField]
-        private float _currentHealth;
+        private StatInt _currentHealth;
 
         [SerializeField]
         private float delayRegen = 0.1f;
@@ -26,40 +28,43 @@ namespace Game
         public void Initialize(Stats stats, CancellationToken ct)
         {
             _maxHealth = stats.maxHealth;
-            _currentHealth = _maxHealth.GetValue();
+            _currentHealth.Value = _maxHealth.GetValue();
             _healthRegen = stats.healthRegen;
+            if (healthView)
+                healthView.Initialize(_currentHealth, _maxHealth);
             _ct = ct;
             _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
         }
 
         public void TakeDamage(float damage)
         {
-            _currentHealth -= damage;
+            _currentHealth.Value -= (int)damage;
             OnHealthNotFull?.Invoke();
             
             ClearCancellationTokenSource();
             _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
             Regen().Forget();
             
-            if (_currentHealth <= 0)
+            if (_currentHealth.Value <= 0)
                 Die();
+            _currentHealth.Value = Mathf.Clamp(_currentHealth.Value, 0, _maxHealth.GetValue());
         }
 
         public void Heal(float amount)
         {
             int maxHealth = _maxHealth.GetValue();
-            _currentHealth += amount;
+            _currentHealth.Value += (int)amount;
             
-            if (_currentHealth >= maxHealth) OnHealthFull?.Invoke();
+            if (_currentHealth.Value >= maxHealth) OnHealthFull?.Invoke();
             
-            _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+            _currentHealth.Value = Mathf.Clamp(_currentHealth.Value, 0, maxHealth);
             
         }
         public async UniTaskVoid Regen()
         {
             try
             {
-                while (_currentHealth < _maxHealth.GetValue())
+                while (_currentHealth.Value < _maxHealth.GetValue())
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,

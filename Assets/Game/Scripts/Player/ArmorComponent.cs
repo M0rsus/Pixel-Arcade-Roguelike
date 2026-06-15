@@ -13,7 +13,8 @@ namespace Game
         
         private CancellationToken _ct;
         private CancellationTokenSource _cts;
-        
+        [SerializeField] 
+        private UI.SliderView armorView;
         [SerializeField] 
         private float cooldownArmorRegen = 4f;
         [SerializeField]
@@ -22,15 +23,17 @@ namespace Game
         public StatInt MaxArmor { get; private set; }
         private StatFloat _armorRegen;
         [SerializeField]
-        private float _currentArmor;
+        private StatInt _currentArmor;
         
         public bool IsActiveRegen { get; set; }
 
         public void Initialize(Stats stats, CancellationToken ct)
         {
             MaxArmor = stats.maxArmor;
-            _currentArmor = MaxArmor.GetValue();
+            _currentArmor.Value = MaxArmor.GetValue();
             _armorRegen = stats.armorRegen;
+            if (armorView)
+                armorView.Initialize(_currentArmor, MaxArmor);
             _ct = ct;
             _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
         }
@@ -43,16 +46,17 @@ namespace Game
         public float TakeDamage(float damage)
         {
             int maxArmor = MaxArmor.GetValue();
+            int currentArmor = _currentArmor.GetValue();
             
-            float prevArmor = _currentArmor;
-            _currentArmor -= damage;
+            float prevArmor = _currentArmor.Value;
+            currentArmor -= (int)damage;
             
-            float excessDamage = -_currentArmor;
+            float excessDamage = -currentArmor;
             
-            if (_currentArmor <= 0 && prevArmor > 0) OnArmorLost?.Invoke();
-            if (_currentArmor >= maxArmor) OnArmorFull?.Invoke();
+            if (currentArmor <= 0 && prevArmor > 0) OnArmorLost?.Invoke();
+            if (currentArmor >= maxArmor) OnArmorFull?.Invoke();
             
-            _currentArmor = Mathf.Clamp(_currentArmor, 0, maxArmor);
+            _currentArmor.Value = Mathf.Clamp(currentArmor, 0, maxArmor);
             
             ClearCancellationTokenSource();
             _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
@@ -64,13 +68,14 @@ namespace Game
         public void Heal(float amount) 
         {
             int maxArmor = MaxArmor.GetValue();
+            int currentArmor = _currentArmor.GetValue();
             
-            _currentArmor += amount;
+            currentArmor += (int)amount;
             
-            if (_currentArmor >= maxArmor) OnArmorFull?.Invoke();
-            if (_currentArmor <= 0) OnArmorLost?.Invoke();
+            if (currentArmor >= maxArmor) OnArmorFull?.Invoke();
+            if (currentArmor <= 0) OnArmorLost?.Invoke();
             
-            _currentArmor = Mathf.Clamp(_currentArmor, 0, maxArmor);
+            _currentArmor.Value = Mathf.Clamp(currentArmor, 0, maxArmor);
         }
 
         public async UniTaskVoid Regen()
@@ -84,7 +89,7 @@ namespace Game
                     ignoreTimeScale: false, 
                     cancellationToken: _cts.Token);
                 
-                while (_currentArmor < MaxArmor.GetValue())
+                while (_currentArmor.Value < MaxArmor.GetValue())
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,

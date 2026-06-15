@@ -37,7 +37,6 @@ namespace Game
 
             if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
             {
-                Debug.Log("Forward");
                 state = State.Forward;
                 agent.SetDestination(playerTransform.position);
                 if (!agent.hasPath) return;
@@ -72,7 +71,6 @@ namespace Game
 
             if (_isStuckSituation)
             {
-                Debug.Log("Backward");
                 state = State.Backward;
             }
             agent.nextPosition = enemyTransform.position;
