@@ -35,7 +35,8 @@ namespace Game
             if (playerTransform != null)
                 distance = (playerTransform.position - enemyTransform.position).sqrMagnitude;
 
-            if (distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
+            if ((distance < distanceFromPlayer * distanceFromPlayer || distanceFromPlayer == 0)
+                && playerTransform != null)
             {
                 state = State.Forward;
                 agent.SetDestination(playerTransform.position);

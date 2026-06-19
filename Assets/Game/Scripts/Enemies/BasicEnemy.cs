@@ -34,8 +34,6 @@ namespace Game
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
             _ct = CancellationToken.None;
-            LevelContext.Instance.currentEnemyCount.Value++;
-            LevelContext.Instance.maxEnemyCount.Value++;
         }
 
         void OnDestroy()

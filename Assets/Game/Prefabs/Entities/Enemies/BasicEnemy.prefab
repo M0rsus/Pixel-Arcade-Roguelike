@@ -345,12 +345,16 @@ MonoBehaviour:
       rid: 8057922056475902027
   damageReceiverComponent:
     healthComponent:
-      _currentHealth: 0
+      healthView: {fileID: 0}
+      _currentHealth:
+        <Value>k__BackingField: 0
       delayRegen: 0.1
     armorComponent:
+      armorView: {fileID: 0}
       cooldownArmorRegen: 4
       delayRegen: 1
-      _currentArmor: 0
+      _currentArmor:
+        <Value>k__BackingField: 0
   moveComponent:
     mode: 1
   stats: {fileID: 11400000, guid: 53cb5fc01cc4bac419c644262314e929, type: 2}
@@ -362,7 +366,7 @@ MonoBehaviour:
       data:
         agent: {fileID: 302703249264968001}
         enemyTransform: {fileID: 2439761971322729150}
-        distanceFromPlayer: 12
+        distanceFromPlayer: 0
         moveOutsideChaseRange: 0
         timeBetweenChangeDirection: 3
 --- !u!1 &7315122017715758177
