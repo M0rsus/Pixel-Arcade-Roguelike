@@ -20,6 +20,7 @@ namespace Game
         public void EndWave()
         {
             OnEndWave?.Invoke();
+            Debug.Log("End wave");
         }
         
         public void StartCardSelection()
@@ -30,6 +31,22 @@ namespace Game
         public void EndCardSelection()
         {
             
+        }
+
+        private void CheckProgressWave(int oldCount, int newCount)
+        {
+            if (newCount <= 0)
+                EndWave();
+        }
+
+        private void OnEnable()
+        {
+            LevelContext.Instance.currentEnemyCount.OnChanged += CheckProgressWave;
+        }
+
+        private void OnDisable()
+        {
+            LevelContext.Instance.currentEnemyCount.OnChanged -= CheckProgressWave;
         }
     }
 }

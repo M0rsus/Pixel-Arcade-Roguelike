@@ -25,8 +25,8 @@ namespace Game
             armorComponent.Initialize(stats, ct);
             _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             
-            armorComponent.MaxArmor.OnValueChange += UpdateSubscriptions;
-            _regenArmorAtFullHealth.OnValueChange += UpdateSubscriptions;
+            armorComponent.MaxArmor.OnUpdated += UpdateSubscriptions;
+            _regenArmorAtFullHealth.OnUpdated += UpdateSubscriptions;
             healthComponent.OnDeath += Death;
             UpdateSubscriptions();
             if (armorComponent.CheckArmor())
@@ -49,8 +49,8 @@ namespace Game
         public void OnDisable()
         {
             healthComponent.OnHealthFull -= ActivateArmorRegen;
-            armorComponent.MaxArmor.OnValueChange -= UpdateSubscriptions;
-            _regenArmorAtFullHealth.OnValueChange -= UpdateSubscriptions;
+            armorComponent.MaxArmor.OnUpdated -= UpdateSubscriptions;
+            _regenArmorAtFullHealth.OnUpdated -= UpdateSubscriptions;
         }
 
         public void OnDestroy()

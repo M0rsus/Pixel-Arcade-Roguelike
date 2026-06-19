@@ -13,36 +13,36 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::Game.Stats
   maxHealth:
-    <Value>k__BackingField: 100
+    value: 100
   healthRegen:
-    <Value>k__BackingField: 15
+    value: 0
   lifeSteal:
-    <Value>k__BackingField: 0
+    value: 0
   maxArmor:
-    <Value>k__BackingField: 0
+    value: 0
   armorRegen:
-    <Value>k__BackingField: 0
+    value: 0
   regenArmorAtFullHealth:
-    <Value>k__BackingField: 1
+    value: 1
   moveSpeed:
-    <Value>k__BackingField: 2
+    value: 2
   rotationSpeed:
-    <Value>k__BackingField: 180
+    value: 180
   contactDamage:
-    <Value>k__BackingField: 0
+    value: 0
   contactDamageCooldown:
-    <Value>k__BackingField: 0
+    value: 0
   bulletDamage:
-    <Value>k__BackingField: 60
+    value: 60
   shootCooldown:
-    <Value>k__BackingField: 1
+    value: 1
   bulletSpeed:
-    <Value>k__BackingField: 4
+    value: 4
   lifeTime:
-    <Value>k__BackingField: 12
+    value: 10
   range:
-    <Value>k__BackingField: 10
+    value: 10
   bounces:
-    <Value>k__BackingField: 0
+    value: 0
   bounceOffEnemies:
-    <Value>k__BackingField: 0
+    value: 0

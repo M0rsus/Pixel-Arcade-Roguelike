@@ -26,44 +26,65 @@ namespace Game
     }
     
     [Serializable]
-    public class Stat<T>
+    public class Stat<T> where T : struct, IEquatable<T>
     {
-        public event Action OnValueChange;
-        
-        [field: SerializeField]
-        public T Value { get; set; }
+        [SerializeField]
+        private T value;
+        private PrimitiveComparer<T> _comparer;
+        public event Action<T, T> OnChanged;
+        public event Action OnUpdated;
         
         private List<Modifier<T>> _modifiers = new();
-        
-        public Stat() : this (default(T)) { }
+
+        public T Value
+        {
+            get => value;
+            set
+            {
+                if (_comparer.Equals(this.value, value)) return;
+                T oldValue = value;
+                this.value = value;
+                OnChanged?.Invoke(oldValue, value);
+                OnUpdated?.Invoke();
+            }
+        }
+
+        public Stat()
+        {
+            value = default;
+        }
 
         public Stat(T value)
         {
-            Value = value;
+            this.value = value;
         }
 
         public T GetValue()
         {
-            var value = Value;
-            if (_modifiers.Count <= 0) return value;
+            var localValue = Value;
+            if (_modifiers.Count <= 0) return localValue;
             foreach (var modifier in _modifiers)
-                value = modifier.Value;
-            return value;
+                localValue = modifier.Value;
+            return localValue;
         }
         public void AddModifier(Modifier<T> modifier)
         {
+            T oldValue = GetValue();
             _modifiers.Add(modifier);
-            OnValueChange?.Invoke();
+            OnChanged?.Invoke(oldValue, GetValue());
+            OnUpdated?.Invoke();
         }
         public void RemoveModifier(Modifier<T> modifier)
         {
+            T oldValue = GetValue();
             _modifiers.Remove(modifier);
-            OnValueChange?.Invoke();
+            OnChanged?.Invoke(oldValue, GetValue());
+            OnUpdated?.Invoke();
         }
         
         public void Refresh()
         {
-            OnValueChange?.Invoke();
+            OnUpdated?.Invoke();
         }
     }
 }
