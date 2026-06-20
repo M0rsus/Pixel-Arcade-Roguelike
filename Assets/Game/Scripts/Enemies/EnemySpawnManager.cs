@@ -38,59 +38,59 @@ namespace Game
 
         private void SpawnListEnemies()
         {
-            try
+            float totalWeight = 0;
+            int minPoints = int.MaxValue;
+            foreach (var enemySpawnOption in _enemySpawnOptions)
             {
-                float totalWeight = 0;
-                int minPoints = int.MaxValue;
+                totalWeight += enemySpawnOption.weight;
+                if (enemySpawnOption.points < minPoints)
+                    minPoints = enemySpawnOption.points;
+            }
+                
+            while (_points > 0)
+            {
+                float randomValue = Random.Range(0, totalWeight);
+                float currentWeight = 0;
+
                 foreach (var enemySpawnOption in _enemySpawnOptions)
                 {
-                    totalWeight += enemySpawnOption.weight;
-                    if (enemySpawnOption.points < minPoints)
-                        minPoints = enemySpawnOption.points;
-                }
-                
-                while (_points > 0)
-                {
-                    float randomValue = Random.Range(0, totalWeight);
-                    float currentWeight = 0;
-
-                    foreach (var enemySpawnOption in _enemySpawnOptions)
-                    {
-                        currentWeight += enemySpawnOption.weight;
-                        if (randomValue > currentWeight) continue;
+                    currentWeight += enemySpawnOption.weight;
+                    if (randomValue > currentWeight) continue;
                     
-                        if (enemySpawnOption.points > _points)
+                    if (enemySpawnOption.points > _points)
+                    {
+                        if (_points < minPoints)
                         {
-                            if (_points < minPoints)
-                            {
-                                _points = 0;
-                                break;
-                            }
-                            continue;
+                            _points = 0;
+                            break;
                         }
-                        Debug.Log(enemySpawnOption.prefab.name);
-                        _listEnemies.Add(enemySpawnOption.prefab);
-                        _points -= enemySpawnOption.points;
-                        LevelContext.Instance.currentEnemyCount.Value++;
-                        LevelContext.Instance.maxEnemyCount.Value++;
-                        break;
+                        continue;
                     }
+                    Debug.Log(enemySpawnOption.prefab.name);
+                    _listEnemies.Add(enemySpawnOption.prefab);
+                    _points -= enemySpawnOption.points;
+                    LevelContext.Instance.currentEnemyCount.Value++;
+                    LevelContext.Instance.maxEnemyCount.Value++;
+                    break;
                 }
-                SpawnEnemies().Forget();
             }
-            catch (OperationCanceledException) { }
+            SpawnEnemies().Forget();
         }
 
         private async UniTaskVoid SpawnEnemies()
         {
-            foreach (var enemy in _listEnemies)
+            try
             {
-                await UniTask.Delay(
-                    TimeSpan.FromSeconds(0.5f), 
-                    ignoreTimeScale: false, 
-                    cancellationToken: _cts.Token);
-                enemySpawn.Instantiate(enemy);
+                foreach (var enemy in _listEnemies)
+                {
+                    await UniTask.Delay(
+                        TimeSpan.FromSeconds(0.5f), 
+                        ignoreTimeScale: false, 
+                        cancellationToken: _cts.Token);
+                    enemySpawn.Instantiate(enemy);
+                }
             }
+            catch (OperationCanceledException) { }
         }
         
         private void ClearCancellationTokenSource()

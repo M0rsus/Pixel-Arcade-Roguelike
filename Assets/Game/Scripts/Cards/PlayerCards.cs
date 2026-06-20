@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Game;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Game
+namespace Cards
 {
     public class PlayerCards : MonoBehaviour, IOnUpdateListener
     {

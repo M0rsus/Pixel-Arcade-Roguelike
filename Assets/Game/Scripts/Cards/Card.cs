@@ -1,11 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using Game;
 using UnityEngine;
 
-namespace Game
+namespace Cards
 {
     [System.Serializable]
     public class Card
     {
+        public static event Action OnPicked;
+        [SerializeField] 
+        protected Stats playerStats;
+        [SerializeField] 
+        protected Sprite itemImage;
+        
         private CardState _state;
         public Card CloneCard()
         {
@@ -19,7 +26,7 @@ namespace Game
             OnStart();
             _state = CardState.Displayed;
         }
-        protected virtual void OnStart() {}
+        protected virtual void OnStart() { }
 
         public void OnUpdate()
         {
@@ -35,15 +42,20 @@ namespace Game
             }
         }
 
-        protected virtual void UpdateDisplayed() {}
-        protected virtual void UpdateTaken() {}
+        protected virtual void UpdateDisplayed() { }
+        protected virtual void UpdateTaken() { }
 
         public void OnPick()
         {
             _state = CardState.Taken;
+            CardTaken();
+            OnPicked?.Invoke();
         }
-        public virtual void OnStartWave() {}
-        public virtual void OnEndWave() {}
+
+        protected virtual void CardTaken() { }
+        public virtual void RemoveCard() { }
+        public virtual void OnStartWave() { }
+        public virtual void OnEndWave(float delay) { }
 
         public void OnEnable()
         {
@@ -56,6 +68,10 @@ namespace Game
             GameManager.OnStartWave -= OnStartWave;
             GameManager.OnEndWave -= OnEndWave;
         }
+
+        public virtual Sprite ItemImage() => itemImage;
+        public virtual string ItemName() => "";
+        public virtual string Description() => "";
         
         private enum CardState
         {

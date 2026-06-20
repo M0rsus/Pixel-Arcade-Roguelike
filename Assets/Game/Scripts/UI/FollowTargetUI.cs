@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Game;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class FollowTargetUI : MonoBehaviour
+    public class FollowTargetUI : MonoBehaviour, IOnLateUpdateListener
     {
         [SerializeField] 
         private Slider slider;
@@ -15,7 +16,16 @@ namespace UI
         [SerializeField] 
         private float offsetY;
 
-        private void LateUpdate()
+        private void OnEnable()
+        {
+            GameUpdate.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            GameUpdate.Unregister(this);
+        }
+        public void OnLateUpdate(float deltaTime)
         {
             if (target == null) return;
 

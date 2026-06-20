@@ -1,19 +1,29 @@
 ﻿using Demo;
+using Game;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Game
+namespace Cards
 {
     public class CardView : MonoBehaviour, IOnUpdateListener
     {
-        PlayerCards _playerCards;
         [SerializeReference] [SRDemo]
         private Card card;
+        [SerializeField]
+        private Image imageContainer;
+        [SerializeField]
+        private TextMeshProUGUI itemName;
+        [SerializeField]
+        private TextMeshProUGUI description;
 
         private void Awake()
         {
-            _playerCards = PlayerCards.Instance;
             GameUpdate.Register(this);
             card.OnCreate();
+            imageContainer.sprite = card.ItemImage();
+            itemName.text = card.ItemName();
+            description.text = card.Description();
         }
 
         public void OnUpdate(float deltaTime)
@@ -22,13 +32,18 @@ namespace Game
         }
         public void PickCard()
         {
+            card.OnPick();
+            PlayerCards.Instance.AddCard(card.CloneCard());
             Destroy(gameObject);
+        }
+
+        public void RemoveCard()
+        {
+            card.RemoveCard();
         }
 
         private void OnDestroy()
         {
-            card.OnPick();
-            _playerCards.AddCard(card.CloneCard());
             GameUpdate.Unregister(this);
         }
 
