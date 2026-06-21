@@ -25,7 +25,7 @@ namespace Game
             textNameContainer.text = statName;
             _statInt = stat;
             _valueType = ValueType.Int;
-            UpdateStat();
+            UpdateStatInt();
         }
         public void Initialize(Sprite statSprite, string statName, StatFloat stat)
         {
@@ -33,7 +33,7 @@ namespace Game
             textNameContainer.text = statName;
             _statFloat = stat;
             _valueType = ValueType.Float;
-            UpdateStat();
+            UpdateStatFloat();
         }
         public void Initialize(Sprite statSprite, string statName, StatBool stat)
         {
@@ -41,19 +41,20 @@ namespace Game
             textNameContainer.text = statName;
             _statBool = stat;
             _valueType = ValueType.Bool;
-            UpdateStat();
+            UpdateStatBool();
         }
 
-        private void UpdateStat()
+        private void UpdateStatInt()
         {
-            string newValue = _valueType switch
-            {
-                ValueType.Int => _statInt.GetValue().ToString(),
-                ValueType.Float => _statFloat.GetValue().ToString("F2"),
-                ValueType.Bool => _statBool.GetValue().ToString(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-            textValueContainer.text = $"{newValue}";
+            textValueContainer.text = $"{_statInt.GetValue().ToString()}";
+        }
+        private void UpdateStatFloat()
+        {
+            textValueContainer.text = $"{_statFloat.GetValue().ToString("F2")}";
+        }
+        private void UpdateStatBool()
+        {
+            textValueContainer.text = $"{_statBool.GetValue().ToString()}";
         }
 
         private void OnEnable()
@@ -61,13 +62,19 @@ namespace Game
             switch (_valueType)
             {
                 case ValueType.Int:
-                    _statInt.OnUpdated += UpdateStat;
+                    if (_statInt == null) return;
+                    _statInt.OnUpdated += UpdateStatInt;
+                    UpdateStatInt();
                     break;
                 case ValueType.Float:
-                    _statFloat.OnUpdated += UpdateStat;
+                    if (_statFloat == null) return;
+                    _statFloat.OnUpdated += UpdateStatFloat;
+                    UpdateStatFloat();
                     break;
                 case ValueType.Bool:
-                    _statBool.OnUpdated += UpdateStat;
+                    if (_statBool == null) return;
+                    _statBool.OnUpdated += UpdateStatBool;
+                    UpdateStatBool();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -79,13 +86,13 @@ namespace Game
             switch (_valueType)
             {
                 case ValueType.Int:
-                    _statInt.OnUpdated -= UpdateStat;
+                    if (_statInt != null) _statInt.OnUpdated -= UpdateStatInt;
                     break;
                 case ValueType.Float:
-                    _statFloat.OnUpdated -= UpdateStat;
+                    if (_statBool != null) _statFloat.OnUpdated -= UpdateStatFloat;
                     break;
                 case ValueType.Bool:
-                    _statBool.OnUpdated -= UpdateStat;
+                    if (_statBool != null) _statBool.OnUpdated -= UpdateStatBool;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

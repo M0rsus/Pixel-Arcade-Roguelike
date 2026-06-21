@@ -142,11 +142,6 @@ namespace UI
             }
         }
 
-        private void Start()
-        {
-
-        }
-
         public enum StatName
         {
             MaxHp,

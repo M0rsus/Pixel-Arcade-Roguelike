@@ -9,6 +9,15 @@ namespace Game
     {
         public StatFloat() : base() { }
         public StatFloat(float value) : base(value) { }
+        
+        public override float GetValue()
+        {
+            var localValue = Value;
+            if (_modifiers.Count <= 0) return localValue;
+            foreach (var modifier in _modifiers)
+                localValue += modifier.Value;
+            return localValue;
+        }
     }
 
     [Serializable]
@@ -16,6 +25,15 @@ namespace Game
     {
         public StatInt() : base() { }
         public StatInt(int value) : base(value) { }
+        
+        public override int GetValue()
+        {
+            var localValue = Value;
+            if (_modifiers.Count <= 0) return localValue;
+            foreach (var modifier in _modifiers)
+                localValue += modifier.Value;
+            return localValue;
+        }
     }
 
     [Serializable]
@@ -23,6 +41,14 @@ namespace Game
     {
         public StatBool() : base() { }
         public StatBool(bool value) : base(value) { }
+        public override bool GetValue()
+        {
+            var localValue = Value;
+            if (_modifiers.Count <= 0) return localValue;
+            foreach (var modifier in _modifiers)
+                localValue = modifier.Value;
+            return localValue;
+        }
     }
     
     [Serializable]
@@ -34,7 +60,7 @@ namespace Game
         public event Action<T, T> OnChanged;
         public event Action OnUpdated;
         
-        private List<Modifier<T>> _modifiers = new();
+        protected List<Modifier<T>> _modifiers = new();
 
         public T Value
         {
@@ -59,7 +85,7 @@ namespace Game
             this.value = value;
         }
 
-        public T GetValue()
+        public virtual T GetValue()
         {
             var localValue = Value;
             if (_modifiers.Count <= 0) return localValue;

@@ -8464,7 +8464,6 @@ GameObject:
   - component: {fileID: 831746956}
   - component: {fileID: 831746959}
   - component: {fileID: 831746958}
-  - component: {fileID: 831746957}
   m_Layer: 0
   m_Name: StatsBackground
   m_TagString: Untagged
@@ -8508,106 +8507,6 @@ RectTransform:
   m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 500, y: 800}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &831746957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831746955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ee52e51af24d20965de2c07bf13e43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI.StatsInfo
-  playerStats: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
-  statsInfo:
-    _serializedList:
-    - Key: 0
-      Value:
-        statView: {fileID: 1926248942}
-        statSprite: {fileID: 21300000, guid: b4c6e7d0285655f4a9db7355ab7ea678, type: 3}
-        statName: Max Health
-    - Key: 1
-      Value:
-        statView: {fileID: 310284333}
-        statSprite: {fileID: 21300014, guid: a0e7f1167efba544bb8d6e3198ae44f9, type: 3}
-        statName: Health Regen
-    - Key: 2
-      Value:
-        statView: {fileID: 1647982267}
-        statSprite: {fileID: 21300000, guid: 8708d80070522a043a1ab6a2b2775382, type: 3}
-        statName: Life Steal
-    - Key: 3
-      Value:
-        statView: {fileID: 649433659}
-        statSprite: {fileID: 21300032, guid: addd2af175d074643a3b1f29f6c23041, type: 3}
-        statName: Max Armor
-    - Key: 4
-      Value:
-        statView: {fileID: 335448679}
-        statSprite: {fileID: 21300000, guid: 68a41ff097730fb45a9b2adce184a79d, type: 3}
-        statName: Armor Regen
-    - Key: 5
-      Value:
-        statView: {fileID: 1169067643}
-        statSprite: {fileID: 21300010, guid: d064385dfce29934793208022539c6cd, type: 3}
-        statName: Regen Armor At Full Health
-    - Key: 6
-      Value:
-        statView: {fileID: 955085279}
-        statSprite: {fileID: 21300000, guid: f6c447868c4916746aba134404e3b985, type: 3}
-        statName: Move Speed
-    - Key: 7
-      Value:
-        statView: {fileID: 2017703988}
-        statSprite: {fileID: 21300000, guid: 5c08bbcce060bf24c8074d9f4d593e63, type: 3}
-        statName: Rotation Speed
-    - Key: 8
-      Value:
-        statView: {fileID: 356361782}
-        statSprite: {fileID: 21300006, guid: c98b9cd543d1a6d448e27babb81798a0, type: 3}
-        statName: Contact Damage
-    - Key: 9
-      Value:
-        statView: {fileID: 2132395824}
-        statSprite: {fileID: 21300000, guid: dc609117e8b8ed84ead2a01085dbbaa4, type: 3}
-        statName: Contact Damage Cooldown
-    - Key: 10
-      Value:
-        statView: {fileID: 2011828958}
-        statSprite: {fileID: 21300000, guid: ff077b6594b804447ab32c9b3b40f584, type: 3}
-        statName: Bullet Damage
-    - Key: 11
-      Value:
-        statView: {fileID: 1559911691}
-        statSprite: {fileID: 21300000, guid: 74523066bc47fe84dbaa42e33b2e9adc, type: 3}
-        statName: Shoot Cooldown
-    - Key: 12
-      Value:
-        statView: {fileID: 1285620744}
-        statSprite: {fileID: 21300000, guid: ec3f5c9d06947e7458e9626551938feb, type: 3}
-        statName: Bullet Speed
-    - Key: 13
-      Value:
-        statView: {fileID: 67733569}
-        statSprite: {fileID: 21300000, guid: 162c961f79f03a7419bae8455ff18508, type: 3}
-        statName: Life Time
-    - Key: 14
-      Value:
-        statView: {fileID: 942370121}
-        statSprite: {fileID: 21300000, guid: c5f12c5adb77b024cac679026c500fe4, type: 3}
-        statName: Range
-    - Key: 15
-      Value:
-        statView: {fileID: 1430138575}
-        statSprite: {fileID: 21300000, guid: 9d760526269e55b40898d45c96b2a15f, type: 3}
-        statName: Bounces
-    - Key: 16
-      Value:
-        statView: {fileID: 765433828}
-        statSprite: {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
-        statName: Bounce Off Enemies
 --- !u!114 &831746958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9915,6 +9814,7 @@ GameObject:
   - component: {fileID: 1086879493}
   - component: {fileID: 1086879495}
   - component: {fileID: 1086879494}
+  - component: {fileID: 1086879496}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -10026,6 +9926,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814da8beea4a4ef0a417c15d8d517b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.UIInput
+--- !u!114 &1086879496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086879491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ee52e51af24d20965de2c07bf13e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.StatsInfo
+  playerStats: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
+  statsInfo:
+    _serializedList:
+    - Key: 0
+      Value:
+        statView: {fileID: 1926248942}
+        statSprite: {fileID: 21300000, guid: b4c6e7d0285655f4a9db7355ab7ea678, type: 3}
+        statName: Max Health
+    - Key: 1
+      Value:
+        statView: {fileID: 310284333}
+        statSprite: {fileID: 21300014, guid: a0e7f1167efba544bb8d6e3198ae44f9, type: 3}
+        statName: Health Regen
+    - Key: 2
+      Value:
+        statView: {fileID: 1647982267}
+        statSprite: {fileID: 21300000, guid: 8708d80070522a043a1ab6a2b2775382, type: 3}
+        statName: Life Steal
+    - Key: 3
+      Value:
+        statView: {fileID: 649433659}
+        statSprite: {fileID: 21300032, guid: addd2af175d074643a3b1f29f6c23041, type: 3}
+        statName: Max Armor
+    - Key: 4
+      Value:
+        statView: {fileID: 335448679}
+        statSprite: {fileID: 21300000, guid: 68a41ff097730fb45a9b2adce184a79d, type: 3}
+        statName: Armor Regen
+    - Key: 5
+      Value:
+        statView: {fileID: 1169067643}
+        statSprite: {fileID: 21300010, guid: d064385dfce29934793208022539c6cd, type: 3}
+        statName: Regen Armor At Full Health
+    - Key: 6
+      Value:
+        statView: {fileID: 955085279}
+        statSprite: {fileID: 21300000, guid: f6c447868c4916746aba134404e3b985, type: 3}
+        statName: Move Speed
+    - Key: 7
+      Value:
+        statView: {fileID: 2017703988}
+        statSprite: {fileID: 21300000, guid: 5c08bbcce060bf24c8074d9f4d593e63, type: 3}
+        statName: Rotation Speed
+    - Key: 8
+      Value:
+        statView: {fileID: 356361782}
+        statSprite: {fileID: 21300006, guid: c98b9cd543d1a6d448e27babb81798a0, type: 3}
+        statName: Contact Damage
+    - Key: 9
+      Value:
+        statView: {fileID: 2132395824}
+        statSprite: {fileID: 21300000, guid: dc609117e8b8ed84ead2a01085dbbaa4, type: 3}
+        statName: Contact Damage Cooldown
+    - Key: 10
+      Value:
+        statView: {fileID: 2011828958}
+        statSprite: {fileID: 21300000, guid: ff077b6594b804447ab32c9b3b40f584, type: 3}
+        statName: Bullet Damage
+    - Key: 11
+      Value:
+        statView: {fileID: 1559911691}
+        statSprite: {fileID: 21300000, guid: 74523066bc47fe84dbaa42e33b2e9adc, type: 3}
+        statName: Shoot Cooldown
+    - Key: 12
+      Value:
+        statView: {fileID: 1285620744}
+        statSprite: {fileID: 21300000, guid: ec3f5c9d06947e7458e9626551938feb, type: 3}
+        statName: Bullet Speed
+    - Key: 13
+      Value:
+        statView: {fileID: 67733569}
+        statSprite: {fileID: 21300000, guid: 162c961f79f03a7419bae8455ff18508, type: 3}
+        statName: Life Time
+    - Key: 14
+      Value:
+        statView: {fileID: 942370121}
+        statSprite: {fileID: 21300000, guid: c5f12c5adb77b024cac679026c500fe4, type: 3}
+        statName: Range
+    - Key: 15
+      Value:
+        statView: {fileID: 1430138575}
+        statSprite: {fileID: 21300000, guid: 9d760526269e55b40898d45c96b2a15f, type: 3}
+        statName: Bounces
+    - Key: 16
+      Value:
+        statView: {fileID: 765433828}
+        statSprite: {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
+        statName: Bounce Off Enemies
 --- !u!1 &1091554482
 GameObject:
   m_ObjectHideFlags: 0
