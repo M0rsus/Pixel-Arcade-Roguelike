@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Cards
 {
-    [System.Serializable]
+    [Serializable]
     public class Card
     {
         public static event Action OnPicked;

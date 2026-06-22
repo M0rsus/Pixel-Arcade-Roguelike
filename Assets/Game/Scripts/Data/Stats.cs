@@ -27,32 +27,5 @@ namespace Game
         public StatFloat range;
         public StatInt bounces;
         public StatBool bounceOffEnemies;
-
-#if UNITY_EDITOR
-        void OnValidate()
-        {
-            if (!Application.isPlaying) return;
-            
-            maxHealth.Refresh();
-            healthRegen.Refresh();
-            lifeSteal.Refresh();
-            maxArmor.Refresh();
-            armorRegen.Refresh();
-            regenArmorAtFullHealth.Refresh();
-                
-            moveSpeed.Refresh();
-            rotationSpeed.Refresh();
-                
-            contactDamage.Refresh();
-            contactDamageCooldown.Refresh();
-            bulletDamage.Refresh();
-            shootCooldown.Refresh();
-            bulletSpeed.Refresh();
-            lifeTime.Refresh();
-            range.Refresh();
-            bounces.Refresh();
-            bounceOffEnemies.Refresh();
-        }
-#endif
     }
 }

@@ -11,7 +11,6 @@ namespace Game
         protected CancellationToken stuckToken;
         protected CancellationTokenSource cts;
         
-        protected Bounds bounds;
         protected Transform playerTransform;
         [SerializeField]
         protected NavMeshAgent agent;
@@ -26,7 +25,6 @@ namespace Game
             agent.updateUpAxis = false;
             agent.updatePosition = false;
             
-            bounds = LevelContext.Instance.LevelBounds;
             playerTransform = LevelContext.Instance.PlayerTransform;
             Player.Destroyed += PlayerDestroyed;
             

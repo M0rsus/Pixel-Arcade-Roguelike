@@ -7,11 +7,9 @@ namespace Game
     public class EnemySpawn : MonoBehaviour
     {
         [SerializeField]
-        private Bounds bounds;
-        [SerializeField]
         private Tilemap spawnerTilemap;
         
-        private List<Vector3> _spawnPoint = new List<Vector3>();
+        private readonly List<Vector3> _spawnPoint = new List<Vector3>();
 
         private void Start()
         {

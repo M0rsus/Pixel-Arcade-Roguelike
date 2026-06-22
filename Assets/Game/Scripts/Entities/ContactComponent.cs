@@ -32,11 +32,5 @@ namespace Game
             component.Damageable.TakeDamage(_contactDamage.GetValue());
             _timer = 0;
         }
-
-        private enum EntityType
-        {
-            Player,
-            Enemy
-        }
     }
 }

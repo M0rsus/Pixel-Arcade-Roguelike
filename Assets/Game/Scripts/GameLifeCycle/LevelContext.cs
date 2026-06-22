@@ -8,9 +8,6 @@ namespace Game
         public static LevelContext Instance { get; private set; }
         
         [field: SerializeField] 
-        public Bounds LevelBounds { get; private set; }
-        
-        [field: SerializeField] 
         public Transform PlayerTransform { get; private set; }
 
         [NonSerialized]

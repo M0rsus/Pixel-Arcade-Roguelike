@@ -51,8 +51,8 @@ namespace Game
                     if (_timer > timeBetweenChangeDirection)
                     {
                         _localDirection = new Vector3(
-                            Random.Range(bounds.GetMinX(), bounds.GetMaxX()), 
-                            Random.Range(bounds.GetMinY(), bounds.GetMaxY()));
+                            Random.Range(Bounds.Instance.GetMinX(), Bounds.Instance.GetMaxX()), 
+                            Random.Range(Bounds.Instance.GetMinY(), Bounds.Instance.GetMaxY()));
                         
                         agent.SetDestination(_localDirection);
                         _timer = 0;

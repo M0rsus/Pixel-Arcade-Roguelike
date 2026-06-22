@@ -52,7 +52,7 @@ namespace Game
     }
     
     [Serializable]
-    public class Stat<T> : BaseStat where T : struct, IEquatable<T>
+    public class Stat<T> where T : struct, IEquatable<T>
     {
         [SerializeField]
         private T value;

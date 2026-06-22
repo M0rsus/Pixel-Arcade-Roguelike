@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace Game
         [SerializeField] 
         private SliderView progressWaveView;
 
-        private StatInt _currentWave = new StatInt();
+        private readonly StatInt _currentWave = new StatInt();
 
         private void Start()
         {
