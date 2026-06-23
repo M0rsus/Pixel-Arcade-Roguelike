@@ -7,11 +7,12 @@ namespace UI
     {
         [SerializeField] private GameObject spawn;
         [SerializeField] private GameObject card;
+        [SerializeField] private CardSpawn cardSpawn;
         public static event Action OnCardCreate;
 
         public void CreateCard()
         {
-            Instantiate(card, spawn.transform);
+            //cardSpawn.Instantiate(card);
             OnCardCreate?.Invoke();
         }
     }
