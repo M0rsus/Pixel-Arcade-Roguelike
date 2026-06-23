@@ -1,10 +1,11 @@
-﻿using Demo;
+﻿using Cards;
+using Demo;
 using Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Cards
+namespace UI
 {
     public class CardView : MonoBehaviour, IOnUpdateListener
     {

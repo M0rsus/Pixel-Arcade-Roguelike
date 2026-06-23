@@ -528,15 +528,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.CardView
   card:
-    rid: 9149310469113118980
+    rid: 9149310543197110356
   imageContainer: {fileID: 2766878377710355837}
   itemName: {fileID: 5301282010074677143}
   description: {fileID: 7135770346873350618}
   references:
     version: 2
     RefIds:
-    - rid: 9149310469113118980
-      type: {class: CardEngine, ns: Cards, asm: Assembly-CSharp}
+    - rid: 9149310543197110356
+      type: {class: EngineCardd, ns: Cards, asm: Assembly-CSharp}
       data:
         playerStats: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
         itemImage: {fileID: 21300000, guid: 4ed7b689baff9da4592bb86f88968a5d, type: 3}

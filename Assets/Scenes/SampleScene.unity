@@ -1063,6 +1063,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 7135770346873350618, guid: 12bfc2964d4929c4784cf8b8a9ab9907, type: 3}
+      propertyPath: m_text
+      value: 'Movement speed: <color=green>+3</color>
+
+        Cooldown:  <color=red>+0,5</color>
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 7660868031053972580, guid: 12bfc2964d4929c4784cf8b8a9ab9907, type: 3}
       propertyPath: m_Color.b
       value: 0.13333334

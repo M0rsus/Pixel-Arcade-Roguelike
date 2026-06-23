@@ -1,10 +1,9 @@
-﻿using Unity.VisualScripting.Dependencies.Sqlite;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    [System.Serializable]
-    public class Rarity
+    [CreateAssetMenu(fileName = "Rarity", menuName = "Game/Rarity")]
+    public class Rarity : ScriptableObject
     {
         [SerializeField]
         private string rarityName;

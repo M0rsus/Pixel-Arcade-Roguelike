@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Cards
 {
     [System.Serializable]
-    public sealed class CardEngine : Card
+    public sealed class EngineCardd : Card
     {
         public Modifier<float> MovementSpeed { get; private set; }
         public Modifier<float> Cooldown { get; private set; }

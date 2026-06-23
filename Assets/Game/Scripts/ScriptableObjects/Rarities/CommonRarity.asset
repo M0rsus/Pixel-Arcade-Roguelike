@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4c3378d1314f5cb951040ae5bf605f, type: 3}
+  m_Name: CommonRarity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Rarity
+  rarityName: Common
+  weight: 6000
+  mainColor: {r: 0.5803922, g: 0.6392157, b: 0.72156864, a: 0}
+  mainBackgroundColor: {r: 0.10980393, g: 0.10980393, b: 0.12941177, a: 0}
+  secondaryBackgroundColor: {r: 0.3372549, g: 0.34117648, b: 0.36078432, a: 0}
