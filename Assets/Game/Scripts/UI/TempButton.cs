@@ -7,13 +7,13 @@ namespace UI
     {
         [SerializeField] private GameObject spawn;
         [SerializeField] private GameObject card;
-        [SerializeField] private CardSpawn cardSpawn;
+        [SerializeField] private GameObject cardSpawn;
         [SerializeField] private UnityEngine.UI.Image image;
         public static event Action OnCardCreate;
 
         public void CreateCard()
         {
-            //cardSpawn.Instantiate(card);
+            Instantiate(card, cardSpawn.transform);
             OnCardCreate?.Invoke();
         }
     }

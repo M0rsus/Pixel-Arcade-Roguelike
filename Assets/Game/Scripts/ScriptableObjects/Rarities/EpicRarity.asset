@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Rarity
   rarityName: Epic
   weight: 400
-  mainColor: {r: 0.6431373, g: 0.28235295, b: 0.9803922, a: 0}
-  mainBackgroundColor: {r: 0.10980393, g: 0.08235294, b: 0.16470589, a: 0}
-  secondaryBackgroundColor: {r: 0.3647059, g: 0.3254902, b: 0.40784317, a: 0}
+  mainColor: {r: 0.6431373, g: 0.28235295, b: 0.9803922, a: 1}
+  mainBackgroundColor: {r: 0.10980393, g: 0.08235294, b: 0.16470589, a: 1}
+  secondaryBackgroundColor: {r: 0.3647059, g: 0.3254902, b: 0.40784317, a: 1}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Rarity
   rarityName: Uncommon
   weight: 2500
-  mainColor: {r: 0.16470589, g: 0.9607844, b: 0.43137258, a: 0}
-  mainBackgroundColor: {r: 0.08235294, g: 0.12941177, b: 0.08235294, a: 0}
-  secondaryBackgroundColor: {r: 0.227451, g: 0.3803922, b: 0.30980393, a: 0}
+  mainColor: {r: 0.16470589, g: 0.9607844, b: 0.43137258, a: 1}
+  mainBackgroundColor: {r: 0.08235294, g: 0.12941177, b: 0.08235294, a: 1}
+  secondaryBackgroundColor: {r: 0.227451, g: 0.3803922, b: 0.30980393, a: 1}

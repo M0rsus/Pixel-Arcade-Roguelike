@@ -1,7 +1,6 @@
 ﻿using System;
 using Cards;
 using Demo;
-using Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +9,9 @@ namespace UI
 {
     public class CardView : MonoBehaviour
     {
-        public static event Action OnPicked;
-        [SerializeField]
-        private EntityInventory inventory;
+        public static event Action<Card> OnPickedCard;
+        public static event Action CardSelected;
+        
         [SerializeReference] [SRDemo]
         private Card card;
         [SerializeField]
@@ -20,28 +19,31 @@ namespace UI
         [SerializeField]
         private Image imageContainer;
         [SerializeField]
-        private Outline outline;
-        [SerializeField]
         private TextMeshProUGUI cardName;
         [SerializeField]
         private TextMeshProUGUI description;
+        
+        private Image _backgroundCard;
+        private Outline _outlineCard;
 
         private void Awake()
         {
+            _backgroundCard = GetComponent<Image>();
+            _outlineCard = GetComponent<Outline>();
             imageContainer.sprite = card.cardSprite;
             cardName.text = card.cardName;
             description.text = card.cardDescription;
             
-            outline.effectColor = card.cardRarity.MainColor;
+            _backgroundCard.color = card.cardRarity.MainBackgroundColor;
+            _outlineCard.effectColor = card.cardRarity.MainColor;
             cardName.color = card.cardRarity.MainColor;
-            imageContainer.color = card.cardRarity.MainBackgroundColor;
             imageBackground.color = card.cardRarity.SecondaryBackgroundColor;
         }
         public void PickCard()
         {
-            inventory.AddCard(card);
+            OnPickedCard?.Invoke(card);
             Destroy(gameObject);
-            OnPicked?.Invoke();
+            CardSelected?.Invoke();
         }
     }
 }

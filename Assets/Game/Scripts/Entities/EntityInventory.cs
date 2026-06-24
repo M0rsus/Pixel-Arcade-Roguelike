@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cards;
+using UI;
 using UnityEngine;
 
 namespace Game
@@ -13,7 +14,7 @@ namespace Game
         [SerializeField]
         private EntityEffects effects;
 
-        public void AddCard(Card card)
+        private void AddCard(Card card)
         {
             slots.Add(new InventorySlot(card));
             effects.AddEffect(card);
@@ -26,6 +27,16 @@ namespace Game
             slots.RemoveAt(index);
             effects.RemoveEffect(index);
             OnInventoryChanged?.Invoke();
+        }
+
+        private void OnEnable()
+        {
+            CardView.OnPickedCard += AddCard;
+        }
+
+        private void OnDisable()
+        {
+            CardView.OnPickedCard -= AddCard;
         }
     }
 }

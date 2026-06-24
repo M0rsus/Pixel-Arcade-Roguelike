@@ -70,13 +70,13 @@ namespace Game
         private void OnEnable()
         {
             LevelContext.Instance.currentEnemyCount.OnChanged += CheckProgressWave;
-            CardView.OnPicked += EndCardSelection;
+            CardView.CardSelected += EndCardSelection;
         }
 
         private void OnDisable()
         {
             LevelContext.Instance.currentEnemyCount.OnChanged -= CheckProgressWave;
-            CardView.OnPicked -= EndCardSelection;
+            CardView.CardSelected -= EndCardSelection;
         }
         private void ClearCancellationTokenSource()
         {
