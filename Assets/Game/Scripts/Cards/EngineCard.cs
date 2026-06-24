@@ -4,9 +4,10 @@ namespace Cards
 {
     public class EngineCard : BaseCard
     {
-        public override Effect CreateEffect()
+        private readonly Effect _effect = new EngineEffect();
+        public override Effect GetEffect()
         {
-            return new EngineEffect();
+            return _effect;
         }
     }
 }

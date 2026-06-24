@@ -15,5 +15,9 @@ namespace Game
         private Color mainBackgroundColor;
         [SerializeField] 
         private Color secondaryBackgroundColor;
+        
+        public Color MainColor => mainColor;
+        public Color MainBackgroundColor => mainBackgroundColor;
+        public Color SecondaryBackgroundColor => secondaryBackgroundColor;
     }
 }

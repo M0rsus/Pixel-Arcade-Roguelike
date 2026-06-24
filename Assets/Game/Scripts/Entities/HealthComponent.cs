@@ -19,7 +19,6 @@ namespace Game
         private UI.SliderView healthView;
         private StatInt _maxHealth;
         private StatFloat _healthRegen;
-        [SerializeField]
         private StatInt _currentHealth;
 
         [SerializeField]

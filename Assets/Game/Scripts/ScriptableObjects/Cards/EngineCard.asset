@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b52d2784a42347019bf566d37a91a733, type: 3}
-  m_Name: Card
+  m_Name: EngineCard
   m_EditorClassIdentifier: Assembly-CSharp::Cards.CardObject
   card:
     rid: 9149310543197110355

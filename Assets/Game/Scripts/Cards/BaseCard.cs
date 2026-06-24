@@ -11,6 +11,6 @@ namespace Cards
         public string cardDescription;
         public Rarity cardRarity;
 
-        public abstract Effect CreateEffect();
+        public abstract Effect GetEffect();
     }
 }
