@@ -22,13 +22,11 @@ namespace Game
             _effects.Add(effect);
         }
 
-        public void RemoveEffect(Card card)
+        public void RemoveEffect(int index)
         {
-            Effect effect = card.GetEffect();
-            
-            if (effect == null) return;
-            effect.Destroy();
-            _effects.Remove(effect);
+            if (index < 0 || index >= _effects.Count) return;
+            _effects[index].Destroy();
+            _effects.RemoveAt(index);
         }
     }
 }
