@@ -13,6 +13,8 @@ namespace Game
         private List<InventorySlot> slots = new List<InventorySlot>();
         [SerializeField]
         private EntityEffects effects;
+        
+        public List<InventorySlot> Slots => slots;
 
         private void AddCard(Card card)
         {
