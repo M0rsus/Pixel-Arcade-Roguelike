@@ -29,15 +29,21 @@ namespace UI
             _currentInt = current;
             _maxInt = max;
             _valueType = ValueType.Int;
+            _maxInt.OnUpdated += UpdateSlider;
+            _currentInt.OnUpdated += UpdateSlider;
+            UpdateSlider();
         }
         public void Initialize(StatFloat current, StatFloat max)
         {
             _currentFloat = current;
             _maxFloat = max;
             _valueType = ValueType.Float;
+            _maxFloat.OnUpdated += UpdateSlider;
+            _currentFloat.OnUpdated += UpdateSlider;
+            UpdateSlider();
         }
 
-        private void Update()
+        private void UpdateSlider()
         {
             var current = _valueType switch
             {
@@ -66,6 +72,14 @@ namespace UI
                 default:
                     goto case View.None;
             }
+        }
+
+        private void OnDestroy()
+        {
+            if (_maxInt != null) _maxInt.OnUpdated -= UpdateSlider;
+            if (_maxFloat != null) _maxFloat.OnUpdated -= UpdateSlider;
+            if (_currentInt != null) _currentInt.OnUpdated -= UpdateSlider;
+            if (_currentFloat != null) _currentFloat.OnUpdated -= UpdateSlider;
         }
 
         private enum View

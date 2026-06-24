@@ -19,10 +19,9 @@ namespace Game
         private float cooldownArmorRegen = 4f;
         [SerializeField]
         private float delayRegen = 1f;
-        
+
         public StatInt MaxArmor { get; private set; }
         private StatFloat _armorRegen;
-        [SerializeField]
         private StatInt _currentArmor;
         
         public bool IsActiveRegen { get; set; }
@@ -30,7 +29,7 @@ namespace Game
         public void Initialize(Stats stats, CancellationToken ct)
         {
             MaxArmor = stats.maxArmor;
-            _currentArmor.Value = MaxArmor.GetValue();
+            _currentArmor = new StatInt(MaxArmor.GetValue());
             _armorRegen = stats.armorRegen;
             if (armorView)
                 armorView.Initialize(_currentArmor, MaxArmor);

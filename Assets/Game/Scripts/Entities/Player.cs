@@ -39,6 +39,11 @@ namespace Game
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
             _ct = CancellationToken.None;
+            damageReceiverComponent.Initialize(this, stats, _ct);
+            moveComponent.Initialize(rigidBody, input, stats);
+            rotationComponent.Initialize(rigidBody, input, stats);
+            shootComponent.Initialize(input, spawnBulletComponent, stats);
+            contactComponent.Initialize(stats, this);
         }
 
         void OnDisable()
@@ -55,11 +60,6 @@ namespace Game
         }
         void Start()
         {
-            damageReceiverComponent.Initialize(this, stats, _ct);
-            moveComponent.Initialize(rigidBody, input, stats);
-            rotationComponent.Initialize(rigidBody, input, stats);
-            shootComponent.Initialize(input, spawnBulletComponent, stats);
-            contactComponent.Initialize(stats, this);
         }
 
         public void OnUpdate(float deltaTime)

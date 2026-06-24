@@ -5,9 +5,9 @@ namespace Game
     [System.Serializable]
     public class InventorySlot
     {
-        public BaseCard card;
+        public Card card;
 
-        public InventorySlot(BaseCard card)
+        public InventorySlot(Card card)
         {
             this.card = card;
         }

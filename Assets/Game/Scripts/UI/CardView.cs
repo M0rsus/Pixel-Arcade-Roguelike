@@ -1,4 +1,5 @@
-﻿using Cards;
+﻿using System;
+using Cards;
 using Demo;
 using Game;
 using TMPro;
@@ -7,55 +8,40 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class CardView : MonoBehaviour, IOnUpdateListener
+    public class CardView : MonoBehaviour
     {
+        public static event Action OnPicked;
+        [SerializeField]
+        private EntityInventory inventory;
         [SerializeReference] [SRDemo]
         private Card card;
         [SerializeField]
+        private Image imageBackground;
+        [SerializeField]
         private Image imageContainer;
         [SerializeField]
-        private TextMeshProUGUI itemName;
+        private Outline outline;
+        [SerializeField]
+        private TextMeshProUGUI cardName;
         [SerializeField]
         private TextMeshProUGUI description;
 
         private void Awake()
         {
-            GameUpdate.Register(this);
-            card.OnCreate();
-            imageContainer.sprite = card.ItemImage();
-            itemName.text = card.ItemName();
-            description.text = card.Description();
-        }
-
-        public void OnUpdate(float deltaTime)
-        {
-            card.OnUpdate();
+            imageContainer.sprite = card.cardSprite;
+            cardName.text = card.cardName;
+            description.text = card.cardDescription;
+            
+            outline.effectColor = card.cardRarity.MainColor;
+            cardName.color = card.cardRarity.MainColor;
+            imageContainer.color = card.cardRarity.MainBackgroundColor;
+            imageBackground.color = card.cardRarity.SecondaryBackgroundColor;
         }
         public void PickCard()
         {
-            card.OnPick();
-            PlayerCards.Instance.AddCard(card.CloneCard());
+            inventory.AddCard(card);
             Destroy(gameObject);
-        }
-
-        public void RemoveCard()
-        {
-            card.RemoveCard();
-        }
-
-        private void OnDestroy()
-        {
-            GameUpdate.Unregister(this);
-        }
-
-        private void OnEnable()
-        {
-            card.OnEnable();
-        }
-
-        private void OnDisable()
-        {
-            card.OnDisable();
+            OnPicked?.Invoke();
         }
     }
 }

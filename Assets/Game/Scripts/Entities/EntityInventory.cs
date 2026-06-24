@@ -11,7 +11,7 @@ namespace Game
         [SerializeField]
         private List<InventorySlot> slots = new List<InventorySlot>();
 
-        public void AddCard(BaseCard card)
+        public void AddCard(Card card)
         {
             slots.Add(new InventorySlot(card));
             OnInventoryChanged?.Invoke();

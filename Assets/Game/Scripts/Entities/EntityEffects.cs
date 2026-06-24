@@ -13,7 +13,7 @@ namespace Game
         
         private readonly List<Effect> _effects = new List<Effect>();
 
-        public void AddEffect(BaseCard card)
+        public void AddEffect(Card card)
         {
             Effect effect = card.GetEffect();
             
@@ -22,7 +22,7 @@ namespace Game
             _effects.Add(effect);
         }
 
-        public void RemoveEffect(BaseCard card)
+        public void RemoveEffect(Card card)
         {
             Effect effect = card.GetEffect();
             

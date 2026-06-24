@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
-using Cards;
 using Cysharp.Threading.Tasks;
+using UI;
 using UnityEngine;
 
 namespace Game
@@ -70,13 +70,13 @@ namespace Game
         private void OnEnable()
         {
             LevelContext.Instance.currentEnemyCount.OnChanged += CheckProgressWave;
-            Card.OnPicked += EndCardSelection;
+            CardView.OnPicked += EndCardSelection;
         }
 
         private void OnDisable()
         {
             LevelContext.Instance.currentEnemyCount.OnChanged -= CheckProgressWave;
-            Card.OnPicked -= EndCardSelection;
+            CardView.OnPicked -= EndCardSelection;
         }
         private void ClearCancellationTokenSource()
         {

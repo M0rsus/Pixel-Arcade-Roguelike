@@ -34,6 +34,11 @@ namespace Game
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
             _ct = CancellationToken.None;
+            input.Initialize(_ct, _stuckToken);
+            damageReceiverComponent.Initialize(this, stats, _ct);
+            moveComponent.Initialize(rigidBody, input, stats);
+            rotationComponent.Initialize(rigidBody, input, stats);
+            contactComponent.Initialize(stats, this);
         }
 
         void OnDestroy()
@@ -46,11 +51,6 @@ namespace Game
         }
         void Start()
         {
-            input.Initialize(_ct, _stuckToken);
-            damageReceiverComponent.Initialize(this, stats, _ct);
-            moveComponent.Initialize(rigidBody, input, stats);
-            rotationComponent.Initialize(rigidBody, input, stats);
-            contactComponent.Initialize(stats, this);
         }
 
         public void OnUpdate(float deltaTime)

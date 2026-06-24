@@ -149,9 +149,10 @@ GameObject:
   - component: {fileID: 8109371843084304395}
   - component: {fileID: 5836382782653421034}
   - component: {fileID: 5142680270018637965}
-  - component: {fileID: 8718611565360537078}
   - component: {fileID: 3730107141297980611}
   - component: {fileID: 1629592956613859296}
+  - component: {fileID: 1684268507203784169}
+  - component: {fileID: 8053031015893475683}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -168,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 5817885745359894659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -334,24 +335,15 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bd1d7214-fdf4-43de-8261-8646a156807b
     m_ActionName: 'Player/Shoot[/Mouse/leftButton,/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 47bdb967-7242-465e-a0c4-b318ddd0d10d
+    m_ActionName: 'UI/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8718611565360537078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5817885745359894659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec308c11da549918126c3a0851f6850, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerCards
-  _cards: []
 --- !u!114 &3730107141297980611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,14 +360,16 @@ MonoBehaviour:
   input: {fileID: 1629592956613859296}
   damageReceiverComponent:
     healthComponent:
-      _currentHealth: 0
+      healthView: {fileID: 0}
       delayRegen: 0.1
     armorComponent:
+      armorView: {fileID: 0}
       cooldownArmorRegen: 4
       delayRegen: 0.1
-      _currentArmor: 0
   moveComponent:
     mode: 0
+  shootComponent:
+    cooldownView: {fileID: 0}
   spawnBulletComponent: {fileID: 4114014089074492704}
   stats: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
 --- !u!114 &1629592956613859296
@@ -390,6 +384,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a4b85cabf84c8e9282265ed15a7156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerInput
+--- !u!114 &1684268507203784169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817885745359894659}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab069cf042fc4281aa1c2d5193a5024c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityInventory
+  slots: []
+--- !u!114 &8053031015893475683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817885745359894659}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1d70a866c84374962b171e71352b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityEffects
+  stats: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
+  entity: {fileID: 5817885745359894659}
 --- !u!1 &6474910442055922326
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ namespace Game
         public void Initialize(Stats stats, CancellationToken ct)
         {
             _maxHealth = stats.maxHealth;
-            _currentHealth.Value = _maxHealth.GetValue();
+            _currentHealth = new StatInt(_maxHealth.GetValue());
             _healthRegen = stats.healthRegen;
             if (healthView)
                 healthView.Initialize(_currentHealth, _maxHealth);
