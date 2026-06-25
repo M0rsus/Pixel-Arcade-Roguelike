@@ -13,7 +13,7 @@ namespace UI
         [SerializeField] 
         private Transform container;
         
-        private List<InventorySlotView> slots = new List<InventorySlotView>();
+        private readonly List<InventorySlotView> _slots = new List<InventorySlotView>();
 
         private void Start()
         {
@@ -32,7 +32,7 @@ namespace UI
             {
                 Destroy(child.gameObject);
             }
-            slots.Clear();
+            _slots.Clear();
 
             var currentSlots = inventory.Slots;
             foreach (var slot in currentSlots)
@@ -41,7 +41,7 @@ namespace UI
                 InventorySlotView uiSlot = newSlot.GetComponent<InventorySlotView>();
                 
                 uiSlot.DisplayItem(slot.card);
-                slots.Add(uiSlot);
+                _slots.Add(uiSlot);
             }
         }
     }

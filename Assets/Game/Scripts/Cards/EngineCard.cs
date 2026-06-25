@@ -1,4 +1,6 @@
-﻿namespace Cards
+﻿using UnityEngine;
+
+namespace Cards
 {
     [System.Serializable]
     public class EngineCard : Card

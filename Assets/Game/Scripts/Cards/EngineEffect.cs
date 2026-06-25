@@ -5,8 +5,8 @@ namespace Cards
 {
     public class EngineEffect : Effect
     {
-        private Modifier<float> _moveSpeed = new(3f);
-        private Modifier<float> _shootCooldown = new(0.5f);
+        private readonly Modifier<float> _moveSpeed = new(3f);
+        private readonly Modifier<float> _shootCooldown = new(0.5f);
         public override void Initialize(Stats stats, GameObject entity)
         {
             base.Initialize(stats, entity);

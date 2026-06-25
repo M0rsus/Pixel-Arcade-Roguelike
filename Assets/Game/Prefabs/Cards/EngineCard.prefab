@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19108224, g: 0.3584906, b: 0.26432338, a: 1}
+  m_Color: {r: 0.3372549, g: 0.34117648, b: 0.36078432, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -549,8 +549,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285332992
-  m_fontColor: {r: 0, g: 0.9960785, b: 0.42352945, a: 1}
+    rgba: 4290290580
+  m_fontColor: {r: 0.5803922, g: 0.6392157, b: 0.72156864, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 2615886354455674840}
   - component: {fileID: 7979501425323293585}
   m_Layer: 5
-  m_Name: Card
+  m_Name: EngineCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.24705882, b: 0.105882354, a: 1}
+  m_Color: {r: 0.10980392, g: 0.10980392, b: 0.12941177, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.16078432, g: 0.9607844, b: 0.43137258, a: 1}
+  m_EffectColor: {r: 0.5803922, g: 0.6392157, b: 0.72156864, a: 1}
   m_EffectDistance: {x: 4, y: 4}
   m_UseGraphicAlpha: 1
 --- !u!114 &7979501425323293585
@@ -865,7 +865,7 @@ MonoBehaviour:
       data:
         cardSprite: {fileID: 21300000, guid: 4ed7b689baff9da4592bb86f88968a5d, type: 3}
         cardName: Engine
-        cardDescription: 'Movement speed: <color=green>+3</color> Cooldown:  <color=red>+0,5</color> '
+        cardDescription: 'Move speed: <color=green>+3</color> Cooldown: <color=red>+0,5</color> '
         cardRarity: {fileID: 11400000, guid: b3424540bd70efe43aa975430cc53c2e, type: 2}
 --- !u!1 &7116249007834437685
 GameObject:
@@ -933,9 +933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Movement speed: +3
-
-    Cooldown: +0.5'
+  m_text: 'Move speed: <color=green>+3</color> Cooldown: <color=red>+0,5</color> '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad2b9265d29990e44a71ae36ea8daa4c, type: 2}
   m_sharedMaterial: {fileID: 87801745564854407, guid: ad2b9265d29990e44a71ae36ea8daa4c, type: 2}
