@@ -8,13 +8,11 @@ namespace Cards
     {
         [SerializeField] 
         private List<GameObject> cardObjects;
-        public static List<CardView> Cards { get; } = new List<CardView>();
+        public static List<CardView> Cards { get; } = new();
         private void Awake()
         {
             foreach (GameObject card in cardObjects)
-            {
                 Cards.Add(card.GetComponent<CardView>());
-            }
         }
     }
 }

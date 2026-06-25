@@ -25,19 +25,21 @@ namespace UI
         
         private Image _backgroundCard;
         private Outline _outlineCard;
+        
+        public Card Card => card;
 
         private void Awake()
         {
             _backgroundCard = GetComponent<Image>();
             _outlineCard = GetComponent<Outline>();
-            imageContainer.sprite = card.cardSprite;
-            cardName.text = card.cardName;
-            description.text = card.cardDescription;
+            imageContainer.sprite = card.sprite;
+            cardName.text = card.name;
+            description.text = card.description;
             
-            _backgroundCard.color = card.cardRarity.MainBackgroundColor;
-            _outlineCard.effectColor = card.cardRarity.MainColor;
-            cardName.color = card.cardRarity.MainColor;
-            imageBackground.color = card.cardRarity.SecondaryBackgroundColor;
+            _backgroundCard.color = card.rarity.MainBackgroundColor;
+            _outlineCard.effectColor = card.rarity.MainColor;
+            cardName.color = card.rarity.MainColor;
+            imageBackground.color = card.rarity.SecondaryBackgroundColor;
         }
         public void PickCard()
         {

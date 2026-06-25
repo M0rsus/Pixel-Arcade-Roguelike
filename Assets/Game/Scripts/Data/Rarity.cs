@@ -16,6 +16,8 @@ namespace Game
         [SerializeField] 
         private Color secondaryBackgroundColor;
         
+        public string Name => rarityName;
+        public int Weight => weight;
         public Color MainColor => mainColor;
         public Color MainBackgroundColor => mainBackgroundColor;
         public Color SecondaryBackgroundColor => secondaryBackgroundColor;

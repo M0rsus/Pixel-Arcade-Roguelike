@@ -6,11 +6,11 @@ namespace Cards
     [System.Serializable]
     public abstract class Card
     {
-        public Sprite cardSprite;
-        public string cardName;
+        public Sprite sprite;
+        public string name;
         [TextArea]
-        public string cardDescription;
-        public Rarity cardRarity;
+        public string description;
+        public Rarity rarity;
 
         public abstract Effect GetEffect();
     }

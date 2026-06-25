@@ -863,10 +863,12 @@ MonoBehaviour:
     - rid: 9149310543197110357
       type: {class: EngineCard, ns: Cards, asm: Assembly-CSharp}
       data:
-        cardSprite: {fileID: 21300000, guid: 4ed7b689baff9da4592bb86f88968a5d, type: 3}
-        cardName: Engine
-        cardDescription: 'Move speed: <color=green>+3</color> Cooldown: <color=red>+0,5</color> '
-        cardRarity: {fileID: 11400000, guid: b3424540bd70efe43aa975430cc53c2e, type: 2}
+        sprite: {fileID: 21300000, guid: 4ed7b689baff9da4592bb86f88968a5d, type: 3}
+        name: Engine
+        description: 'Move speed: <color=green>+3</color>
+
+          Cooldown: <color=red>+0.5s</color>'
+        rarity: {fileID: 11400000, guid: b3424540bd70efe43aa975430cc53c2e, type: 2}
 --- !u!1 &7116249007834437685
 GameObject:
   m_ObjectHideFlags: 0

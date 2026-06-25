@@ -11,12 +11,12 @@ namespace UI
 
         public void DisplayItem(Card card)
         {
-            if (card == null || card.cardSprite == null)
+            if (card == null || card.sprite == null)
             {
                 ClearItem();
                 return;
             }
-            icon.sprite = card.cardSprite;
+            icon.sprite = card.sprite;
             icon.gameObject.SetActive(true);
         }
 
