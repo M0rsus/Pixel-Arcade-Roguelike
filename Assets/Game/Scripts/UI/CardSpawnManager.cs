@@ -10,6 +10,8 @@ namespace UI
         private readonly List<GameObject> _cardSpawners = new();
         [SerializeField] 
         private EntityRarities playerRarities;
+        [SerializeField]
+        private GameObject emptyCard; 
 
         private void Awake()
         {
@@ -27,7 +29,7 @@ namespace UI
                 
                 if (currentRarity == null)
                 {
-                    SpawnEmptyCard();
+                    SpawnEmptyCard(cardSpawner);
                     continue;
                 }
                 
@@ -35,7 +37,7 @@ namespace UI
                 
                 if (selectedCards.Count <= 0)
                 {
-                    SpawnEmptyCard();
+                    SpawnEmptyCard(cardSpawner);
                     continue;
                 }
                 Instantiate(selectedCards[Random.Range(0, selectedCards.Count)], cardSpawner.transform);
@@ -55,9 +57,9 @@ namespace UI
             return null;
         }
         
-        private void SpawnEmptyCard()
+        private void SpawnEmptyCard(GameObject cardSpawner)
         {
-            
+            Instantiate(emptyCard, cardSpawner.transform);
         }
         public void DeleteAllCards()
         {

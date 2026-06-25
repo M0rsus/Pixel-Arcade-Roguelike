@@ -1758,6 +1758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.CardSpawn
   playerRarities: {fileID: 1958141508}
+  emptyCard: {fileID: 6071748939240835061, guid: 85625703b0340db4281a83a0b2911a0d, type: 3}
 --- !u!1 &267785799
 GameObject:
   m_ObjectHideFlags: 0
@@ -8028,6 +8029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.CardSpawn
   playerRarities: {fileID: 1958141508}
+  emptyCard: {fileID: 6071748939240835061, guid: 85625703b0340db4281a83a0b2911a0d, type: 3}
 --- !u!114 &700358128
 MonoBehaviour:
   m_ObjectHideFlags: 0
