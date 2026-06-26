@@ -1,11 +1,12 @@
 ﻿namespace Cards
 {
     [System.Serializable]
-    public class EmptyCard : Card
+    public class GymCard : Card
     {
+        private readonly Effect _effect = new GymEffect();
         public override Effect GetEffect()
         {
-            return null;
+            return _effect;
         }
     }
 }

@@ -6163,6 +6163,9 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 79696036f6844b541af859b64cc3247a, type: 2}
   - {fileID: 11400000, guid: 79696036f6844b541af859b64cc3247a, type: 2}
+  - {fileID: 11400000, guid: 79696036f6844b541af859b64cc3247a, type: 2}
+  - {fileID: 11400000, guid: 79696036f6844b541af859b64cc3247a, type: 2}
+  - {fileID: 11400000, guid: 79696036f6844b541af859b64cc3247a, type: 2}
   currentWaveView: {fileID: 869607084}
   progressWaveView: {fileID: 1750651253}
 --- !u!1 &466335774
@@ -11831,6 +11834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cards.CardRegistry
   cardObjects:
   - {fileID: 6969829414164011089, guid: 12bfc2964d4929c4784cf8b8a9ab9907, type: 3}
+  - {fileID: 1363803502841932312, guid: c28b93e102d65ce43b2dd7f523fed960, type: 3}
 --- !u!1 &1484594564
 GameObject:
   m_ObjectHideFlags: 0

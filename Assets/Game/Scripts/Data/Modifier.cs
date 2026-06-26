@@ -2,7 +2,7 @@
 {
     public class Modifier<T>
     {
-        public T Value { get; private set; }
+        public T Value { get; set; }
 
         public Modifier(T value)
         {
