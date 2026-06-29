@@ -35,7 +35,7 @@ MonoBehaviour:
   bulletDamage:
     value: 100
   shootCooldown:
-    value: 5
+    value: 0.05
   bulletSpeed:
     value: 4
   lifeTime:

@@ -19,9 +19,9 @@ namespace UI
         [SerializeField]
         private Image imageContainer;
         [SerializeField]
-        private TextMeshProUGUI cardName;
+        private TextMeshProUGUI nameContainer;
         [SerializeField]
-        private TextMeshProUGUI description;
+        private TextMeshProUGUI descriptionContainer;
         
         private Image _backgroundCard;
         private Outline _outlineCard;
@@ -33,12 +33,12 @@ namespace UI
             _backgroundCard = GetComponent<Image>();
             _outlineCard = GetComponent<Outline>();
             imageContainer.sprite = card.sprite;
-            cardName.text = card.name;
-            description.text = card.description;
+            nameContainer.text = card.name;
+            descriptionContainer.text = card.description;
             
             _backgroundCard.color = card.rarity.MainBackgroundColor;
             _outlineCard.effectColor = card.rarity.MainColor;
-            cardName.color = card.rarity.MainColor;
+            nameContainer.color = card.rarity.MainColor;
             imageBackground.color = card.rarity.SecondaryBackgroundColor;
         }
         public void PickCard()

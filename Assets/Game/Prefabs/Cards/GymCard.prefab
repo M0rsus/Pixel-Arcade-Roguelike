@@ -175,7 +175,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 16
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -381,8 +381,8 @@ MonoBehaviour:
     rid: 9149310639575662674
   imageBackground: {fileID: 4074731944837859423}
   imageContainer: {fileID: 1933188051160114254}
-  cardName: {fileID: 4924915522101467170}
-  description: {fileID: 609131161094708335}
+  nameContainer: {fileID: 4924915522101467170}
+  descriptionContainer: {fileID: 609131161094708335}
   references:
     version: 2
     RefIds:
@@ -877,8 +877,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0

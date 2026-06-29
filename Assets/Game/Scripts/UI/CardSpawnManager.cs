@@ -7,12 +7,13 @@ namespace UI
 {
     public class CardSpawnManager : MonoBehaviour
     {
-        private readonly List<GameObject> _cardSpawners = new();
         [SerializeField] 
         private EntityRarities playerRarities;
         [SerializeField]
-        private GameObject emptyCard; 
+        private GameObject emptyCard;
 
+        private readonly List<GameObject> _cardSpawners = new();
+        private readonly List<CardView> _spawnedCards = new();
         private void Awake()
         {
             foreach(Transform child in transform)
@@ -40,7 +41,9 @@ namespace UI
                     SpawnEmptyCard(cardSpawner);
                     continue;
                 }
-                Instantiate(selectedCards[Random.Range(0, selectedCards.Count)], cardSpawner.transform);
+                CardView selectedCard = selectedCards[Random.Range(0, selectedCards.Count)];
+                Instantiate(selectedCard, cardSpawner.transform);
+                //_spawnedCards.Add(selectedCard);
             }
         }
 

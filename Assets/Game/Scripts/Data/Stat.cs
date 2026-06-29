@@ -15,7 +15,23 @@ namespace Game
             var localValue = Value;
             if (_modifiers.Count <= 0) return localValue;
             foreach (var modifier in _modifiers)
-                localValue += modifier.Value;
+            {
+                switch (modifier.Type)
+                {
+                    case Modifier<float>.ModifierType.Add:
+                        localValue += modifier.Value;
+                        break;
+                    case Modifier<float>.ModifierType.Subtract:
+                        localValue -= modifier.Value;
+                        break;
+                    case Modifier<float>.ModifierType.Multiply:
+                        localValue *= modifier.Value;
+                        break;
+                    case Modifier<float>.ModifierType.Divide:
+                        localValue /= modifier.Value;
+                        break;
+                }
+            }
             return localValue;
         }
     }
@@ -31,7 +47,23 @@ namespace Game
             var localValue = Value;
             if (_modifiers.Count <= 0) return localValue;
             foreach (var modifier in _modifiers)
-                localValue += modifier.Value;
+            {
+                switch (modifier.Type)
+                {
+                    case Modifier<int>.ModifierType.Add:
+                        localValue += modifier.Value;
+                        break;
+                    case Modifier<int>.ModifierType.Subtract:
+                        localValue -= modifier.Value;
+                        break;
+                    case Modifier<int>.ModifierType.Multiply:
+                        localValue *= modifier.Value;
+                        break;
+                    case Modifier<int>.ModifierType.Divide:
+                        localValue /= modifier.Value;
+                        break;
+                }
+            }
             return localValue;
         }
     }
