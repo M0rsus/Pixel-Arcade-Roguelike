@@ -17,11 +17,11 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - Wall
-  - PlayerDoor
   - CircleCollider
-  - 
-  - 
+  - Wall
+  - CreatureBarrier
+  - EnemyBarrier
+  - PlayerBullet
   - 
   - 
   - 

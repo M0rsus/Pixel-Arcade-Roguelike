@@ -27,5 +27,8 @@ namespace Game
         public StatFloat range;
         public StatInt bounces;
         public StatBool bounceOffEnemies;
+        
+        [Header("Objects")]
+        public StatFloat doorCooldown;
     }
 }

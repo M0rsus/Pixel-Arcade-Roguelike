@@ -35,7 +35,7 @@ MonoBehaviour:
   bulletDamage:
     value: 100
   shootCooldown:
-    value: 0.05
+    value: 5
   bulletSpeed:
     value: 4
   lifeTime:
@@ -46,3 +46,5 @@ MonoBehaviour:
     value: 0
   bounceOffEnemies:
     value: 0
+  doorCooldown:
+    value: 8

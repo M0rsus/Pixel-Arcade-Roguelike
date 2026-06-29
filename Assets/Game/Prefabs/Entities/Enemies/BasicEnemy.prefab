@@ -346,15 +346,11 @@ MonoBehaviour:
   damageReceiverComponent:
     healthComponent:
       healthView: {fileID: 0}
-      _currentHealth:
-        <Value>k__BackingField: 0
       delayRegen: 0.1
     armorComponent:
       armorView: {fileID: 0}
       cooldownArmorRegen: 4
       delayRegen: 1
-      _currentArmor:
-        <Value>k__BackingField: 0
   moveComponent:
     mode: 1
   stats: {fileID: 11400000, guid: 53cb5fc01cc4bac419c644262314e929, type: 2}
@@ -379,7 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6188576289702768428}
   - component: {fileID: 1451148706780618694}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: CircleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

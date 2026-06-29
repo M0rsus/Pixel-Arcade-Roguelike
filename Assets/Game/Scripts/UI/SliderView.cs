@@ -62,10 +62,10 @@ namespace UI
             switch (view)
             {
                 case View.Ratio:
-                    text.SetText($"{current}/{max}");
+                    text.SetText($"{MathF.Round(current, 2)}/{MathF.Round(max, 2)}");
                     break;
                 case View.Labeled:
-                    text.SetText($"{prefixedText}: {current}");
+                    text.SetText($"{prefixedText}{MathF.Round(current, 2)}");
                     break;
                 case View.None:
                     break;

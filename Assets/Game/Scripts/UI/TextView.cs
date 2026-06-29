@@ -35,7 +35,7 @@ namespace UI
                     text.SetText($"{_current.Value}/{_max.Value}");
                     break;
                 case View.Labeled:
-                    text.SetText($"{prefixedText}: {_current.Value}");
+                    text.SetText($"{prefixedText}{_current.Value}");
                     break;
                 default:
                     goto case View.Ratio;

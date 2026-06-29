@@ -28,7 +28,7 @@ namespace Game
         public void OnUpdate(float deltaTime)
         {
             _timer.Value += deltaTime;
-            cooldownView.gameObject.SetActive(!(_timer.Value >= _cooldown.GetValue()));
+            cooldownView.gameObject.SetActive(_timer.Value < _cooldown.GetValue());
             TryShoot();
         }
 
@@ -42,6 +42,7 @@ namespace Game
         {
             _timer.Value = 0;
             _bulletSpawner.SpawnBullet();
+            cooldownView.gameObject.transform.SetAsFirstSibling();
         }
     }
 }

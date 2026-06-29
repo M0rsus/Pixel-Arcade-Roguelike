@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9151632724555760468}
   - component: {fileID: 4114014089074492704}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5242089953278326029}
   - component: {fileID: 4540740195673831382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerParts_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 1629592956613859296}
   - component: {fileID: 1684268507203784169}
   - component: {fileID: 8053031015893475683}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -397,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.EntityInventory
   slots: []
+  effects: {fileID: 0}
 --- !u!114 &8053031015893475683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8327068941141356533}
   - component: {fileID: 6174596982169758303}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerParts_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4047758574868159368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

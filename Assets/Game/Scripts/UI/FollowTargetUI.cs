@@ -7,7 +7,7 @@ namespace UI
     public class FollowTargetUI : MonoBehaviour, IOnLateUpdateListener
     {
         [SerializeField] 
-        private Slider slider;
+        private GameObject UIObject;
         [SerializeField]
         private Transform target;
         [SerializeField]
@@ -35,13 +35,13 @@ namespace UI
 
             if (screenPosition.z < 0)
             {
-                slider.gameObject.SetActive(false);
+                UIObject.gameObject.SetActive(false);
                 return;
             }
 
-            slider.gameObject.SetActive(true);
+            UIObject.gameObject.SetActive(true);
 
-            slider.transform.position = screenPosition;
+            UIObject.transform.position = screenPosition;
         }
     }
 }
