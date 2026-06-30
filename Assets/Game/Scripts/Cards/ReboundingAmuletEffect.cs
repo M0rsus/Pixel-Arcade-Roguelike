@@ -6,15 +6,14 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class PassAmuletEffect : Effect
+    public class ReboundingAmuletEffect : Effect
     {
         private static int _activeCardsCount;
         private static int _activeEffectsCount;
         private CancellationTokenSource _cts;
         private CancellationToken _ct;
-        private static readonly Modifier<float> _shootCooldown = new(0.5f, Modifier<float>.ModifierType.Multiply);
-        private static readonly Modifier<float> _bulletSpeed = new(2f, Modifier<float>.ModifierType.Multiply);
-        private static readonly StatFloat _effectCooldown = new(5f);
+        private static readonly Modifier<float> _healthRegen = new(5f, Modifier<float>.ModifierType.Add);
+        private static readonly StatFloat _effectCooldown = new(4f);
         public override void Initialize(Stats stats, GameObject entity)
         {
             base.Initialize(stats, entity);
@@ -28,12 +27,10 @@ namespace Cards
         {
             if (_activeEffectsCount == 0)
             {
-                _shootCooldown.Value = 1f / (1 << _activeCardsCount);
-                _bulletSpeed.Value = 1f + _activeCardsCount;
-                _effectCooldown.Value = 4f + 1f * _activeCardsCount;
+                _healthRegen.Value = 5f * _activeCardsCount;
+                _effectCooldown.Value = 3f + 1f * _activeCardsCount;
             
-                _stats.shootCooldown.AddModifier(_shootCooldown);
-                _stats.bulletSpeed.AddModifier(_bulletSpeed);
+                _stats.healthRegen.AddModifier(_healthRegen);
             }
             _activeEffectsCount++;
             DurationEffect().Forget();
@@ -53,8 +50,7 @@ namespace Cards
                 _activeEffectsCount--;
                 if (_activeEffectsCount == 0)
                 {
-                    _stats.shootCooldown.RemoveModifier(_shootCooldown);
-                    _stats.bulletSpeed.RemoveModifier(_bulletSpeed);
+                    _stats.healthRegen.RemoveModifier(_healthRegen);
                 }
             }
         }

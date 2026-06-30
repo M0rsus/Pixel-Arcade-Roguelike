@@ -6436,8 +6436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Doors
   playerStats: {fileID: 11400000, guid: 4ee6632b2b0fd2740b435004d0ae143a, type: 2}
   cooldownView: {fileID: 309841807}
-  openDoorColor: {r: 0.8941177, g: 0.9333334, b: 0.28235295, a: 1}
-  closedDoorColor: {r: 0.93333334, g: 0.28235298, b: 0.30109066, a: 1}
+  openBarrierColor: {r: 0.8941177, g: 0.9333334, b: 0.28235295, a: 1}
+  closedBarrierColor: {r: 0.93333334, g: 0.28235295, b: 0.3019608, a: 1}
 --- !u!1 &432043321
 GameObject:
   m_ObjectHideFlags: 0
@@ -12895,6 +12895,7 @@ MonoBehaviour:
   - {fileID: 1363803502841932312, guid: c28b93e102d65ce43b2dd7f523fed960, type: 3}
   - {fileID: 5037786084285754567, guid: dc8691b1e84e196459e989ccba3f01fe, type: 3}
   - {fileID: 7328966244593008942, guid: 04e935d0035084648a3ca1d718787f16, type: 3}
+  - {fileID: 3030491492448276307, guid: 4ec8f58d8bda6d241b7fe2ff5362f9c9, type: 3}
 --- !u!1 &1484594564
 GameObject:
   m_ObjectHideFlags: 0

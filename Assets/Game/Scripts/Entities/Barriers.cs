@@ -11,13 +11,13 @@ namespace Game
         [SerializeField]
         private UI.SliderView cooldownView;
         [SerializeField] 
-        private Color openDoorColor;
+        private Color openBarrierColor;
         [SerializeField]
-        private Color closedDoorColor;
+        private Color closedBarrierColor;
 
         private readonly StatFloat _timer = new(0f);
         
-        public static event Action OnDoorCrossed;
+        public static event Action OnBarrierCrossed;
         private CompositeCollider2D _compositeCollider;
         private Tilemap _tilemap;
         private void Awake()
@@ -32,31 +32,31 @@ namespace Game
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
-            CloseDoor();
+            CloseBarrier();
         }
 
-        private void CloseDoor()
+        private void CloseBarrier()
         {
             cooldownView.gameObject.SetActive(true);
             cooldownView.gameObject.transform.SetAsFirstSibling();
-            OnDoorCrossed?.Invoke();
+            OnBarrierCrossed?.Invoke();
             _timer.Value = playerStats.doorCooldown.GetValue();
             _compositeCollider.isTrigger = false;
-            _tilemap.color = closedDoorColor;
+            _tilemap.color = closedBarrierColor;
         }
 
-        private void OpenDoor()
+        private void OpenBarrier()
         {
             cooldownView.gameObject.SetActive(false);
             _timer.Value = 0;
             _compositeCollider.isTrigger = true;
-            _tilemap.color = openDoorColor;
+            _tilemap.color = openBarrierColor;
         }
 
         public void OnUpdate(float deltaTime)
         {
             _timer.Value -= deltaTime;
-            if (_timer.GetValue() <= 0) OpenDoor();
+            if (_timer.GetValue() <= 0) OpenBarrier();
         }
     }
 }
