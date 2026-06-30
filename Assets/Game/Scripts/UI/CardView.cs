@@ -1,6 +1,7 @@
 ﻿using System;
 using Cards;
 using Demo;
+using Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,6 +47,7 @@ namespace UI
             OnPickedCard?.Invoke(card);
             Destroy(gameObject);
             CardSelected?.Invoke();
+            Statistics.CardPickedUp();
         }
     }
 }

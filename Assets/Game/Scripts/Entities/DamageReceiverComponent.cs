@@ -90,6 +90,7 @@ namespace Game
         private void Death()
         {
             Object.Destroy(_entity.gameObject);
+            Statistics.EnemyKill();
         }
     }
 }

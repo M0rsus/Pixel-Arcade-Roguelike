@@ -201,7 +201,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -15, y: -15}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 135, y: 120}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8821663950204849459
 CanvasRenderer:
@@ -258,11 +258,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 14
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 14
   m_fontSizeMax: 72
   m_fontStyle: 16
   m_HorizontalAlignment: 2
@@ -903,8 +903,8 @@ MonoBehaviour:
       data:
         sprite: {fileID: 21300000, guid: 5486dbe5aab9a9745a638da80d41b247, type: 3}
         name: Pass Amulet
-        description: 'Cross a barrier to gain these buffs for 5s (+1s per additional
-          item):
+        description: 'Cross a barrier to gain these buffs for 5s <color=grey>(+1s
+          per additional item)</color>:
 
           Shoot cooldown: <color=green>-50%</color>
 
