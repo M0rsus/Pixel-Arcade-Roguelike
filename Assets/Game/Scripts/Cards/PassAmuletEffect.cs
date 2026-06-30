@@ -21,7 +21,7 @@ namespace Cards
             _cts = AsyncLifecycleManager.CreateLinkedSource();
             _ct = _cts.Token;
             _activeCardsCount++;
-            Doors.OnDoorCrossed += BarrierCrossed;
+            Barriers.OnDoorCrossed += BarrierCrossed;
         }
 
         private void BarrierCrossed()
@@ -62,7 +62,7 @@ namespace Cards
         public override void Destroy()
         {
             _activeCardsCount--;
-            Doors.OnDoorCrossed -= BarrierCrossed;
+            Barriers.OnDoorCrossed -= BarrierCrossed;
             if (_cts == null) return;
             _cts.Cancel();
             _cts.Dispose();

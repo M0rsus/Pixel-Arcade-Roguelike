@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace Game
 {
-    public class Doors : MonoBehaviour, IOnUpdateListener
+    public class Barriers : MonoBehaviour, IOnUpdateListener
     {
         [SerializeField] 
         private Stats playerStats;

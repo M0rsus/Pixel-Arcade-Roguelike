@@ -10493,7 +10493,7 @@ GameObject:
   - component: {fileID: 1062288565}
   - component: {fileID: 1062288564}
   m_Layer: 11
-  m_Name: Doors
+  m_Name: Barriers
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
