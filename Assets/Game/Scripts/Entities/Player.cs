@@ -56,15 +56,13 @@ namespace Game
             GameUpdate.Unregister(onUpdateListener: this);
             GameUpdate.Unregister(onFixedUpdateListener: this);
             damageReceiverComponent.OnDestroy();
+            shootComponent.OnDestroy();
             Destroyed?.Invoke();
-        }
-        void Start()
-        {
         }
 
         public void OnUpdate(float deltaTime)
         {
-            shootComponent.OnUpdate(deltaTime);
+            shootComponent.OnUpdate();
         }
 
         public void OnFixedUpdate(float deltaTime)

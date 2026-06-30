@@ -2,6 +2,6 @@
 {
     public interface IShootable
     {
-        public bool ShootInput { get; }
+        public event System.Action<bool> OnShoot;
     }
 }

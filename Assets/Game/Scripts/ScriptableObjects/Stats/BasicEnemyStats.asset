@@ -46,3 +46,5 @@ MonoBehaviour:
     value: 0
   bounceOffEnemies:
     value: 0
+  doorCooldown:
+    value: 1

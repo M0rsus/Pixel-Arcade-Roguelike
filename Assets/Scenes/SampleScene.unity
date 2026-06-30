@@ -16163,6 +16163,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5142680270018637965, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5142680270018637965, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShootInput
+      objectReference: {fileID: 0}
     - target: {fileID: 5817885745359894659, guid: f91ec125e5b53a6409fbaac9f5563c6d, type: 3}
       propertyPath: m_Name
       value: Player

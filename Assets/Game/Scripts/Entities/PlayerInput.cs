@@ -7,7 +7,7 @@ namespace Game
     {
         public float ForwardInput { get; private set; }
         public float RotationInput {get; private set;}
-        public bool ShootInput { get; private set; }
+        public event System.Action<bool> OnShoot;
         
         public void OnForward(InputAction.CallbackContext context)
         {
@@ -19,9 +19,12 @@ namespace Game
             RotationInput = context.ReadValue<float>();
         }
 
-        public void OnShoot(InputAction.CallbackContext context)
+        public void ShootInput(InputAction.CallbackContext context)
         {
-            ShootInput = context.performed;
+            if (context.started)
+                OnShoot?.Invoke(true);
+            if (context.canceled)
+                OnShoot?.Invoke(false);
         }
     }
 }

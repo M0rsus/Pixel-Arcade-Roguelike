@@ -11,7 +11,7 @@ namespace Game
         private AI ai;
         public float ForwardInput { get; private set; }
         public float RotationInput {get; private set;}
-        public bool ShootInput { get; private set; }
+        public event System.Action<bool> OnShoot;
 
         public void Initialize(CancellationToken ct, CancellationToken stuckToken)
         {
@@ -32,8 +32,6 @@ namespace Game
             RotationInput = Mathf.Clamp(ai.Angle / 90f, -1f, 1f);
             if (Mathf.Abs(ai.Angle) < 1f)
                 RotationInput = 0f;
-            
-            ShootInput = true;
         }
 
         public void OnDestroy()
