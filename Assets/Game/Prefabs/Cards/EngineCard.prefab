@@ -510,7 +510,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -15, y: -15}
-  m_SizeDelta: {x: 13, y: 120}
+  m_SizeDelta: {x: 135, y: 120}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7404203028500080672
 CanvasRenderer:
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rubber
+  m_text: Engine
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad2b9265d29990e44a71ae36ea8daa4c, type: 2}
   m_sharedMaterial: {fileID: 87801745564854407, guid: ad2b9265d29990e44a71ae36ea8daa4c, type: 2}
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 30
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1

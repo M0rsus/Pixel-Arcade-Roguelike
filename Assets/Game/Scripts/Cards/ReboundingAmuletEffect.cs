@@ -25,7 +25,7 @@ namespace Cards
 
         private void BarrierCrossed()
         {
-            if (_activeEffectsCount == 0)
+            if (_activeEffectsCount <= 0)
             {
                 _healthRegen.Value = 5f * _activeCardsCount;
                 _effectCooldown.Value = 3f + 1f * _activeCardsCount;
@@ -48,7 +48,7 @@ namespace Cards
             finally
             {
                 _activeEffectsCount--;
-                if (_activeEffectsCount == 0)
+                if (_activeEffectsCount <= 0)
                 {
                     _stats.healthRegen.RemoveModifier(_healthRegen);
                 }

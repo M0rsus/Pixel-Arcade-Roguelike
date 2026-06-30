@@ -26,7 +26,7 @@ namespace Cards
 
         private void BarrierCrossed()
         {
-            if (_activeEffectsCount == 0)
+            if (_activeEffectsCount <= 0)
             {
                 _shootCooldown.Value = 1f / (1 << _activeCardsCount);
                 _bulletSpeed.Value = 1f + _activeCardsCount;
@@ -51,7 +51,7 @@ namespace Cards
             finally
             {
                 _activeEffectsCount--;
-                if (_activeEffectsCount == 0)
+                if (_activeEffectsCount <= 0)
                 {
                     _stats.shootCooldown.RemoveModifier(_shootCooldown);
                     _stats.bulletSpeed.RemoveModifier(_bulletSpeed);

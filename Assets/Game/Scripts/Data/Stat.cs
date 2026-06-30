@@ -7,6 +7,7 @@ namespace Game
     [Serializable]
     public class StatFloat : Stat<float>
     {
+        public override event Action<float, float> OnChanged;
         public StatFloat() : base() { }
         public StatFloat(float value) : base(value) { }
         
@@ -34,11 +35,16 @@ namespace Game
             }
             return localValue;
         }
+        protected override void Refresh(float oldValue, float newValue)
+        {
+            OnChanged?.Invoke(GetValue() - (newValue - oldValue), GetValue());
+        }
     }
 
     [Serializable]
     public class StatInt : Stat<int>
     {
+        public override event Action<int, int> OnChanged;
         public StatInt() : base() { }
         public StatInt(int value) : base(value) { }
         
@@ -66,6 +72,10 @@ namespace Game
             }
             return localValue;
         }
+        protected override void Refresh(int oldValue, int newValue)
+        {
+            OnChanged?.Invoke(GetValue() - (newValue - oldValue), GetValue());
+        }
     }
 
     [Serializable]
@@ -89,7 +99,7 @@ namespace Game
         [SerializeField]
         private T value;
         private PrimitiveComparer<T> _comparer;
-        public event Action<T, T> OnChanged;
+        public virtual event Action<T, T> OnChanged;
         public event Action OnUpdated;
         
         protected List<Modifier<T>> _modifiers = new();
@@ -104,6 +114,7 @@ namespace Game
                 this.value = value;
                 OnChanged?.Invoke(oldValue, value);
                 OnUpdated?.Invoke();
+                Debug.Log($"Changing {oldValue} to {value}");
             }
         }
 
@@ -129,6 +140,8 @@ namespace Game
         {
             T oldValue = GetValue();
             _modifiers.Add(modifier);
+            modifier.OnChanged += Refresh;
+            modifier.OnUpdated += Refresh;
             OnChanged?.Invoke(oldValue, GetValue());
             OnUpdated?.Invoke();
         }
@@ -136,13 +149,16 @@ namespace Game
         {
             T oldValue = GetValue();
             _modifiers.Remove(modifier);
+            modifier.OnChanged -= Refresh;
+            modifier.OnUpdated -= Refresh;
             OnChanged?.Invoke(oldValue, GetValue());
             OnUpdated?.Invoke();
         }
-        
-        public void Refresh()
+
+        private void Refresh()
         {
             OnUpdated?.Invoke();
         }
+        protected virtual void Refresh(T oldValue, T newValue) { }
     }
 }

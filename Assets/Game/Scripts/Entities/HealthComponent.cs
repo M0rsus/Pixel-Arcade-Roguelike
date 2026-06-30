@@ -33,6 +33,13 @@ namespace Game
                 healthView.Initialize(_currentHealth, _maxHealth);
             _ct = ct;
             _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            _maxHealth.OnChanged += RecalculateHealth;
+        }
+
+        private void RecalculateHealth(int oldHealth, int newHealth)
+        {
+            Heal(newHealth - oldHealth);
+            Debug.Log($"Recalculate Health: {_currentHealth.Value} & {newHealth - oldHealth}");
         }
 
         public void TakeDamage(float damage)
@@ -87,6 +94,7 @@ namespace Game
         {
             Debug.Log("Death");
             OnDeath?.Invoke();
+            _maxHealth.OnChanged -= RecalculateHealth;
         }
     }
 }
