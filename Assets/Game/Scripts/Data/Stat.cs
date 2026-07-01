@@ -36,7 +36,6 @@ namespace Game
         }
         protected override void Refresh(float oldValue, float newValue)
         {
-            Debug.Log($"{nameof(StatFloat)}: {GetValue()}, oldValue: {oldValue}, newValue: {newValue}");
             float currentValue = GetValue();
             float delta = newValue - oldValue;
             float previousValue = currentValue - delta;
@@ -76,7 +75,6 @@ namespace Game
         }
         protected override void Refresh(int oldValue, int newValue)
         {
-            Debug.Log($"{nameof(StatInt)}: {GetValue()}, oldValue: {oldValue}, newValue: {newValue}");
             int currentValue = GetValue();
             int delta = newValue - oldValue;
             int previousValue = currentValue - delta;

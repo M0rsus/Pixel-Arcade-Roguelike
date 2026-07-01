@@ -9,7 +9,7 @@ namespace Game
         public StatFloat maxHealth;
         public StatFloat healthRegen;
         public StatFloat lifeSteal;
-        public StatInt maxArmor;
+        public StatFloat maxArmor;
         public StatFloat armorRegen;
         public StatBool regenArmorAtFullHealth;
         

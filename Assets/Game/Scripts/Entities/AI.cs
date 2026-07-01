@@ -7,9 +7,10 @@ namespace Game
     [System.Serializable]
     public abstract class AI
     {
-        protected CancellationToken ct;
-        protected CancellationToken stuckToken;
-        protected CancellationTokenSource cts;
+        protected CancellationToken _ct;
+        protected CancellationToken _stuckCt;
+        protected CancellationTokenSource _cts;
+        protected CancellationTokenSource _stuckCts;
         
         protected Transform playerTransform;
         [SerializeField]
@@ -19,7 +20,7 @@ namespace Game
         
         public abstract float Angle { get; set; }
 
-        public void Initialize(CancellationToken ct, CancellationToken stuckToken)
+        public void Initialize()
         {
             agent.updateRotation = false;
             agent.updateUpAxis = false;
@@ -28,9 +29,10 @@ namespace Game
             playerTransform = LevelContext.Instance.PlayerTransform;
             Player.Destroyed += PlayerDestroyed;
             
-            this.ct = ct;
-            this.stuckToken = stuckToken;
-            cts = CancellationTokenSource.CreateLinkedTokenSource(this.ct);
+            _cts = AsyncLifecycleManager.CreateLinkedSource();
+            _stuckCts = AsyncLifecycleManager.CreateLinkedSource();
+            _ct = _cts.Token;
+            _stuckCt =  _stuckCts.Token;
         }
         public string GetState()
         {
@@ -44,13 +46,17 @@ namespace Game
         public void OnDestroy()
         {
             Player.Destroyed -= PlayerDestroyed;
+            if (_stuckCts == null) return;
+            _stuckCts.Cancel();
+            _stuckCts.Dispose();
+            _stuckCts = null;
         }
         public void ClearCancellationTokenSource()
         {
-            if (cts == null) return;
-            cts.Cancel();
-            cts.Dispose();
-            cts = null;
+            if (_cts == null) return;
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
         }
 
         protected virtual void PlayerDestroyed() { }

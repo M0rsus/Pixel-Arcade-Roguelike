@@ -82,7 +82,8 @@ namespace Game
             if (_timerIsRunning) return;
             
             ClearCancellationTokenSource();
-            cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            _cts = AsyncLifecycleManager.CreateLinkedSource();
+            _ct = _cts.Token;
             Sticking().Forget();
         }
 
@@ -100,14 +101,14 @@ namespace Game
                 await UniTask.Delay(
                     TimeSpan.FromSeconds(2.5f),
                     ignoreTimeScale: false,
-                    cancellationToken: cts.Token);
+                    cancellationToken: _ct);
 
                 _isStuckSituation = true;
 
                 await UniTask.Delay(
                     TimeSpan.FromSeconds(0.4f),
                     ignoreTimeScale: false,
-                    cancellationToken: stuckToken);
+                    cancellationToken: _stuckCt);
             }
             catch (OperationCanceledException) { }
             finally

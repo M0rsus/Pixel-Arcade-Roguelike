@@ -20,7 +20,6 @@ namespace Game
                 _value = value;
                 OnChanged?.Invoke(oldValue, value);
                 OnUpdated?.Invoke();
-                Debug.Log($"oldValue: {oldValue}, newValue: {value}");
             }
         }
 

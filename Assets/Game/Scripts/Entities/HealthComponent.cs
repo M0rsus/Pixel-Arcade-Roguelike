@@ -20,32 +20,28 @@ namespace Game
         private StatFloat _maxHealth;
         private StatFloat _healthRegen;
         private StatFloat _currentHealth;
-        private bool _activeRegen;
+        private bool _isActiveRegen;
 
         [SerializeField]
         private float delayRegen = 0.1f;
         
-        public void Initialize(Stats stats, CancellationToken ct)
+        public void Initialize(Stats stats)
         {
             _maxHealth = stats.maxHealth;
             _currentHealth = new (_maxHealth.GetValue());
             _healthRegen = stats.healthRegen;
             if (healthView)
                 healthView.Initialize(_currentHealth, _maxHealth);
-            _ct = ct;
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            _maxHealth.OnChanged += RecalculateHealth;
+            _cts = AsyncLifecycleManager.CreateLinkedSource();
+            _ct = _cts.Token;
+            _maxHealth.OnChanged += Recalculate;
             _maxHealth.OnUpdated += ShouldRegenerate;
             _currentHealth.OnUpdated += ShouldRegenerate;
             _healthRegen.OnUpdated += ShouldRegenerate;
         }
 
-        private void RecalculateHealth(float oldHealth, float newHealth)
+        private void Recalculate(float oldHealth, float newHealth)
         {
-            Debug.Log("<color=green>Recalculate Health</color>");
-            Debug.Log($"newHealth: {newHealth}");
-            Debug.Log($"oldHealth: {oldHealth}");
-            Debug.Log($"Recalculate Health: {_currentHealth.Value} & newHealth - oldHealth: {newHealth - oldHealth}");
             Heal(newHealth - oldHealth);
         }
 
@@ -55,7 +51,8 @@ namespace Game
             OnHealthNotFull?.Invoke();
             
             ClearCancellationTokenSource();
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(_ct);
+            _cts = AsyncLifecycleManager.CreateLinkedSource();
+            _ct = _cts.Token;
             
             if (_currentHealth.Value <= 0)
                 Die();
@@ -78,7 +75,7 @@ namespace Game
             {
                 while (_currentHealth.Value < _maxHealth.GetValue())
                 {
-                    _activeRegen = true;
+                    _isActiveRegen = true;
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,
                         cancellationToken: _cts.Token);
@@ -90,13 +87,13 @@ namespace Game
             catch (OperationCanceledException) { }
             finally
             {
-                _activeRegen = false;
+                _isActiveRegen = false;
             }
         }
 
         private void ShouldRegenerate()
         {
-            if (_currentHealth.Value < _maxHealth.GetValue() && _activeRegen == false)
+            if (_currentHealth.Value < _maxHealth.GetValue() && _isActiveRegen == false)
                 Regen().Forget();
         }
         public void ClearCancellationTokenSource()
@@ -109,9 +106,8 @@ namespace Game
 
         private void Die()
         {
-            Debug.Log("Death");
             OnDeath?.Invoke();
-            _maxHealth.OnChanged -= RecalculateHealth;
+            _maxHealth.OnChanged -= Recalculate;
             _maxHealth.OnUpdated -= ShouldRegenerate;
             _currentHealth.OnUpdated -= ShouldRegenerate;
             _healthRegen.OnUpdated -= ShouldRegenerate;

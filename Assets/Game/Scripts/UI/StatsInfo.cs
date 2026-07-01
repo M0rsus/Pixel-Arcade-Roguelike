@@ -23,7 +23,7 @@ namespace UI
         private StatFloat _maxHealth;
         private StatFloat _healthRegen;
         private StatFloat _lifeSteal;
-        private StatInt _maxArmor;
+        private StatFloat _maxArmor;
         private StatFloat _armorRegen;
         private StatBool _regenArmorAtFullHealth;
         
@@ -70,7 +70,6 @@ namespace UI
             
             _statsInt = new Dictionary<StatName, StatInt>()
             {
-                { StatName.MaxArmor, _maxArmor },
                 { StatName.ContactDamage, _contactDamage },
                 { StatName.BulletDamage, _bulletDamage },
                 { StatName.Bounces, _bounces }
@@ -80,6 +79,7 @@ namespace UI
                 { StatName.MaxHp, _maxHealth },
                 { StatName.HealthRegen, _healthRegen },
                 { StatName.LifeSteal, _lifeSteal },
+                { StatName.MaxArmor, _maxArmor },
                 { StatName.ArmorRegen, _armorRegen },
                 { StatName.MoveSpeed, _moveSpeed },
                 { StatName.RotationSpeed, _rotationSpeed },
@@ -100,7 +100,7 @@ namespace UI
                 { StatName.MaxHp, StatType.Float},
                 { StatName.HealthRegen, StatType.Float},
                 { StatName.LifeSteal, StatType.Float},
-                { StatName.MaxArmor, StatType.Int},
+                { StatName.MaxArmor, StatType.Float},
                 { StatName.ArmorRegen, StatType.Float},
                 { StatName.RegenArmorAtFullHealth, StatType.Bool },
                 { StatName.MoveSpeed, StatType.Float },

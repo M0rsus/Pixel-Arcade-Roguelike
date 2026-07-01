@@ -18,11 +18,11 @@ namespace Game
         private MonoBehaviour _entity;
         private float _excessDamage;
 
-        public void Initialize(MonoBehaviour entity, Stats stats, CancellationToken ct)
+        public void Initialize(MonoBehaviour entity, Stats stats)
         {
             _entity = entity;
-            healthComponent.Initialize(stats, ct);
-            armorComponent.Initialize(stats, ct);
+            healthComponent.Initialize(stats);
+            armorComponent.Initialize(stats);
             _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             
             armorComponent.MaxArmor.OnUpdated += UpdateSubscriptions;

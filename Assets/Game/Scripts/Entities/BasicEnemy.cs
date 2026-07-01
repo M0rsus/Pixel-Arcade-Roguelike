@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -26,16 +25,13 @@ namespace Game
         private Stats stats; 
 
         public IDamageable Damageable => damageReceiverComponent;
-        private CancellationToken _ct;
-        private CancellationToken _stuckToken;
 
         void Awake()
         {
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
-            _ct = CancellationToken.None;
-            input.Initialize(_ct, _stuckToken);
-            damageReceiverComponent.Initialize(this, stats, _ct);
+            input.Initialize();
+            damageReceiverComponent.Initialize(this, stats);
             moveComponent.Initialize(rigidBody, input, stats);
             rotationComponent.Initialize(rigidBody, input, stats);
             contactComponent.Initialize(stats, this);

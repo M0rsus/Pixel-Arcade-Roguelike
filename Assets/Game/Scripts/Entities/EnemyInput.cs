@@ -13,9 +13,9 @@ namespace Game
         public float RotationInput {get; private set;}
         public event System.Action<bool> OnShoot;
 
-        public void Initialize(CancellationToken ct, CancellationToken stuckToken)
+        public void Initialize()
         {
-            ai.Initialize(ct, stuckToken);
+            ai.Initialize();
         }
 
         public void OnUpdate(float deltaTime)
