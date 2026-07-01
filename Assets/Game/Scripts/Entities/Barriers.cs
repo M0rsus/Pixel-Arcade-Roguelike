@@ -25,7 +25,7 @@ namespace Game
             _compositeCollider = GetComponent<CompositeCollider2D>();
             _tilemap = GetComponentInParent<Tilemap>();
             if (!cooldownView) return;
-            cooldownView.Initialize(_timer, playerStats.doorCooldown);
+            cooldownView.Initialize(_timer, playerStats.barriersCooldown);
             cooldownView.gameObject.SetActive(false);
         }
 
@@ -41,7 +41,7 @@ namespace Game
             cooldownView.gameObject.SetActive(true);
             cooldownView.gameObject.transform.SetAsFirstSibling();
             OnBarrierCrossed?.Invoke();
-            _asyncTimer.Start(playerStats.doorCooldown, CurrentCooldown);
+            _asyncTimer.Start(playerStats.barriersCooldown, CurrentCooldown);
             _compositeCollider.isTrigger = false;
             _tilemap.color = closedBarrierColor;
         }
@@ -49,7 +49,7 @@ namespace Game
         private void CurrentCooldown(StatFloat timer)
         {
             _timer.Value = timer.Value;
-            if (_timer.Value >= playerStats.doorCooldown.GetValue()) OpenBarrier();
+            if (_timer.Value >= playerStats.barriersCooldown.GetValue()) OpenBarrier();
         }
 
         private void OpenBarrier()

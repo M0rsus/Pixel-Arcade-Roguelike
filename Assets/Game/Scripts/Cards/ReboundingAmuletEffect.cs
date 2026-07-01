@@ -25,12 +25,15 @@ namespace Cards
 
         private void BarrierCrossed()
         {
+            Debug.Log("Barrier Crossed");
             if (_activeEffectsCount <= 0)
             {
                 _healthRegen.Value = 5f * _activeCardsCount;
                 _effectCooldown.Value = 3f + 1f * _activeCardsCount;
             
                 _stats.healthRegen.AddModifier(_healthRegen);
+                Debug.Log("Add modifier");
+                Debug.Log($"Health regen: {_stats.healthRegen.GetValue()}");
             }
             _activeEffectsCount++;
             DurationEffect().Forget();

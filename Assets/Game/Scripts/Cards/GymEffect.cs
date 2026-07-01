@@ -5,7 +5,7 @@ namespace Cards
 {
     public class GymEffect : Effect
     {
-        private readonly Modifier<int> _health = new(0, Modifier<int>.ModifierType.Add);
+        private readonly Modifier<float> _health = new(0, Modifier<float>.ModifierType.Add);
         private readonly Modifier<int> _damage = new(0, Modifier<int>.ModifierType.Add);
         private readonly Modifier<float> _moveSpeed = new(0f, Modifier<float>.ModifierType.Add);
         public override void Initialize(Stats stats, GameObject entity)
@@ -19,7 +19,7 @@ namespace Cards
 
         private void WaveCompleted(float postWaveDelay)
         {
-            _health.Value += 5;
+            _health.Value += 5f;
             _damage.Value += 5;
             _moveSpeed.Value += 0.1f;
         }

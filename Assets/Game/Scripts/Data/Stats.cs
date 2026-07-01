@@ -6,7 +6,7 @@ namespace Game
     public class Stats : ScriptableObject
     {
         [Header("Vitality")]
-        public StatInt maxHealth;
+        public StatFloat maxHealth;
         public StatFloat healthRegen;
         public StatFloat lifeSteal;
         public StatInt maxArmor;
@@ -29,6 +29,6 @@ namespace Game
         public StatBool bounceOffEnemies;
         
         [Header("Objects")]
-        public StatFloat doorCooldown;
+        public StatFloat barriersCooldown;
     }
 }

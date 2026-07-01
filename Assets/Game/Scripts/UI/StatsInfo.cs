@@ -20,7 +20,7 @@ namespace UI
         private Dictionary<StatName, StatBool> _statsBool;
         
         // Vitality
-        private StatInt _maxHealth;
+        private StatFloat _maxHealth;
         private StatFloat _healthRegen;
         private StatFloat _lifeSteal;
         private StatInt _maxArmor;
@@ -41,6 +41,9 @@ namespace UI
         private StatFloat _range;
         private StatInt _bounces;
         private StatBool _bounceOffEnemies;
+        
+        // Objects
+        private StatFloat _barriersCooldown;
         private void Awake()
         {
             _maxHealth = playerStats.maxHealth;
@@ -62,10 +65,11 @@ namespace UI
             _range = playerStats.range;
             _bounces = playerStats.bounces;
             _bounceOffEnemies = playerStats.bounceOffEnemies;
+
+            _barriersCooldown = playerStats.barriersCooldown;
             
             _statsInt = new Dictionary<StatName, StatInt>()
             {
-                { StatName.MaxHp, _maxHealth },
                 { StatName.MaxArmor, _maxArmor },
                 { StatName.ContactDamage, _contactDamage },
                 { StatName.BulletDamage, _bulletDamage },
@@ -73,6 +77,7 @@ namespace UI
             };
             _statsFloat = new Dictionary<StatName, StatFloat>()
             {
+                { StatName.MaxHp, _maxHealth },
                 { StatName.HealthRegen, _healthRegen },
                 { StatName.LifeSteal, _lifeSteal },
                 { StatName.ArmorRegen, _armorRegen },
@@ -82,7 +87,8 @@ namespace UI
                 { StatName.ShootCooldown, _shootCooldown},
                 { StatName.BulletSpeed, _bulletSpeed },
                 { StatName.LifeTime, _lifeTime },
-                { StatName.Range, _range }
+                { StatName.Range, _range },
+                { StatName.BarriersCooldown, _barriersCooldown }
             };
             _statsBool = new Dictionary<StatName, StatBool>()
             {
@@ -91,7 +97,7 @@ namespace UI
             };
             _statsType = new Dictionary<StatName, StatType>()
             {
-                { StatName.MaxHp, StatType.Int},
+                { StatName.MaxHp, StatType.Float},
                 { StatName.HealthRegen, StatType.Float},
                 { StatName.LifeSteal, StatType.Float},
                 { StatName.MaxArmor, StatType.Int},
@@ -107,7 +113,8 @@ namespace UI
                 { StatName.LifeTime, StatType.Float},
                 { StatName.Range, StatType.Float},
                 { StatName.Bounces, StatType.Int},
-                { StatName.BounceOffEnemies, StatType.Bool}
+                { StatName.BounceOffEnemies, StatType.Bool},
+                { StatName.BarriersCooldown, StatType.Float}
             };
             
             foreach (var (statName, statInfo) in statsInfo)
@@ -160,7 +167,8 @@ namespace UI
             LifeTime,
             Range,
             Bounces,
-            BounceOffEnemies
+            BounceOffEnemies,
+            BarriersCooldown
         }
 
         private enum StatType

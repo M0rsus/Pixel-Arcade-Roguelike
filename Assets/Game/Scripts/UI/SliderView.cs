@@ -15,9 +15,12 @@ namespace UI
         private TextMeshProUGUI text;
         [SerializeField] 
         private View view;
+        [SerializeField] [HideIf("view", View.None)]
+        private FloatPrecision floatPrecision;
         [SerializeField] [ShowIf("view", View.Labeled)]
         private string prefixedText;
 
+        private int _digits;
         private ValueType _valueType;
         private StatInt _currentInt;
         private StatInt _maxInt;
@@ -38,6 +41,13 @@ namespace UI
             _currentFloat = current;
             _maxFloat = max;
             _valueType = ValueType.Float;
+            _digits = floatPrecision switch
+            {
+                FloatPrecision.Two => 2,
+                FloatPrecision.One => 1,
+                FloatPrecision.Zero => 0,
+                _ => 2
+            };
             _maxFloat.OnUpdated += UpdateSlider;
             _currentFloat.OnUpdated += UpdateSlider;
             UpdateSlider();
@@ -62,10 +72,10 @@ namespace UI
             switch (view)
             {
                 case View.Ratio:
-                    text.SetText($"{MathF.Round(current, 2)}/{MathF.Round(max, 2)}");
+                    text.SetText($"{MathF.Round(current, _digits)}/{MathF.Round(max, _digits)}");
                     break;
                 case View.Labeled:
-                    text.SetText($"{prefixedText}{MathF.Round(current, 2)}");
+                    text.SetText($"{prefixedText}{MathF.Round(current, _digits)}");
                     break;
                 case View.None:
                     break;
@@ -93,6 +103,13 @@ namespace UI
         {
             Int,
             Float
+        }
+
+        private enum FloatPrecision
+        {
+            Two,
+            One,
+            Zero
         }
     }
 }

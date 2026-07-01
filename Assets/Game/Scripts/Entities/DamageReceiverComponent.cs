@@ -78,7 +78,7 @@ namespace Game
             armorComponent.OnArmorLost += DeactivateArmorRegen;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             if (armorComponent != null)
                 _excessDamage = armorComponent.TakeDamage(damage);

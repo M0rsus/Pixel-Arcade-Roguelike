@@ -1605,6 +1605,7 @@ MonoBehaviour:
   slider: {fileID: 158809700}
   text: {fileID: 656177537}
   view: 0
+  floatPrecision: 0
   prefixedText: 
 --- !u!224 &158809699
 RectTransform:
@@ -4786,6 +4787,7 @@ MonoBehaviour:
   slider: {fileID: 276021117}
   text: {fileID: 1224651886}
   view: 0
+  floatPrecision: 2
   prefixedText: 
 --- !u!1 &287972153
 GameObject:
@@ -5014,6 +5016,7 @@ MonoBehaviour:
   slider: {fileID: 309841808}
   text: {fileID: 1531738039}
   view: 2
+  floatPrecision: 0
   prefixedText: 
 --- !u!114 &309841808
 MonoBehaviour:
@@ -5175,6 +5178,7 @@ MonoBehaviour:
   slider: {fileID: 322135371}
   text: {fileID: 1902956018}
   view: 2
+  floatPrecision: 0
   prefixedText: 
 --- !u!114 &322135371
 MonoBehaviour:
@@ -14210,6 +14214,7 @@ MonoBehaviour:
   slider: {fileID: 1750651252}
   text: {fileID: 1832093329}
   view: 1
+  floatPrecision: 0
   prefixedText: 'Enemies: '
 --- !u!1 &1754547656
 GameObject:

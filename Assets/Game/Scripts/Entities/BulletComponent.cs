@@ -11,7 +11,7 @@ namespace Game
         private Rigidbody2D rigidbodyBullet;
         
         private float _bulletSpeed;
-        private float _bulletDamage;
+        private int _bulletDamage;
         private float _lifeTime;
         private float _range;
         private float _bounces;
