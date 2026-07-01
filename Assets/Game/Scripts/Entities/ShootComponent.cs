@@ -49,7 +49,7 @@ namespace Game
         public void Shoot()
         {
             _timer.Value = 0;
-            _asyncTimer.Start(_cooldown.GetValue(), CurrentCooldown);
+            _asyncTimer.Start(_cooldown, CurrentCooldown);
             _canShoot = false;
             
             _bulletSpawner.SpawnBullet();

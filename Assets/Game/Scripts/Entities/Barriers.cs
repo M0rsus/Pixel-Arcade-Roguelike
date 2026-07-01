@@ -41,7 +41,7 @@ namespace Game
             cooldownView.gameObject.SetActive(true);
             cooldownView.gameObject.transform.SetAsFirstSibling();
             OnBarrierCrossed?.Invoke();
-            _asyncTimer.Start(playerStats.doorCooldown.GetValue(), CurrentCooldown);
+            _asyncTimer.Start(playerStats.doorCooldown, CurrentCooldown);
             _compositeCollider.isTrigger = false;
             _tilemap.color = closedBarrierColor;
         }

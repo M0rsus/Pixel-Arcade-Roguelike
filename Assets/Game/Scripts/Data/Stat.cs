@@ -7,7 +7,6 @@ namespace Game
     [Serializable]
     public class StatFloat : Stat<float>
     {
-        public override event Action<float, float> OnChanged;
         public StatFloat() : base() { }
         public StatFloat(float value) : base(value) { }
         
@@ -37,14 +36,14 @@ namespace Game
         }
         protected override void Refresh(float oldValue, float newValue)
         {
-            OnChanged?.Invoke(GetValue() - (newValue - oldValue), GetValue());
+            Debug.Log($"{nameof(StatFloat)}: {GetValue()}, oldValue: {oldValue}, newValue: {newValue}");
+            ValueChanged(oldValue, GetValue());
         }
     }
 
     [Serializable]
     public class StatInt : Stat<int>
     {
-        public override event Action<int, int> OnChanged;
         public StatInt() : base() { }
         public StatInt(int value) : base(value) { }
         
@@ -74,7 +73,8 @@ namespace Game
         }
         protected override void Refresh(int oldValue, int newValue)
         {
-            OnChanged?.Invoke(GetValue() - (newValue - oldValue), GetValue());
+            Debug.Log($"{nameof(StatInt)}: {GetValue()}, oldValue: {oldValue}, newValue: {newValue}");
+            ValueChanged(oldValue, GetValue());
         }
     }
 
@@ -99,7 +99,7 @@ namespace Game
         [SerializeField]
         private T value;
         private PrimitiveComparer<T> _comparer;
-        public virtual event Action<T, T> OnChanged;
+        public event Action<T, T> OnChanged;
         public event Action OnUpdated;
         
         protected List<Modifier<T>> _modifiers = new();
@@ -112,9 +112,9 @@ namespace Game
                 if (_comparer.Equals(this.value, value)) return;
                 T oldValue = value;
                 this.value = value;
-                OnChanged?.Invoke(oldValue, value);
+                ValueChanged(oldValue, value);
                 OnUpdated?.Invoke();
-                Debug.Log($"Changing {oldValue} to {value}");
+                //Debug.Log($"Changing {oldValue} to {value}");
             }
         }
 
@@ -126,6 +126,11 @@ namespace Game
         public Stat(T value)
         {
             this.value = value;
+        }
+
+        protected void ValueChanged(T oldValue, T newValue)
+        {
+            OnChanged?.Invoke(oldValue, newValue);
         }
 
         public virtual T GetValue()
@@ -142,7 +147,7 @@ namespace Game
             _modifiers.Add(modifier);
             modifier.OnChanged += Refresh;
             modifier.OnUpdated += Refresh;
-            OnChanged?.Invoke(oldValue, GetValue());
+            ValueChanged(oldValue, GetValue());
             OnUpdated?.Invoke();
         }
         public void RemoveModifier(Modifier<T> modifier)
@@ -151,7 +156,7 @@ namespace Game
             _modifiers.Remove(modifier);
             modifier.OnChanged -= Refresh;
             modifier.OnUpdated -= Refresh;
-            OnChanged?.Invoke(oldValue, GetValue());
+            ValueChanged(oldValue, GetValue());
             OnUpdated?.Invoke();
         }
 

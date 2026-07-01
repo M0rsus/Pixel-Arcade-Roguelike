@@ -10,7 +10,7 @@ namespace Game
         private CancellationTokenSource _cts;
         private CancellationToken _ct;
 
-        public void Start(float duration, Action<StatFloat> callback)
+        public void Start(StatFloat duration, Action<StatFloat> callback)
         {
             Stop();
             _cts = AsyncLifecycleManager.CreateLinkedSource();
@@ -18,13 +18,13 @@ namespace Game
             Run(duration, callback).Forget();
         }
 
-        private async UniTaskVoid Run(float duration, Action<StatFloat> callback)
+        private async UniTaskVoid Run(StatFloat duration, Action<StatFloat> callback)
         {
             StatFloat timer = new();
 
             try
             {
-                while (timer.Value < duration)
+                while (timer.Value < duration.GetValue())
                 {
                     await UniTask.Yield(PlayerLoopTiming.Update, _ct);
                 
