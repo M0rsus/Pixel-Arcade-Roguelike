@@ -42,8 +42,11 @@ namespace Game
 
         private void RecalculateHealth(float oldHealth, float newHealth)
         {
+            Debug.Log("<color=green>Recalculate Health</color>");
+            Debug.Log($"newHealth: {newHealth}");
+            Debug.Log($"oldHealth: {oldHealth}");
+            Debug.Log($"Recalculate Health: {_currentHealth.Value} & newHealth - oldHealth: {newHealth - oldHealth}");
             Heal(newHealth - oldHealth);
-            Debug.Log($"Recalculate Health: {_currentHealth.Value} & {newHealth - oldHealth}");
         }
 
         public void TakeDamage(int damage)

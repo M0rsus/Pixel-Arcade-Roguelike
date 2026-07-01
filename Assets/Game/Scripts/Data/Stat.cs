@@ -37,7 +37,10 @@ namespace Game
         protected override void Refresh(float oldValue, float newValue)
         {
             Debug.Log($"{nameof(StatFloat)}: {GetValue()}, oldValue: {oldValue}, newValue: {newValue}");
-            ValueChanged(oldValue, GetValue());
+            float currentValue = GetValue();
+            float delta = newValue - oldValue;
+            float previousValue = currentValue - delta;
+            ValueChanged(previousValue, currentValue);
         }
     }
 
@@ -74,7 +77,10 @@ namespace Game
         protected override void Refresh(int oldValue, int newValue)
         {
             Debug.Log($"{nameof(StatInt)}: {GetValue()}, oldValue: {oldValue}, newValue: {newValue}");
-            ValueChanged(oldValue, GetValue());
+            int currentValue = GetValue();
+            int delta = newValue - oldValue;
+            int previousValue = currentValue - delta;
+            ValueChanged(previousValue, currentValue);
         }
     }
 
@@ -114,7 +120,6 @@ namespace Game
                 this.value = value;
                 ValueChanged(oldValue, value);
                 OnUpdated?.Invoke();
-                //Debug.Log($"Changing {oldValue} to {value}");
             }
         }
 
