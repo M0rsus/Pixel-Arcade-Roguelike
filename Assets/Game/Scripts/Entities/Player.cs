@@ -32,7 +32,7 @@ namespace Game
         
         public IDamageable Damageable => damageReceiverComponent;
 
-        void Awake()
+        private void Awake()
         {
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
@@ -43,12 +43,7 @@ namespace Game
             contactComponent.Initialize(stats, this);
         }
 
-        void OnDisable()
-        {
-            damageReceiverComponent.OnDisable();
-        }
-
-        void OnDestroy()
+        private void OnDestroy()
         {
             GameUpdate.Unregister(onUpdateListener: this);
             GameUpdate.Unregister(onFixedUpdateListener: this);

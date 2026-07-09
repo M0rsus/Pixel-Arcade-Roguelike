@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,7 +15,6 @@ namespace Game
         private StatBool _regenArmorAtFullHealth;
 
         private MonoBehaviour _entity;
-        private float _excessDamage;
 
         public void Initialize(MonoBehaviour entity, Stats stats)
         {
@@ -25,66 +23,43 @@ namespace Game
             armorComponent.Initialize(stats);
             _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             
-            armorComponent.MaxArmor.OnUpdated += UpdateSubscriptions;
-            _regenArmorAtFullHealth.OnUpdated += UpdateSubscriptions;
             healthComponent.OnDeath += Death;
+            _regenArmorAtFullHealth.OnUpdated += UpdateSubscriptions;
             UpdateSubscriptions();
-            if (armorComponent.CheckArmor())
-                ActivateArmorRegen();
-        }
-
-        private void ActivateArmorRegen()
-        {
-            Debug.Log("<color=green>ActivateArmorRegen</color>");
-            armorComponent.IsActiveRegen = true;
-            armorComponent.Regen().Forget();
-        }
-
-        private void DeactivateArmorRegen()
-        {
-            Debug.Log("<color=red>DeactivateArmorRegen</color>");
-            armorComponent.IsActiveRegen = false;
-        }
-
-        public void OnDisable()
-        {
-            if (healthComponent != null) healthComponent.OnHealthFull -= ActivateArmorRegen;
-            if (armorComponent != null) armorComponent.MaxArmor.OnUpdated -= UpdateSubscriptions;
-            if (_regenArmorAtFullHealth != null) _regenArmorAtFullHealth.OnUpdated -= UpdateSubscriptions;
         }
 
         public void OnDestroy()
         {
-            healthComponent.ClearCancellationTokenSource();
-            armorComponent.ClearCancellationTokenSource();
+            armorComponent.OnDestroy();
             healthComponent.OnDeath -= Death;
+            healthComponent.OnHealthFull -= armorComponent.ActivateRegen;
+            _regenArmorAtFullHealth.OnUpdated -= UpdateSubscriptions;
         }
 
-        public void UpdateSubscriptions()
+        private void UpdateSubscriptions()
         {
             if (healthComponent == null || armorComponent == null) return;
             
-            healthComponent.OnHealthFull -= ActivateArmorRegen;
-            armorComponent.OnArmorLost -= DeactivateArmorRegen;
-
-            if (!_regenArmorAtFullHealth.GetValue())
-            {
-                if (armorComponent.CheckArmor())
-                    ActivateArmorRegen();
-                return;
-            }
-            
-            healthComponent.OnHealthFull += ActivateArmorRegen;
-            armorComponent.OnArmorLost += DeactivateArmorRegen;
+            healthComponent.OnHealthFull -= armorComponent.ActivateRegen;
+            if (_regenArmorAtFullHealth.GetValue())
+                healthComponent.OnHealthFull += armorComponent.ActivateRegen;
         }
 
         public void TakeDamage(int damage)
         {
-            if (armorComponent != null)
-                _excessDamage = armorComponent.TakeDamage(damage);
+            bool regenArmorAtFullHealth = _regenArmorAtFullHealth.GetValue();
+            float excessDamage = 0;
             
-            if (_excessDamage <= 0) return;
-            healthComponent?.TakeDamage(damage);
+            if (armorComponent != null)
+                excessDamage = armorComponent?.TakeDamage(damage) ?? 0;
+
+            armorComponent?.CancelRegen();
+            if (excessDamage <= 0)
+            {
+                armorComponent?.ActivateRegen();
+                return;
+            }
+            healthComponent?.TakeDamage(excessDamage);
         }
 
         private void Death()

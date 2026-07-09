@@ -20,23 +20,27 @@ namespace Game
         [SerializeField]
         private float delayRegen = 1f;
 
-        public StatFloat MaxArmor { get; private set; }
+        private StatFloat _maxArmor;
         private StatFloat _armorRegen;
         private StatFloat _currentArmor;
-        
-        public bool IsActiveRegen { get; set; }
+        private StatBool _regenArmorAtFullHealth;
+
+        private bool _isActiveRegen;
 
         public void Initialize(Stats stats)
         {
-            MaxArmor = stats.maxArmor;
-            _currentArmor = new(MaxArmor.GetValue());
+            _maxArmor = stats.maxArmor;
+            _currentArmor = new(_maxArmor.GetValue());
             _armorRegen = stats.armorRegen;
+            _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             if (armorView)
-                armorView.Initialize(_currentArmor, MaxArmor);
+                armorView.Initialize(_currentArmor, _maxArmor);
+            
             _cts = AsyncLifecycleManager.CreateLinkedSource();
             _ct = _cts.Token;
-            MaxArmor.OnChanged += Recalculate;
-            MaxArmor.OnUpdated += ShouldRegenerate;
+            
+            _maxArmor.OnChanged += Recalculate;
+            _maxArmor.OnUpdated += ShouldRegenerate;
             _currentArmor.OnUpdated += ShouldRegenerate;
             _armorRegen.OnUpdated += ShouldRegenerate;
         }
@@ -46,36 +50,29 @@ namespace Game
             Heal(newArmor - oldArmor);
         }
 
-        public bool CheckArmor()
+        public bool HasArmor()
         {
-            return MaxArmor.GetValue() > 0 && _armorRegen.GetValue() > 0;
+            return _maxArmor.GetValue() > 0 && _armorRegen.GetValue() > 0;
         }
 
         public float TakeDamage(int damage)
         {
-            float maxArmor = MaxArmor.GetValue();
-            float currentArmor = _currentArmor.GetValue();
-            
-            float prevArmor = _currentArmor.Value;
+            float maxArmor = _maxArmor.GetValue();
+            float currentArmor = _currentArmor.Value;
             currentArmor -= damage;
-            
             float excessDamage = -currentArmor;
             
-            if (currentArmor <= 0 && prevArmor > 0) OnArmorLost?.Invoke();
             if (currentArmor >= maxArmor) OnArmorFull?.Invoke();
+            if (currentArmor <= 0) OnArmorLost?.Invoke();
             
             _currentArmor.Value = Mathf.Clamp(currentArmor, 0, maxArmor);
-            
-            ClearCancellationTokenSource();
-            _cts = AsyncLifecycleManager.CreateLinkedSource();
-            _ct = _cts.Token;
             
             return excessDamage;
         }
         
         public void Heal(float amount) 
         {
-            float maxArmor = MaxArmor.GetValue();
+            float maxArmor = _maxArmor.GetValue();
             float currentArmor = _currentArmor.GetValue();
             
             currentArmor += amount;
@@ -86,33 +83,50 @@ namespace Game
             _currentArmor.Value = Mathf.Clamp(currentArmor, 0, maxArmor);
         }
 
-        public async UniTaskVoid Regen()
+        private async UniTaskVoid Regen()
         {
             try
             {
+                Debug.Log("<color=green>ActivateArmorRegen</color>");
                 await UniTask.Delay(
-                    TimeSpan.FromSeconds(cooldownArmorRegen), 
-                    ignoreTimeScale: false, 
+                    TimeSpan.FromSeconds(cooldownArmorRegen),
+                    ignoreTimeScale: false,
                     cancellationToken: _ct);
-                
-                while (_currentArmor.Value < MaxArmor.GetValue())
+
+                while (_currentArmor.Value < _maxArmor.GetValue())
                 {
+                    _isActiveRegen = true;
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,
                         cancellationToken: _ct);
-                
+
                     float regenArmor = _armorRegen.GetValue() * delayRegen;
                     Heal(regenArmor);
                 }
             }
             catch (OperationCanceledException) { }
+            finally
+            {
+                _isActiveRegen = false;
+            }
         }
+        
         private void ShouldRegenerate()
         {
-            if (_currentArmor.Value < MaxArmor.GetValue() && IsActiveRegen)
-                Regen().Forget();
+            if (_currentArmor.Value >= _maxArmor.GetValue() || _isActiveRegen) return;
+            Debug.Log("<color=red>DeactivateArmorRegen</color>");
+            CancelRegen();
+            if (_regenArmorAtFullHealth.GetValue()) return;
+            Regen().Forget();
         }
-        public void ClearCancellationTokenSource()
+
+        public void ActivateRegen()
+        {
+            ShouldRegenerate();
+            Regen().Forget();
+        }
+        
+        private void ClearCancellationTokenSource()
         {
             if (_cts == null) return;
             _cts.Cancel();
@@ -120,11 +134,18 @@ namespace Game
             _cts = null;
         }
 
+        public void CancelRegen()
+        {
+            ClearCancellationTokenSource();
+            _cts = AsyncLifecycleManager.CreateLinkedSource();
+            _ct = _cts.Token;
+        }
+
         public void OnDestroy()
         {
             ClearCancellationTokenSource();
-            MaxArmor.OnChanged -= Recalculate;
-            MaxArmor.OnUpdated -= ShouldRegenerate;
+            _maxArmor.OnChanged -= Recalculate;
+            _maxArmor.OnUpdated -= ShouldRegenerate;
             _currentArmor.OnUpdated -= ShouldRegenerate;
             _armorRegen.OnUpdated -= ShouldRegenerate;
         }

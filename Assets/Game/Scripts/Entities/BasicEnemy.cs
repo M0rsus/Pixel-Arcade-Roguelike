@@ -26,7 +26,7 @@ namespace Game
 
         public IDamageable Damageable => damageReceiverComponent;
 
-        void Awake()
+        private void Awake()
         {
             GameUpdate.Register(onUpdateListener: this);
             GameUpdate.Register(onFixedUpdateListener: this);
@@ -37,16 +37,13 @@ namespace Game
             contactComponent.Initialize(stats, this);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             GameUpdate.Unregister(onUpdateListener: this);
             GameUpdate.Unregister(onFixedUpdateListener: this);
             damageReceiverComponent.OnDestroy();
             input.OnDestroy();
             LevelContext.Instance.currentEnemyCount.Value--;
-        }
-        void Start()
-        {
         }
 
         public void OnUpdate(float deltaTime)

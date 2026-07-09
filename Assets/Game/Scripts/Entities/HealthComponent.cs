@@ -45,14 +45,10 @@ namespace Game
             Heal(newHealth - oldHealth);
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             _currentHealth.Value -= damage;
             OnHealthNotFull?.Invoke();
-            
-            ClearCancellationTokenSource();
-            _cts = AsyncLifecycleManager.CreateLinkedSource();
-            _ct = _cts.Token;
             
             if (_currentHealth.Value <= 0)
                 Die();
@@ -93,19 +89,28 @@ namespace Game
 
         private void ShouldRegenerate()
         {
-            if (_currentHealth.Value < _maxHealth.GetValue() && _isActiveRegen == false)
-                Regen().Forget();
+            if (_currentHealth.Value >= _maxHealth.GetValue() || _isActiveRegen) return;
+            CancelRegen();
+            Regen().Forget();
         }
-        public void ClearCancellationTokenSource()
+        private void ClearCancellationTokenSource()
         {
             if (_cts == null) return;
             _cts.Cancel();
             _cts.Dispose();
             _cts = null;
         }
+        
+        public void CancelRegen()
+        {
+            ClearCancellationTokenSource();
+            _cts = AsyncLifecycleManager.CreateLinkedSource();
+            _ct = _cts.Token;
+        }
 
         private void Die()
         {
+            ClearCancellationTokenSource();
             OnDeath?.Invoke();
             _maxHealth.OnChanged -= Recalculate;
             _maxHealth.OnUpdated -= ShouldRegenerate;
