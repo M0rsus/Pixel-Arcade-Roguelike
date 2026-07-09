@@ -52,13 +52,15 @@ namespace Game
             if (armorComponent != null)
                 excessDamage = armorComponent?.TakeDamage(damage) ?? 0;
 
-            armorComponent?.CancelRegen();
             if (excessDamage <= 0)
             {
                 armorComponent?.ActivateRegen();
                 return;
             }
-            if (!_regenArmorAtFullHealth.GetValue()) armorComponent?.ActivateRegen();
+            if (!_regenArmorAtFullHealth.GetValue()) 
+                armorComponent?.ActivateRegen();
+            else 
+                armorComponent?.CancelRegen();
             healthComponent?.TakeDamage(excessDamage);
         }
 

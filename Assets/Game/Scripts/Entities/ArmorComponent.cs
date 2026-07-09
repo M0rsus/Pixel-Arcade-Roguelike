@@ -107,8 +107,9 @@ namespace Game
 
         public void ActivateRegen()
         {
-            if (_currentArmor.Value >= _maxArmor.GetValue() || _isActiveRegen) return;
+            if (_currentArmor.Value >= _maxArmor.GetValue()) return;
             CancelRegen();
+            _isActiveRegen = false;
             Regen().Forget();
         }
         
