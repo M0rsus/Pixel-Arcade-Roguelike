@@ -47,7 +47,6 @@ namespace Game
 
         public void TakeDamage(int damage)
         {
-            bool regenArmorAtFullHealth = _regenArmorAtFullHealth.GetValue();
             float excessDamage = 0;
             
             if (armorComponent != null)
@@ -59,6 +58,7 @@ namespace Game
                 armorComponent?.ActivateRegen();
                 return;
             }
+            if (!_regenArmorAtFullHealth.GetValue()) armorComponent?.ActivateRegen();
             healthComponent?.TakeDamage(excessDamage);
         }
 

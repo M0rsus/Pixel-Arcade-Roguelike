@@ -23,7 +23,6 @@ namespace Game
         private StatFloat _maxArmor;
         private StatFloat _armorRegen;
         private StatFloat _currentArmor;
-        private StatBool _regenArmorAtFullHealth;
 
         private bool _isActiveRegen;
 
@@ -32,7 +31,6 @@ namespace Game
             _maxArmor = stats.maxArmor;
             _currentArmor = new(_maxArmor.GetValue());
             _armorRegen = stats.armorRegen;
-            _regenArmorAtFullHealth = stats.regenArmorAtFullHealth;
             if (armorView)
                 armorView.Initialize(_currentArmor, _maxArmor);
             
@@ -40,9 +38,6 @@ namespace Game
             _ct = _cts.Token;
             
             _maxArmor.OnChanged += Recalculate;
-            _maxArmor.OnUpdated += ShouldRegenerate;
-            _currentArmor.OnUpdated += ShouldRegenerate;
-            _armorRegen.OnUpdated += ShouldRegenerate;
         }
 
         private void Recalculate(float oldArmor, float newArmor)
@@ -87,15 +82,14 @@ namespace Game
         {
             try
             {
-                Debug.Log("<color=green>ActivateArmorRegen</color>");
                 await UniTask.Delay(
                     TimeSpan.FromSeconds(cooldownArmorRegen),
                     ignoreTimeScale: false,
                     cancellationToken: _ct);
 
+                _isActiveRegen = true;
                 while (_currentArmor.Value < _maxArmor.GetValue())
                 {
-                    _isActiveRegen = true;
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
                         ignoreTimeScale: false,
                         cancellationToken: _ct);
@@ -110,19 +104,11 @@ namespace Game
                 _isActiveRegen = false;
             }
         }
-        
-        private void ShouldRegenerate()
-        {
-            if (_currentArmor.Value >= _maxArmor.GetValue() || _isActiveRegen) return;
-            Debug.Log("<color=red>DeactivateArmorRegen</color>");
-            CancelRegen();
-            if (_regenArmorAtFullHealth.GetValue()) return;
-            Regen().Forget();
-        }
 
         public void ActivateRegen()
         {
-            ShouldRegenerate();
+            if (_currentArmor.Value >= _maxArmor.GetValue() || _isActiveRegen) return;
+            CancelRegen();
             Regen().Forget();
         }
         
@@ -145,9 +131,6 @@ namespace Game
         {
             ClearCancellationTokenSource();
             _maxArmor.OnChanged -= Recalculate;
-            _maxArmor.OnUpdated -= ShouldRegenerate;
-            _currentArmor.OnUpdated -= ShouldRegenerate;
-            _armorRegen.OnUpdated -= ShouldRegenerate;
         }
     }
 }
