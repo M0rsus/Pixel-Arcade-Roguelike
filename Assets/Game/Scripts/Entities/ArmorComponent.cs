@@ -24,8 +24,6 @@ namespace Game
         private StatFloat _armorRegen;
         private StatFloat _currentArmor;
 
-        private bool _isActiveRegen;
-
         public void Initialize(Stats stats)
         {
             _maxArmor = stats.maxArmor;
@@ -87,7 +85,6 @@ namespace Game
                     ignoreTimeScale: false,
                     cancellationToken: _ct);
 
-                _isActiveRegen = true;
                 while (_currentArmor.Value < _maxArmor.GetValue())
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(delayRegen),
@@ -99,17 +96,12 @@ namespace Game
                 }
             }
             catch (OperationCanceledException) { }
-            finally
-            {
-                _isActiveRegen = false;
-            }
         }
 
         public void ActivateRegen()
         {
             if (_currentArmor.Value >= _maxArmor.GetValue()) return;
             CancelRegen();
-            _isActiveRegen = false;
             Regen().Forget();
         }
         
