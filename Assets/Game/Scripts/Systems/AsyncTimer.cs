@@ -28,7 +28,7 @@ namespace Game
                 {
                     await UniTask.Yield(PlayerLoopTiming.Update, _ct);
 
-                    timer.Value += Time.deltaTime;
+                    timer.Value += Time.unscaledDeltaTime;
 
                     callback?.Invoke(timer);
                 }
