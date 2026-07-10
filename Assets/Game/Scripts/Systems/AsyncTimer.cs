@@ -36,7 +36,7 @@ namespace Game
             catch (OperationCanceledException) { }
         }
 
-        private void Stop()
+        public void Stop()
         {
             if (_cts == null) return;
             _cts.Cancel();

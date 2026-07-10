@@ -37,5 +37,10 @@ namespace UI
             _counter = (_counter + 1) % sprites.Length;
             image.sprite = sprites[_counter];
         }
+
+        private void OnDisable()
+        {
+            _asyncTimer.Stop();
+        }
     }
 }
