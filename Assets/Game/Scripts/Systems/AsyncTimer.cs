@@ -27,12 +27,11 @@ namespace Game
                 while (timer.Value < duration.GetValue())
                 {
                     await UniTask.Yield(PlayerLoopTiming.Update, _ct);
-                
+
                     timer.Value += Time.deltaTime;
-                
+
                     callback?.Invoke(timer);
                 }
-                callback?.Invoke(timer);
             }
             catch (OperationCanceledException) { }
         }

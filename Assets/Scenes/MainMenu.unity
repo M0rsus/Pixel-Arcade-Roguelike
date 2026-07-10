@@ -1831,6 +1831,7 @@ GameObject:
   - component: {fileID: 1320678283}
   - component: {fileID: 1320678285}
   - component: {fileID: 1320678284}
+  - component: {fileID: 1320678286}
   m_Layer: 5
   m_Name: ImageControls
   m_TagString: Untagged
@@ -1881,7 +1882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3536845739935544130, guid: 6709c2980f5a65140bbd4d4493da1062, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1899,6 +1900,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320678282}
   m_CullTransparentMesh: 1
+--- !u!114 &1320678286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320678282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65f0a285085456dac54d5a958c66ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.ImageRotator
+  image: {fileID: 1320678284}
+  sprites:
+  - {fileID: -3536845739935544130, guid: 6709c2980f5a65140bbd4d4493da1062, type: 3}
+  - {fileID: 5363986052265085469, guid: dc8b8afafd0efc84ba8cc0ae270975e2, type: 3}
+  duration:
+    value: 2
 --- !u!1 &1386351205
 GameObject:
   m_ObjectHideFlags: 0
