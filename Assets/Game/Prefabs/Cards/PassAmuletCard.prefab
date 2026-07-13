@@ -734,11 +734,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 20576016656714826}
+  - component: {fileID: 1453948768871588187}
   - component: {fileID: 4047348703353513445}
   - component: {fileID: 8775709399220310876}
   - component: {fileID: 1175296527852555030}
   - component: {fileID: 2680666679878753389}
-  - component: {fileID: 1453948768871588187}
   m_Layer: 5
   m_Name: PassAmuletCard
   m_TagString: Untagged
@@ -768,6 +768,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1453948768871588187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037786084285754567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab2d142b12543bf8546fbf1c14f7156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.CardVieww
+  card:
+    rid: 9149310697997336654
+  imageBackground: {fileID: 1308149342968764315}
+  imageContainer: {fileID: 7698386715044677267}
+  nameContainer: {fileID: 3982419625174435262}
+  descriptionContainer: {fileID: 5567529728418285172}
+  references:
+    version: 2
+    RefIds:
+    - rid: 9149310697997336654
+      type: {class: PassAmuletCard, ns: Cards, asm: Assembly-CSharp}
+      data:
+        sprite: {fileID: 21300000, guid: 5486dbe5aab9a9745a638da80d41b247, type: 3}
+        name: Pass Amulet
+        description: 'Cross a barrier to gain these buffs for 5s <color=grey>(+1s
+          per additional item)</color>:
+
+          Shoot cooldown: <color=green>-50%</color>
+
+          Bullet
+          speed: <color=green>+100%</color>'
+        rarity: {fileID: 11400000, guid: d734856c2465afd4496f5f09cfcb7cb2, type: 2}
+        tags:
+        - power
+        - amulet
+        isInRotation: 1
 --- !u!222 &4047348703353513445
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -877,40 +915,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5803922, g: 0.6392157, b: 0.72156864, a: 1}
   m_EffectDistance: {x: 4, y: 4}
   m_UseGraphicAlpha: 1
---- !u!114 &1453948768871588187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5037786084285754567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ab2d142b12543bf8546fbf1c14f7156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI.CardVieww
-  card:
-    rid: 9149310697997336654
-  imageBackground: {fileID: 1308149342968764315}
-  imageContainer: {fileID: 7698386715044677267}
-  nameContainer: {fileID: 3982419625174435262}
-  descriptionContainer: {fileID: 5567529728418285172}
-  references:
-    version: 2
-    RefIds:
-    - rid: 9149310697997336654
-      type: {class: PassAmuletCard, ns: Cards, asm: Assembly-CSharp}
-      data:
-        sprite: {fileID: 21300000, guid: 5486dbe5aab9a9745a638da80d41b247, type: 3}
-        name: Pass Amulet
-        description: 'Cross a barrier to gain these buffs for 5s <color=grey>(+1s
-          per additional item)</color>:
-
-          Shoot cooldown: <color=green>-50%</color>
-
-          Bullet
-          speed: <color=green>+100%</color>'
-        rarity: {fileID: 11400000, guid: d734856c2465afd4496f5f09cfcb7cb2, type: 2}
 --- !u!1 &5468808739164064788
 GameObject:
   m_ObjectHideFlags: 0

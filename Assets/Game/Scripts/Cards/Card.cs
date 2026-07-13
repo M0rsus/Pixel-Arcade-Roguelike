@@ -11,6 +11,8 @@ namespace Cards
         [TextArea]
         public string description;
         public Rarity rarity;
+        public string[] tags;
+        public bool isInRotation;
 
         public abstract Effect GetEffect();
     }

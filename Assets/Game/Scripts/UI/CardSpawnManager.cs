@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Cards;
 using Game;
 using UnityEngine;
@@ -34,7 +35,9 @@ namespace UI
                     continue;
                 }
                 
-                List<CardView> selectedCards = cards.FindAll(c => currentRarity.Name == c.Card.rarity.Name);
+                List<CardView> selectedCards = cards.FindAll(c => currentRarity.Name == c.Card.rarity.Name 
+                                                                  && c.Card.isInRotation);
+                selectedCards = selectedCards.Except(_spawnedCards).ToList();
                 
                 if (selectedCards.Count <= 0)
                 {
@@ -43,8 +46,9 @@ namespace UI
                 }
                 CardView selectedCard = selectedCards[Random.Range(0, selectedCards.Count)];
                 Instantiate(selectedCard, cardSpawner.transform);
-                //_spawnedCards.Add(selectedCard);
+                _spawnedCards.Add(selectedCard);
             }
+            _spawnedCards.Clear();
         }
 
         private Rarity SelectRarity()
