@@ -52,10 +52,11 @@ namespace Game
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent<IEntity>(out var component))
+            bool isEntity = collision.gameObject.TryGetComponent<IEntity>(out var component);
+            if (isEntity)
                 component.Damageable.TakeDamage(_bulletDamage);
             
-            if (!_canBounceOffEnemies || _bounces <= 0)
+            if ((!_canBounceOffEnemies && isEntity) || _bounces <= 0)
             {
                 Destroy(gameObject);
                 return;

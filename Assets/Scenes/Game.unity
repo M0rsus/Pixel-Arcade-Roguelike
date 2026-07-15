@@ -10876,6 +10876,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 101625604}
+        m_TargetAssemblyTypeName: UI.PauseView, Assembly-CSharp
+        m_MethodName: PressPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &852882382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14892,6 +14904,9 @@ MonoBehaviour:
   - {fileID: 3046597871764417894, guid: f40f03aca4f4fd24a840de9f4bd9f92a, type: 3}
   - {fileID: 8947113428742769478, guid: f75c1990d0c668c45ae8110b21e5c0de, type: 3}
   - {fileID: 2300721436050905085, guid: 575a8917ff2180a479d4b51cbdd92fa0, type: 3}
+  - {fileID: 2109074304508254865, guid: db893da181bf5254cb043e8ce7efbc3e, type: 3}
+  - {fileID: 502928836463850226, guid: 85c48eef84b1f71458e1e435c8bbbf3d, type: 3}
+  - {fileID: 6568432409948738975, guid: 21a6e65676972714fa71fb9f53ddeaff, type: 3}
 --- !u!1 &1484594564
 GameObject:
   m_ObjectHideFlags: 0
