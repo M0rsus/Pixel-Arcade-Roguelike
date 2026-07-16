@@ -20,7 +20,7 @@ namespace Game
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawner.position, bulletSpawner.rotation);
             var bulletComponent = bullet.GetComponent<BulletComponent>();
-            bulletComponent.Initialize(_stats);
+            bulletComponent.Initialize(_stats, GetComponentInParent<Collider2D>());
         }
     }
 }
