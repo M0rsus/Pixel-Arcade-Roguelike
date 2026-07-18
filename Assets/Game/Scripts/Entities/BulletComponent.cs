@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -25,6 +26,11 @@ namespace Game
         private Collider2D _ownerCollider;
         private bool _ownerCollisionEnabled;
         private float _requiredDistance;
+        
+        private List<BulletComponent> _volleySiblings;
+        private List<Collider2D> _activeSiblingIgnores;
+        [SerializeField] 
+        private float siblingSeparationDistance;
 
         void Awake()
         {
@@ -44,6 +50,22 @@ namespace Game
             GameUpdate.Unregister(onFixedUpdateListener: this);
             GameUpdate.Unregister(onUpdateListener: this);
         }
+
+        public void Initialize(Stats stats, Collider2D ownerCollider)
+        {
+            _bulletDamage = stats.bulletDamage.GetValue();
+            _bulletSpeed = stats.bulletSpeed.GetValue();
+            _lifeTime = stats.lifeTime.GetValue();
+            _range = stats.range.GetValue();
+            _bounces = stats.bounces.GetValue();
+            _canBounceOffEnemies = stats.bounceOffEnemies.GetValue();
+            
+            _bulletCollider = GetComponent<Collider2D>();
+            _ownerCollider = ownerCollider;
+            Physics2D.IgnoreCollision(_bulletCollider, _ownerCollider, true);
+            _requiredDistance = _bulletSpeed * speedDistanceFactor;
+        }
+        
         public void OnUpdate(float deltaTime)
         {
             float distance = (transform.position - _startPosition).sqrMagnitude;
@@ -61,6 +83,30 @@ namespace Game
             if (travelled < _requiredDistance) return;
             Physics2D.IgnoreCollision(_bulletCollider, _ownerCollider, false);
             _ownerCollisionEnabled = true;
+            
+            CheckSiblingSeparation();
+        }
+        
+        private void CheckSiblingSeparation()
+        {
+            if (_activeSiblingIgnores == null || _activeSiblingIgnores.Count == 0) return;
+
+            for (int i = _activeSiblingIgnores.Count - 1; i >= 0; i--)
+            {
+                var siblingCollider = _activeSiblingIgnores[i];
+                if (siblingCollider == null)
+                {
+                    _activeSiblingIgnores.RemoveAt(i);
+                    continue;
+                }
+
+                float distance = Vector2.Distance(rb.position, siblingCollider.attachedRigidbody.position);
+                if (distance >= siblingSeparationDistance)
+                {
+                    Physics2D.IgnoreCollision(_bulletCollider, siblingCollider, false);
+                    _activeSiblingIgnores.RemoveAt(i);
+                }
+            }
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -85,19 +131,21 @@ namespace Game
             _ownerCollisionEnabled = true;
         }
 
-        public void Initialize(Stats stats, Collider2D ownerCollider)
+        public void SetVolleySiblings(List<BulletComponent> siblings)
         {
-            _bulletDamage = stats.bulletDamage.GetValue();
-            _bulletSpeed = stats.bulletSpeed.GetValue();
-            _lifeTime = stats.lifeTime.GetValue();
-            _range = stats.range.GetValue();
-            _bounces = stats.bounces.GetValue();
-            _canBounceOffEnemies = stats.bounceOffEnemies.GetValue();
-            
-            _bulletCollider = GetComponent<Collider2D>();
-            _ownerCollider = ownerCollider;
-            Physics2D.IgnoreCollision(_bulletCollider, _ownerCollider, true);
-            _requiredDistance = _bulletSpeed * speedDistanceFactor;
+            _volleySiblings = new List<BulletComponent>();
+            _activeSiblingIgnores = new List<Collider2D>();
+
+            foreach (var sibling in siblings)
+            {
+                if (sibling == this) continue;
+
+                var siblingCollider = sibling.GetComponent<Collider2D>();
+                Physics2D.IgnoreCollision(_bulletCollider, siblingCollider, true);
+
+                _volleySiblings.Add(sibling);
+                _activeSiblingIgnores.Add(siblingCollider);
+            }
         }
 
         private IEnumerator LifeTimeBullet()

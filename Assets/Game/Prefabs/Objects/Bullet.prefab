@@ -181,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.BulletComponent
   rb: {fileID: 4683611179355464682}
   speedDistanceFactor: 0.1
+  siblingSeparationDistance: 0.2

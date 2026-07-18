@@ -41,6 +41,8 @@ namespace UI
         private StatFloat _range;
         private StatInt _bounces;
         private StatBool _bounceOffEnemies;
+        private StatFloat _spread;
+        private StatInt _bullets;
         
         // Objects
         private StatFloat _barriersCooldown;
@@ -65,6 +67,8 @@ namespace UI
             _range = playerStats.range;
             _bounces = playerStats.bounces;
             _bounceOffEnemies = playerStats.bounceOffEnemies;
+            _spread = playerStats.spread;
+            _bullets = playerStats.bullets;
 
             _barriersCooldown = playerStats.barriersCooldown;
             
@@ -72,7 +76,8 @@ namespace UI
             {
                 { StatName.ContactDamage, _contactDamage },
                 { StatName.BulletDamage, _bulletDamage },
-                { StatName.Bounces, _bounces }
+                { StatName.Bounces, _bounces },
+                { StatName.Bullets, _bullets }
             };
             _statsFloat = new Dictionary<StatName, StatFloat>()
             {
@@ -88,6 +93,7 @@ namespace UI
                 { StatName.BulletSpeed, _bulletSpeed },
                 { StatName.LifeTime, _lifeTime },
                 { StatName.Range, _range },
+                { StatName.Spread, _spread },
                 { StatName.BarriersCooldown, _barriersCooldown }
             };
             _statsBool = new Dictionary<StatName, StatBool>()
@@ -95,6 +101,7 @@ namespace UI
                 { StatName.RegenArmorAtFullHealth, _regenArmorAtFullHealth },
                 { StatName.BounceOffEnemies, _bounceOffEnemies }
             };
+            
             _statsType = new Dictionary<StatName, StatType>()
             {
                 { StatName.MaxHp, StatType.Float},
@@ -114,6 +121,8 @@ namespace UI
                 { StatName.Range, StatType.Float},
                 { StatName.Bounces, StatType.Int},
                 { StatName.BounceOffEnemies, StatType.Bool},
+                { StatName.Spread, StatType.Float},
+                { StatName.Bullets, StatType.Int},
                 { StatName.BarriersCooldown, StatType.Float}
             };
             
@@ -168,6 +177,8 @@ namespace UI
             Range,
             Bounces,
             BounceOffEnemies,
+            Spread,
+            Bullets,
             BarriersCooldown
         }
 

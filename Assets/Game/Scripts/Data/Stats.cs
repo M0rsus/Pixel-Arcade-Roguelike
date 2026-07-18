@@ -27,6 +27,8 @@ namespace Game
         public StatFloat range;
         public StatInt bounces;
         public StatBool bounceOffEnemies;
+        public StatFloat spread;
+        public StatInt bullets;
         
         [Header("Objects")]
         public StatFloat barriersCooldown;
